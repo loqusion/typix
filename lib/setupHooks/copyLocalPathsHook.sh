@@ -1,0 +1,5 @@
+copyLocalPaths() {
+	:
+}
+
+preBuildHooks+=(copyLocalPaths)

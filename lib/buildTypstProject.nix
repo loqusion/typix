@@ -1,5 +1,7 @@
 {
+  copyLocalPathsHook,
   lib,
+  prepareTypstEnvHook,
   stdenv,
   typst,
   ...
@@ -85,6 +87,11 @@ in
 
         buildInputs = [
           typst
+        ];
+
+        nativeBuildInputs = [
+          copyLocalPathsHook
+          prepareTypstEnvHook
         ];
 
         buildPhase = ''
