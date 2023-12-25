@@ -24,7 +24,7 @@
       (isPath args.typstProjectOutput) "typstProjectOutput must be a path; received ${typeof args.typstProjectOutput}"
       (escapeShellArg args.typstProjectOutput)
     else "$out";
-  typstOpts = typstOptsFromArgs args;
+  typstOpts = typstOptsFromArgs (args.typstOpts or {});
   cleanedArgs = removeAttrs args [
     "typstProjectOutput"
     "typstProjectSource"
