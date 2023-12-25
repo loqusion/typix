@@ -29,9 +29,7 @@ in
   stdenv.mkDerivation (cleanedArgs
     // nameArgs
     // optionalAttrs (fontPaths != []) {
-      TYPST_FONT_PATHS =
-        concatStringsSep ":"
-        fontPaths;
+      TYPST_FONT_PATHS = concatStringsSep ":" fontPaths;
     }
     // {
       nativeBuildInputs =
@@ -40,15 +38,19 @@ in
           typst
         ];
 
-      buildPhase = args.buildPhase or ''
-        runHook preBuild
-        ${buildPhaseTypstCommand}
-        runHook postBuild
-      '';
+      buildPhase =
+        args.buildPhase
+        or ''
+          runHook preBuild
+          ${buildPhaseTypstCommand}
+          runHook postBuild
+        '';
 
-      installPhase = args.installPhase or ''
-        runHook preInstall
-        ${installPhaseCommand}
-        runHook postInstall
-      '';
+      installPhase =
+        args.installPhase
+        or ''
+          runHook preInstall
+          ${installPhaseCommand}
+          runHook postInstall
+        '';
     })
