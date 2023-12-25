@@ -40,19 +40,15 @@ in
           typst
         ];
 
-      buildPhase =
-        args.buildPhase
-        or ''
-          runHook preBuild
-          ${buildPhaseTypstCommand}
-          runHook postBuild
-        '';
+      buildPhase = args.buildPhase or ''
+        runHook preBuild
+        ${buildPhaseTypstCommand}
+        runHook postBuild
+      '';
 
-      installPhase =
-        args.installPhase
-        or ''
-          runHook preInstall
-          ${installPhaseCommand}
-          runHook postInstall
-        '';
+      installPhase = args.installPhase or ''
+        runHook preInstall
+        ${installPhaseCommand}
+        runHook postInstall
+      '';
     })
