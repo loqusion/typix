@@ -8,7 +8,7 @@
   typstProjectSource,
   ...
 }: let
-  inherit (builtins) isPath removeAttrs typeof;
+  inherit (builtins) isPath removeAttrs typeOf;
   inherit (lib.asserts) assertMsg;
   inherit (lib.strings) escapeShellArg;
 
@@ -21,7 +21,7 @@
     if args ? typstProjectOutput
     then
       assertMsg
-      (isPath args.typstProjectOutput) "typstProjectOutput must be a path; received ${typeof args.typstProjectOutput}"
+      (isPath args.typstProjectOutput) "typstProjectOutput must be a path; received ${typeOf args.typstProjectOutput}"
       (escapeShellArg args.typstProjectOutput)
     else "$out";
   typstOpts = typstOptsFromArgs (args.typstOpts or {});
