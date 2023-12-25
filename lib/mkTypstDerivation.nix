@@ -49,7 +49,7 @@ in
         '';
 
       installPhase =
-        args.buildPhase
+        args.installPhase
         or ''
           runHook preInstall
           ${installPhaseCommand}
