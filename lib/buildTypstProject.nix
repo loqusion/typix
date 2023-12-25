@@ -1,108 +1,44 @@
 {
   copyLocalPathsHook,
   lib,
+  mkTypstDerivation,
   prepareTypstEnvHook,
-  stdenv,
-  typst,
+  typstOptsFromArgs,
+}: args @ {
+  typstCompileCommand ? "typst compile",
+  typstProjectSource,
   ...
 }: let
-  inherit (builtins) all isAttrs isList isNull isString;
+  inherit (builtins) isPath removeAttrs typeof;
   inherit (lib.asserts) assertMsg;
-  inherit (lib.attrsets) filterAttrs mapAttrsToList;
-  inherit (lib.strings) concatMapStringsSep concatStringsSep escapeShellArg isStringLike;
-  inherit (stdenv) mkDerivation;
+  inherit (lib.strings) escapeShellArg;
 
-  mkErr = msg: "typst.nix: ${msg}";
-  validate = assertion: msg: v:
-    if assertMsg (assertion v) msg
-    then v
-    else null;
-
-  isFontPaths = fontPaths: (isList fontPaths) && all isString fontPaths;
-  validateFontPaths = fontPaths:
-    validate isFontPaths (mkErr "fontPaths must be an array of strings") fontPaths;
-  convertFontPaths = fontPaths: concatStringsSep ":" (validateFontPaths fontPaths);
-
-  _mkLocalPathCmd = {
-    dest ? ".",
-    src,
-  }: "cp -L --reflink=auto --no-preserve=mode -R ${escapeShellArg src} -T ${escapeShellArg dest}";
-  mkLocalPathCmd = localPath:
-    _mkLocalPathCmd (
-      if isStringLike localPath
-      then {src = localPath;}
-      else if isAttrs localPath
-      then localPath
-      else throw (mkErr "localPath must be a string or attrset")
-    );
-  mkLocalPathsCmds = concatMapStringsSep "\n" mkLocalPathCmd;
-
-  mkShellOpts = attrs:
-    concatStringsSep " " (
-      mapAttrsToList
-      (name: value: "--${escapeShellArg name} ${escapeShellArg value}")
-      (filterAttrs (n: v: !isNull v) attrs)
-    );
+  # TODO: Experiment with exposing this to the user. If it doesn't write to the user's directory,
+  # then just write to $out and use this attribute in a `pkgs.writeShellScriptBin` derivation
+  # with something like:
+  #     typstNixOutput=$(nix build .#default --no-link --print-out-paths)
+  #     cp -L --no-preserve=mode "$typstNixOutput" ./${escapeShellArg typstProjectOutput}
+  typstProjectOutput =
+    if args ? typstProjectOutput
+    then
+      assertMsg
+      (isPath args.typstProjectOutput) "typstProjectOutput must be a path; received ${typeof args.typstProjectOutput}"
+      (escapeShellArg args.typstProjectOutput)
+    else "$out";
+  typstOpts = typstOptsFromArgs args;
+  cleanedArgs = removeAttrs args [
+    "typstProjectOutput"
+    "typstProjectSource"
+  ];
 in
-  {
-    src,
-    entry,
-    out,
-    version ? null,
-    format ? "pdf",
-    fontPaths ? [],
-    localPaths ? [],
-    dontInstall ? false,
-  }: let
-    typstCompileCommand = "typst compile";
-    typstOptionAttrs = {inherit format;};
-    copyLocalPathsCommand = mkLocalPathsCmds localPaths;
-    exportFontPathsCommand = let
-      fontPathsString = convertFontPaths fontPaths;
-    in
-      if fontPathsString == ""
-      then ""
-      else ''
-        export TYPST_FONT_PATHS=${fontPathsString}
+  mkTypstDerivation (cleanedArgs
+    // {
+      buildPhaseTypstCommand = ''
+        ${typstCompileCommand} ${typstOpts} ${escapeShellArg typstProjectSource} ${typstProjectOutput}
       '';
-    buildPhaseCommand = ''
-      ${copyLocalPathsCommand}
-      ${exportFontPathsCommand}
-      ${typstCompileCommand} ${mkShellOpts typstOptionAttrs} ${escapeShellArg entry} "$out"
-    '';
-    installPhaseCommand = ''
-      echo "$out"
-    '';
-    nameAttrs =
-      if version == null
-      then {name = out;}
-      else {
-        pname = out;
-        inherit version;
-      };
-  in
-    mkDerivation (nameAttrs
-      // {
-        inherit src dontInstall;
 
-        buildInputs = [
-          typst
-        ];
-
-        nativeBuildInputs = [
-          copyLocalPathsHook
-          prepareTypstEnvHook
-        ];
-
-        buildPhase = ''
-          runHook preBuild
-          ${buildPhaseCommand}
-          runHook postBuild
-        '';
-
-        installPhase = ''
-          runHook preInstall
-          ${installPhaseCommand}
-          runHook postInstall
-        '';
-      })
+      nativeBuildInputs = [
+        copyLocalPathsHook
+        prepareTypstEnvHook
+      ];
+    })
