@@ -17,7 +17,7 @@
     "fontPaths"
     "installPhaseCommand"
   ];
-  name = args.name or baseNameOf (getEnv "PWD");
+  name = args.name or (baseNameOf (getEnv "PWD"));
   nameArgs =
     if args ? version
     then {
