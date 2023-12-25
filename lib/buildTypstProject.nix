@@ -20,9 +20,9 @@
   typstProjectOutput =
     if args ? typstProjectOutput
     then
-      assertMsg
-      (isPath args.typstProjectOutput) "typstProjectOutput must be a path; received ${typeOf args.typstProjectOutput}"
-      (escapeShellArg args.typstProjectOutput)
+      assert assertMsg
+      (isPath args.typstProjectOutput)
+      "typstProjectOutput must be a path; received ${typeOf args.typstProjectOutput}"; (escapeShellArg args.typstProjectOutput)
     else "$out";
   typstOpts = typstOptsFromArgs (args.typstOpts or {});
   cleanedArgs = removeAttrs args [
