@@ -19,12 +19,12 @@
   ];
   name = args.name or baseNameOf (getEnv "PWD");
   nameArgs =
-    if args.version == null
-    then {inherit name;}
-    else {
+    if args ? version
+    then {
       pname = name;
       inherit (args) version;
-    };
+    }
+    else {inherit name;};
 in
   stdenv.mkDerivation (cleanedArgs
     // nameArgs
