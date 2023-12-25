@@ -1,5 +1,0 @@
-prepareTypstEnv() {
-	:
-}
-
-preBuildHooks+=(prepareTypstEnv)

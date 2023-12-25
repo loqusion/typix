@@ -2,7 +2,6 @@
   copyLocalPathsHook,
   lib,
   mkTypstDerivation,
-  prepareTypstEnvHook,
   typstOptsFromArgs,
 }: args @ {
   typstCompileCommand ? "typst compile",
@@ -39,6 +38,5 @@ in
 
       nativeBuildInputs = [
         copyLocalPathsHook
-        prepareTypstEnvHook
       ];
     })
