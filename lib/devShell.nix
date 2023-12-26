@@ -14,13 +14,9 @@
   ...
 }: let
   inherit (builtins) removeAttrs;
-  inherit (lib) optionalAttrs;
+  inherit (lib) optionalAttrs optionalString;
   inherit (lib.strings) concatMapStringsSep concatStringsSep;
 
-  optionalLinkLocalPathsHook =
-    if localPaths != []
-    then linkLocalPathsHook
-    else "";
   linkLocalPathsHook =
     concatMapStringsSep
     "\n" (localPath_: let
@@ -71,8 +67,9 @@ in
 
       shellHook =
         args.shellHook
-        or ''
-          ${optionalLinkLocalPathsHook}
+        or (optionalString (localPaths != []) linkLocalPathsHook)
+        + optionalString (extraShellHook != "") ''
+
           ${extraShellHook}
         '';
     })
