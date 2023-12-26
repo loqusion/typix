@@ -39,7 +39,13 @@
 
       overlays.default = _final: _prev: {};
 
-      templates = {};
+      templates = rec {
+        default = quick-start;
+        quick-start = {
+          description = "A Typst project";
+          path = ./examples/quick-start;
+        };
+      };
     }
     // eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
