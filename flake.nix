@@ -45,8 +45,13 @@
       pkgs = nixpkgs.legacyPackages.${system};
 
       lib = mkLib pkgs;
+
+      checks = pkgs.callPackages ./checks {
+        inherit pkgs;
+        myLib = mkLib pkgs;
+      };
     in {
-      inherit lib;
+      inherit checks lib;
 
       formatter = pkgs.alejandra;
 
