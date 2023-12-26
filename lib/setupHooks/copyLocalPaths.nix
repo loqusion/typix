@@ -1,22 +1,9 @@
 {
+  coerceLocalPathAttr,
   lib,
   makeSetupHook,
 }: let
-  inherit (builtins) isAttrs;
-  inherit (lib.strings) concatMapStringsSep escapeShellArg isStringLike;
-
-  coerceLocalPath = localPath:
-    if isStringLike localPath
-    then {
-      src = escapeShellArg localPath;
-      dest = ".";
-    }
-    else if isAttrs localPath
-    then {
-      src = escapeShellArg localPath.src;
-      dest = escapeShellArg (localPath.dest or ".");
-    }
-    else throw "Invalid local path";
+  inherit (lib.strings) concatMapStringsSep;
 in
   localPaths:
     makeSetupHook {
@@ -25,7 +12,7 @@ in
         copyAllLocalPaths =
           concatMapStringsSep
           "\n" (localPath_: let
-            localPath = coerceLocalPath localPath_;
+            localPath = coerceLocalPathAttr localPath_;
           in ''
             mkdir -p ${localPath.dest}
             echo "Copying ${localPath.src} to ${localPath.dest}"
