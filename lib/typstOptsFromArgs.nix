@@ -1,6 +1,9 @@
-{lib}: args: let
+{lib}: args_: let
   inherit (lib.attrsets) filterAttrs mapAttrsToList;
   inherit (lib.strings) concatStringsSep escapeShellArg;
+
+  defaultArgs = {format = "pdf";};
+  args = defaultArgs // args_;
 in
   concatStringsSep " " (
     mapAttrsToList

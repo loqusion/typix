@@ -8,7 +8,6 @@ in {
     checks = {
       simple = myLib.buildTypstProject {
         src = ./simple;
-        typstOpts = {format = "pdf";};
         inherit localPaths;
       };
     };
@@ -22,18 +21,15 @@ in {
 
   simple = myLib.buildTypstProject {
     src = ./simple;
-    typstOpts = {format = "pdf";};
   };
   simpleWithFonts = myLib.buildTypstProject {
     src = ./simple-with-fonts;
-    typstOpts = {format = "pdf";};
     fontPaths = [
       "${pkgs.roboto}/share/fonts/truetype"
     ];
   };
   simpleWithLocalPaths = myLib.buildTypstProject {
     src = ./simple-with-local-paths;
-    typstOpts = {format = "pdf";};
     localPaths = [
       {
         src = ./fixtures/icons;
