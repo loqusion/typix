@@ -29,6 +29,7 @@
     "forceLocalPaths"
     "localPaths"
     "text"
+    "typstOpts"
     "typstProjectOutput"
     "typstProjectSource"
     "typstWatchCommand"
