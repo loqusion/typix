@@ -17,7 +17,15 @@
     "fontPaths"
     "installPhaseCommand"
   ];
-  name = args.name or (baseNameOf (getEnv "PWD"));
+
+  name =
+    args.name
+    or (let
+      pwd = getEnv "PWD";
+    in
+      if pwd != ""
+      then baseNameOf pwd
+      else "typst");
   nameArgs =
     if args ? version
     then {
