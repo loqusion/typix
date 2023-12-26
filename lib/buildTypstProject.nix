@@ -15,6 +15,7 @@
   typstOpts = typstOptsFromArgs (args.typstOpts or {});
   cleanedArgs = removeAttrs args [
     "localPaths"
+    "typstOpts"
     "typstProjectOutput"
     "typstProjectSource"
   ];
