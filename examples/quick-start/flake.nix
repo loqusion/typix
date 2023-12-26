@@ -10,9 +10,15 @@
     };
 
     flake-utils.url = "github:numtide/flake-utils";
+
+    # Example of downloading icons from a non-flake source
+    # font-awesome = {
+    #   url = "github:FortAwesome/Font-Awesome";
+    #   flake = false;
+    # };
   };
 
-  outputs = {
+  outputs = inputs @ {
     nixpkgs,
     typst-nix,
     flake-utils,
@@ -28,10 +34,23 @@
       commonArgs = {
         src = ./.;
         inherit typstProjectSource;
+
+        fontPaths = [
+          # Add paths to fonts here
+          # "${pkgs.roboto}/share/fonts/truetype"
+        ];
+
+        localPaths = [
+          # Add paths that must be locally accessible to typst here
+          # {
+          #   dest = "icons";
+          #   src = "${inputs.font-awesome}/svgs/regular";
+          # }
+        ];
       };
 
       watch-drv = typstNixLib.watchTypstProject {
-        inherit (commonArgs) typstProjectSource;
+        inherit (commonArgs) typstProjectSource fontPaths localPaths;
       };
 
       buildToRootDrv = output:
@@ -41,7 +60,7 @@
         '';
     in {
       packages.default = typstNixLib.buildTypstProject {
-        inherit (commonArgs) src typstProjectSource;
+        inherit (commonArgs) src typstProjectSource fontPaths localPaths;
       };
 
       apps = rec {
