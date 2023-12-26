@@ -1,6 +1,7 @@
 {
   coerceLocalPathAttr,
   lib,
+  linkLocalPaths,
   mkShell,
   typst,
 }: args @ {
@@ -15,33 +16,7 @@
 }: let
   inherit (builtins) removeAttrs;
   inherit (lib) optionalAttrs optionalString;
-  inherit (lib.strings) concatMapStringsSep concatStringsSep;
-
-  linkLocalPathsHook =
-    concatMapStringsSep
-    "\n" (localPath_: let
-      localPath = coerceLocalPathAttr localPath_;
-      linkCommand = ''
-        echo "typst-nix: linking ${localPath.src} to ${localPath.dest}"
-        ln -sfT ${localPath.src} ${localPath.dest}
-      '';
-    in
-      if forceLocalPaths
-      then ''
-        if [ -e ${localPath.dest} ]; then
-          echo "typst-nix: removing ${localPath.dest}"
-          rm -rf ${localPath.dest}
-        fi
-        ${linkCommand}
-      ''
-      else ''
-        if [ -e ${localPath.dest} ] && [ ! -L ${localPath.dest} ]; then
-          echo "typst-nix: ${localPath.dest} already exists; skipping"
-        else
-          ${linkCommand}
-        fi
-      '')
-    localPaths;
+  inherit (lib.strings) concatStringsSep;
 
   cleanedArgs = removeAttrs args [
     "checks"
@@ -67,7 +42,9 @@ in
 
       shellHook =
         args.shellHook
-        or (optionalString (localPaths != []) linkLocalPathsHook)
+        or (optionalString (localPaths != []) (linkLocalPaths {
+          inherit localPaths forceLocalPaths;
+        }))
         + optionalString (extraShellHook != "") ''
 
           ${extraShellHook}
