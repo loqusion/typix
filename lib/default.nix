@@ -9,7 +9,6 @@ in {
   coerceLocalPathAttr = callPackage ./coerceLocalPathAttr.nix {};
   copyLocalPathsHook = callPackage ./setupHooks/copyLocalPaths.nix {};
   devShell = callPackage ./devShell.nix {};
-  linkLocalPathsHook = callPackage ./setupHooks/linkLocalPaths.nix {};
   mkTypstDerivation = callPackage ./mkTypstDerivation.nix {};
   typstOptsFromArgs = callPackage ./typstOptsFromArgs.nix {};
   watchTypstProject = callPackage ./watchTypstProject.nix {};

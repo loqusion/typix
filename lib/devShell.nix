@@ -1,6 +1,6 @@
 {
+  coerceLocalPathAttr,
   lib,
-  linkLocalPathsHook,
   mkShell,
   typst,
 }: args @ {
@@ -14,8 +14,17 @@
 }: let
   inherit (builtins) removeAttrs;
   inherit (lib) optionalAttrs;
-  inherit (lib.strings) concatStringsSep;
+  inherit (lib.strings) concatMapStringsSep concatStringsSep;
 
+  linkLocalPathsHook = localPaths:
+    concatMapStringsSep
+    "\n" (localPath_: let
+      localPath = coerceLocalPathAttr localPath_;
+    in ''
+      echo "typst-nix: linking ${localPath.src} to ${localPath.dest}"
+      ln -sfT ${localPath.src} ${localPath.dest}
+    '')
+    localPaths;
   optionalLinkLocalPathsHook =
     if localPaths != []
     then linkLocalPathsHook localPaths
