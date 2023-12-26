@@ -5,12 +5,12 @@ in
   localPath:
     if isStringLike localPath
     then {
-      src = escapeShellArg localPath;
+      src = escapeShellArg "${localPath}";
       dest = ".";
     }
     else if isAttrs localPath
     then {
-      src = escapeShellArg localPath.src;
+      src = escapeShellArg "${localPath.src}";
       dest = escapeShellArg (localPath.dest or ".");
     }
     else throw "Invalid local path"
