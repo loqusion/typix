@@ -3,7 +3,7 @@
   mkShell,
   typst,
 }: args @ {
-  checks ? [],
+  checks ? {},
   extraShellHook ? "",
   inputsFrom ? [],
   localPaths ? [],
