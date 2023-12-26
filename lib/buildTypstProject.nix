@@ -6,7 +6,7 @@
 }: args @ {
   localPaths ? [],
   typstCompileCommand ? "typst compile",
-  typstProjectSource,
+  typstProjectSource ? "main.typ",
   ...
 }: let
   inherit (builtins) removeAttrs;
