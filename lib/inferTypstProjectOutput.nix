@@ -1,4 +1,8 @@
-{lib}: args: let
+{lib}: args_: let
+  args =
+    if builtins.isString args_
+    then {typstProjectSource = args_;}
+    else args_;
   supportedFormats = ["pdf" "svg" "png"];
   format = ({format = "pdf";} // args.typstOpts or {}).format;
   name = lib.strings.removeSuffix ".typ" (builtins.baseNameOf args.typstProjectSource);
