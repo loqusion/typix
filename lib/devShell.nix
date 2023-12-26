@@ -7,6 +7,7 @@
   checks ? {},
   extraShellHook ? "",
   fontPaths ? [],
+  forceLocalPaths ? false,
   inputsFrom ? [],
   localPaths ? [],
   packages ? [],
@@ -16,24 +17,41 @@
   inherit (lib) optionalAttrs;
   inherit (lib.strings) concatMapStringsSep concatStringsSep;
 
-  linkLocalPathsHook = localPaths:
+  optionalLinkLocalPathsHook =
+    if localPaths != []
+    then linkLocalPathsHook
+    else "";
+  linkLocalPathsHook =
     concatMapStringsSep
     "\n" (localPath_: let
       localPath = coerceLocalPathAttr localPath_;
-    in ''
-      echo "typst-nix: linking ${localPath.src} to ${localPath.dest}"
-      ln -sfT ${localPath.src} ${localPath.dest}
-    '')
+      linkCommand = ''
+        echo "typst-nix: linking ${localPath.src} to ${localPath.dest}"
+        ln -sfT ${localPath.src} ${localPath.dest}
+      '';
+    in
+      if forceLocalPaths
+      then ''
+        if [ -e ${localPath.dest} ]; then
+          echo "typst-nix: removing ${localPath.dest}"
+          rm -rf ${localPath.dest}
+        fi
+        ${linkCommand}
+      ''
+      else ''
+        if [ ! -e ${localPath.dest} ]; then
+          ${linkCommand}
+        else
+          echo "typst-nix: ${localPath.dest} already exists; skipping"
+        fi
+      '')
     localPaths;
-  optionalLinkLocalPathsHook =
-    if localPaths != []
-    then linkLocalPathsHook localPaths
-    else "";
 
   cleanedArgs = removeAttrs args [
     "checks"
     "extraShellHook"
     "fontPaths"
+    "forceLocalPaths"
     "inputsFrom"
     "localPaths"
   ];
