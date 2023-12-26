@@ -24,9 +24,10 @@
 
       typstNixLib = typst-nix.lib.${system};
 
+      typstProjectSource = "main.typ";
       commonArgs = {
         src = ./.;
-        typstProjectSource = "main.typ";
+        inherit typstProjectSource;
       };
 
       watch-drv = typstNixLib.watchTypstProject {
@@ -49,14 +50,14 @@
           drv = watch-drv;
         };
         build = flake-utils.lib.mkApp {
-          drv = buildToRootDrv "main.pdf";
+          drv = buildToRootDrv (typstNixLib.inferTypstProjectOutput typstProjectSource);
         };
       };
 
       devShells.default = typstNixLib.devShell {
         packages = [
           watch-drv
-          (buildToRootDrv "main.pdf")
+          (buildToRootDrv (typstNixLib.inferTypstProjectOutput typstProjectSource))
           # pkgs.typstfmt
         ];
       };
