@@ -39,10 +39,10 @@
         ${linkCommand}
       ''
       else ''
-        if [ ! -e ${localPath.dest} ]; then
-          ${linkCommand}
-        else
+        if [ -e ${localPath.dest} ] && [ ! -L ${localPath.dest} ]; then
           echo "typst-nix: ${localPath.dest} already exists; skipping"
+        else
+          ${linkCommand}
         fi
       '')
     localPaths;
