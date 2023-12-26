@@ -1,5 +1,5 @@
 copyLocalPaths() {
-	:
+	@copyAllLocalPaths@
 }
 
 preBuildHooks+=(copyLocalPaths)

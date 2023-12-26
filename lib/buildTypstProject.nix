@@ -4,6 +4,7 @@
   mkTypstDerivation,
   typstOptsFromArgs,
 }: args @ {
+  localPaths ? [],
   typstCompileCommand ? "typst compile",
   typstProjectSource,
   ...
@@ -26,6 +27,7 @@
     else "$out";
   typstOpts = typstOptsFromArgs (args.typstOpts or {});
   cleanedArgs = removeAttrs args [
+    "localPaths"
     "typstProjectOutput"
     "typstProjectSource"
   ];
@@ -37,6 +39,6 @@ in
       '';
 
       nativeBuildInputs = [
-        copyLocalPathsHook
+        (copyLocalPathsHook localPaths)
       ];
     })
