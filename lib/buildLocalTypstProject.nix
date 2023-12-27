@@ -16,7 +16,7 @@
     );
 in
   pkgs.writeShellApplication {
-    name = "typst-build-local";
+    name = "typst-build";
 
     text = ''
       nix_out_path=$(nix build ${buildTypstProject args} --print-out-paths)
