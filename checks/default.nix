@@ -9,13 +9,13 @@ in
     callPackage = self.newScope {};
   in {
     buildLocal = myLib.buildLocalTypstProject {
-      src = ./simple;
+      src = myLib.cleanTypstSource ./simple;
     };
 
     devShell = myLib.devShell rec {
       checks = {
         simple = myLib.buildTypstProject {
-          src = ./simple;
+          src = myLib.cleanTypstSource ./simple;
           inherit localPaths;
         };
       };
@@ -28,16 +28,16 @@ in
     };
 
     simple = myLib.buildTypstProject {
-      src = ./simple;
+      src = myLib.cleanTypstSource ./simple;
     };
     simpleWithFonts = myLib.buildTypstProject {
-      src = ./simple-with-fonts;
+      src = myLib.cleanTypstSource ./simple-with-fonts;
       fontPaths = [
         "${pkgs.roboto}/share/fonts/truetype"
       ];
     };
     simpleWithLocalPaths = myLib.buildTypstProject {
-      src = ./simple-with-local-paths;
+      src = myLib.cleanTypstSource ./simple-with-local-paths;
       localPaths = [
         {
           src = ./fixtures/icons;
