@@ -7,6 +7,7 @@ lib.makeScope newScope (self: let
 in {
   buildLocalTypstProject = callPackage ./buildLocalTypstProject.nix {};
   buildTypstProject = callPackage ./buildTypstProject.nix {};
+  cleanTypstSource = callPackage ./cleanTypstSource.nix {};
   coerceLocalPathAttr = callPackage ./coerceLocalPathAttr.nix {};
   copyLocalPathsHook = callPackage ./setupHooks/copyLocalPaths.nix {};
   devShell = callPackage ./devShell.nix {};
