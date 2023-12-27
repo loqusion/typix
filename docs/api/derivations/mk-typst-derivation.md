@@ -27,7 +27,7 @@ The command (or commands) to run during
 
 ### `fontPaths` (optional) { #fontpaths }
 
-A list of strings specifying paths to font files that will be made available to
+List of sources specifying paths to font files that will be made available to
 your Typst project. With this, you can compile Typst projects even when the
 fonts it uses are not available on your system.
 
@@ -58,8 +58,8 @@ The command (or commands) to run during
 
 ### `localPaths` (optional) { #localpaths }
 
-List of paths that will be made locally available to your Typst project. Useful
-for projects which rely on remote resources, such as
+List of sources that will be made locally available to your Typst project.
+Useful for projects which rely on remote resources, such as
 [images](https://typst.app/docs/reference/visualize/image/) or
 [data](https://typst.app/docs/reference/data-loading/).
 
