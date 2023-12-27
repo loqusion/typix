@@ -30,10 +30,9 @@
 
       typstNixLib = typst-nix.lib.${system};
 
-      typstProjectSource = "main.typ";
       commonArgs = {
         src = ./.;
-        inherit typstProjectSource;
+        typstProjectSource = "main.typ";
 
         fontPaths = [
           # Add paths to fonts here
@@ -49,15 +48,13 @@
         ];
       };
 
+      build-local = typstNixLib.buildLocalTypstProject {
+        inherit (commonArgs) src typstProjectSource fontPaths localPaths;
+      };
+
       watch-drv = typstNixLib.watchTypstProject {
         inherit (commonArgs) typstProjectSource fontPaths localPaths;
       };
-
-      buildToRootDrv = output:
-        pkgs.writeShellScriptBin "typst-build" ''
-          nix_out_path=$(nix build .#default --no-link --print-out-paths)
-          cp -L --no-preserve=mode "$nix_out_path" ${lib.strings.escapeShellArg output}
-        '';
     in {
       packages.default = typstNixLib.buildTypstProject {
         inherit (commonArgs) src typstProjectSource fontPaths localPaths;
@@ -65,18 +62,18 @@
 
       apps = rec {
         default = watch;
+        build = flake-utils.lib.mkApp {
+          drv = build-local;
+        };
         watch = flake-utils.lib.mkApp {
           drv = watch-drv;
-        };
-        build = flake-utils.lib.mkApp {
-          drv = buildToRootDrv (typstNixLib.inferTypstProjectOutput typstProjectSource);
         };
       };
 
       devShells.default = typstNixLib.devShell {
         packages = [
+          build-local
           watch-drv
-          (buildToRootDrv (typstNixLib.inferTypstProjectOutput typstProjectSource))
           # pkgs.typstfmt
         ];
       };
