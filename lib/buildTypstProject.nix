@@ -1,10 +1,8 @@
 {
-  copyLocalPathsHook,
   lib,
   mkTypstDerivation,
   typstOptsFromArgs,
 }: args @ {
-  localPaths ? [],
   typstCompileCommand ? "typst compile",
   typstProjectSource ? "main.typ",
   ...
@@ -14,7 +12,6 @@
 
   typstOpts = typstOptsFromArgs (args.typstOpts or {});
   cleanedArgs = removeAttrs args [
-    "localPaths"
     "typstOpts"
     "typstProjectOutput"
     "typstProjectSource"
@@ -25,8 +22,4 @@ in
       buildPhaseTypstCommand = ''
         ${typstCompileCommand} ${typstOpts} ${escapeShellArg typstProjectSource} "$out"
       '';
-
-      nativeBuildInputs = [
-        (copyLocalPathsHook localPaths)
-      ];
     })
