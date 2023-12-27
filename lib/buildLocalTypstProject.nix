@@ -19,7 +19,10 @@ in
     name = "typst-build";
 
     text = ''
-      nix_out_path=$(nix build ${buildTypstProject args} --print-out-paths)
-      cp -L --no-preserve=mode "$nix_out_path" ${escapeShellArg typstProjectOutput}
+      symlink=$(mktemp -d)/result
+      nix build ${buildTypstProject args} -o "$symlink" && {
+        cp -L --no-preserve=mode "$(readlink -e "$symlink")" ${escapeShellArg typstProjectOutput}
+      }
+      [ -L "$symlink" ] && rm "$symlink"
     '';
   }
