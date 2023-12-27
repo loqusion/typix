@@ -39,9 +39,11 @@ in
     // {
       name = args.name or "typst-watch";
 
-      runtimeInputs = [
-        typst
-      ];
+      runtimeInputs =
+        (args.runtimeInputs or [])
+        ++ [
+          typst
+        ];
 
       text =
         optionalString (fontPaths != []) ''
