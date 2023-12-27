@@ -8,6 +8,10 @@ in
   onlyDrvs (lib.makeScope myLib.newScope (self: let
     callPackage = self.newScope {};
   in {
+    buildLocal = myLib.buildLocalTypstProject {
+      src = ./simple;
+    };
+
     devShell = myLib.devShell rec {
       checks = {
         simple = myLib.buildTypstProject {
