@@ -52,18 +52,23 @@
 
       lib = mkLib pkgs;
 
+      packages = import ./pkgs.nix {
+        inherit pkgs;
+      };
+
       checks = pkgs.callPackages ./checks {
         inherit pkgs;
         myLib = mkLib pkgs;
       };
     in {
-      inherit checks lib;
+      inherit checks lib packages;
 
       formatter = pkgs.alejandra;
 
       devShells.default = pkgs.mkShell {
         nativeBuildInputs = with pkgs; [
           alejandra
+          mdbook
         ];
       };
     });
