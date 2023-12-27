@@ -19,7 +19,7 @@ in
     name = "typst-build";
 
     text = ''
-      symlink=$(mktemp -d)/result
+      symlink=$(mktemp -d -t tmp.XXXXXXXXXX)/result
       nix build ${buildTypstProject args} -o "$symlink" && {
         cp -L --no-preserve=mode "$(readlink -e "$symlink")" ${escapeShellArg typstProjectOutput}
       }
