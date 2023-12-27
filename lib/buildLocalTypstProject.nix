@@ -24,7 +24,7 @@ in
     text = ''
       symlink=$(mktemp -d -t tmp.XXXXXXXXXX)/result
       nix build ${buildTypstProjectDerivation} -o "$symlink" && {
-        cp -L --no-preserve=mode "$(readlink -e "$symlink")" ${escapeShellArg typstProjectOutput}
+        cp -LT --no-preserve=mode "$symlink" ${escapeShellArg typstProjectOutput}
       }
       [ -L "$symlink" ] && rm "$symlink"
     '';
