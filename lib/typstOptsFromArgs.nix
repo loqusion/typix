@@ -1,12 +1,16 @@
 {lib}: args_: let
-  inherit (lib.attrsets) filterAttrs mapAttrsToList;
+  inherit (lib.attrsets) filterAttrs mapAttrsToList recursiveUpdate;
   inherit (lib.strings) concatStringsSep escapeShellArg;
 
-  defaultArgs = {format = "pdf";};
-  args = defaultArgs // args_;
+  defaultArgs = {
+    typstOpts = {
+      format = "pdf";
+    };
+  };
+  args = recursiveUpdate defaultArgs args_;
 in
   concatStringsSep " " (
     mapAttrsToList
     (opt: value: "--${opt} ${escapeShellArg value}")
-    (filterAttrs (_: v: !isNull v) args)
+    (filterAttrs (_: v: !isNull v) args.typstOpts)
   )

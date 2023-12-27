@@ -17,7 +17,7 @@
   inherit (lib) optionalString;
   inherit (lib.strings) concatStringsSep escapeShellArg;
 
-  typstOpts = typstOptsFromArgs (args.typstOpts or {});
+  typstOpts = typstOptsFromArgs args;
   typstProjectOutput =
     args.typstProjectOutput
     or (inferTypstProjectOutput (

@@ -10,7 +10,7 @@
   inherit (builtins) removeAttrs;
   inherit (lib.strings) escapeShellArg;
 
-  typstOpts = typstOptsFromArgs (args.typstOpts or {});
+  typstOpts = typstOptsFromArgs args;
   cleanedArgs = removeAttrs args [
     "typstOpts"
     "typstProjectOutput"
