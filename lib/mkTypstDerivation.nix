@@ -29,7 +29,7 @@
   nameArgs =
     if args ? version
     then {
-      pname = name;
+      pname = args.pname or name;
       inherit (args) version;
     }
     else {inherit name;};
