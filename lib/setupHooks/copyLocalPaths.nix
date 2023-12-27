@@ -16,7 +16,7 @@ in
           in ''
             mkdir -p ${localPath.dest}
             echo "Copying ${localPath.src} to ${localPath.dest}"
-            cp -L --reflink=auto --no-preserve=mode -R ${localPath.src} -T ${localPath.dest}
+            cp -LTR --reflink=auto --no-preserve=mode ${localPath.src} ${localPath.dest}
             if [ ${localPath.dest} != "." ]; then
               rmdir --ignore-fail-on-non-empty ${localPath.dest}
             fi
