@@ -3,6 +3,20 @@
 A derivation for building a Typst project _and then_ copying the result to the
 current directory.
 
+<div class="warning">
+
+Using this derivation requires
+<a href="https://nixos.org/manual/nix/stable/command-ref/conf-file#conf-allow-import-from-derivation">
+<code>allow-import-from-derivation</code></a>
+to be <code>true</code>.
+
+More info:
+<a href="https://nixos.org/manual/nix/stable/language/import-from-derivation">
+https://nixos.org/manual/nix/stable/language/import-from-derivation
+</a>
+
+</div>
+
 ## Parameters
 
 > **TODO:** Copy parameters from [`buildTypstProject`](build-typst-project.md)
