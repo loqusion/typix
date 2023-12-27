@@ -34,7 +34,7 @@ fonts it uses are not available on your system.
 Used for setting `TYPST_FONT_PATHS` (see
 [`text`](https://typst.app/docs/reference/text/text/)).
 
-#### Example
+#### Example { #fontpaths-example }
 
 ```nix
 {
@@ -71,7 +71,7 @@ Each element of the list is an attribute set with the following keys:
 Instead of an attrset, you may use a path which will be interpreted the same as
 if you had specified an attrset with just `src`.
 
-#### Example
+#### Example { #localpaths-example }
 
 You can specify dependencies in your flake input, and then use them in your
 project with something like:
