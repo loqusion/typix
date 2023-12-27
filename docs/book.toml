@@ -4,3 +4,7 @@ language = "en"
 multilingual = false
 src = "."
 title = "Typst.nix"
+
+[output.html]
+git-repository-url = "https://github.com/loqusion/typst.nix"
+edit-url-template = "https://github.com/loqusion/typst.nix/edit/main/docs/{path}"
