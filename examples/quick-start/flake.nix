@@ -48,11 +48,11 @@
         ];
       };
 
-      build-local = typstNixLib.buildLocalTypstProject {
+      build-script = typstNixLib.buildLocalTypstProject {
         inherit (commonArgs) src typstProjectSource fontPaths localPaths;
       };
 
-      watch-drv = typstNixLib.watchTypstProject {
+      watch-script = typstNixLib.watchTypstProject {
         inherit (commonArgs) typstProjectSource fontPaths localPaths;
       };
     in {
@@ -63,17 +63,17 @@
       apps = rec {
         default = watch;
         build = flake-utils.lib.mkApp {
-          drv = build-local;
+          drv = build-script;
         };
         watch = flake-utils.lib.mkApp {
-          drv = watch-drv;
+          drv = watch-script;
         };
       };
 
       devShells.default = typstNixLib.devShell {
         packages = [
-          build-local
-          watch-drv
+          build-script
+          watch-script
           # pkgs.typstfmt
         ];
       };
