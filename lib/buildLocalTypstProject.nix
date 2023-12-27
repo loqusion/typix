@@ -17,15 +17,12 @@
   buildTypstProjectDerivation = buildTypstProject (
     args // {inherit typstProjectOutput typstProjectSource;}
   );
+  buildTypstProjectImport = builtins.path {path = buildTypstProjectDerivation;};
 in
   pkgs.writeShellApplication {
     name = "typst-build";
 
     text = ''
-      symlink=$(mktemp -d -t tmp.XXXXXXXXXX)/result
-      nix build ${buildTypstProjectDerivation} -o "$symlink" && {
-        cp -LT --no-preserve=mode "$symlink" ${escapeShellArg typstProjectOutput}
-      }
-      [ -L "$symlink" ] && rm "$symlink"
+      cp -LT --no-preserve=mode ${buildTypstProjectImport} ${escapeShellArg typstProjectOutput}
     '';
   }
