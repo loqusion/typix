@@ -25,7 +25,7 @@ The command (or commands) to run during
 
 ### `src`
 
-### `fontPaths` (optional)
+### `fontPaths` (optional) { #fontpaths }
 
 A list of strings specifying paths to font files that will be made available to
 your Typst project. With this, you can compile Typst projects even when the
@@ -51,12 +51,12 @@ Used for setting `TYPST_FONT_PATHS` (see
 }
 ```
 
-### `installPhaseCommand` (optional)
+### `installPhaseCommand` (optional) { #installphasecommand }
 
 The command (or commands) to run during
 [`installPhase`](https://nixos.org/manual/nixpkgs/stable/#ssec-install-phase).
 
-### `localPaths` (optional)
+### `localPaths` (optional) { #localpaths }
 
 List of paths that will be made locally available to your Typst project. Useful
 for projects which rely on remote resources, such as
