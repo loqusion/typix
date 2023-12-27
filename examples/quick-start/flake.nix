@@ -31,7 +31,7 @@
       typstNixLib = typst-nix.lib.${system};
 
       commonArgs = {
-        src = ./.;
+        src = typstNixLib.cleanTypstSource ./.;
         typstProjectSource = "main.typ";
 
         fontPaths = [
