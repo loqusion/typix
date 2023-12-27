@@ -71,6 +71,7 @@
       };
 
       devShells.default = typstNixLib.devShell {
+        inherit (commonArgs) fontPaths localPaths;
         packages = [
           build-script
           watch-script
