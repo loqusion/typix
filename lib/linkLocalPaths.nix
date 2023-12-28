@@ -7,7 +7,7 @@
   inherit (pkgs) symlinkJoin;
   inherit (lib) optionalString;
   inherit (lib.filesystem) pathIsDirectory;
-  inherit (lib.strings) concatMapStringsSep;
+  inherit (lib.strings) concatMapStringsSep escapeShellArg;
 in
   {
     localPaths,
@@ -30,12 +30,12 @@ in
         then "--force"
         else "--no-clobber";
     in ''
-      if [ ! -d ${source} ]; then
+      if [ ! -d ${escapeShellArg source} ]; then
         echo "typst-nix: linking ${localPath.src} to ${localPath.dest}"
-        ln ${lnAdditionalOpts} -sT ${source} ${localPath.dest}
+        ln ${lnAdditionalOpts} -sT ${escapeShellArg source} ${escapeShellArg localPath.dest}
       else
         echo "typst-nix: linking ${localPath.src} to ${localPath.dest} recursively"
-        cp ${cpAdditionalOpts} -RT --no-dereference --no-preserve=mode ${source} ${localPath.dest}
+        cp ${cpAdditionalOpts} -RT --no-dereference --no-preserve=mode ${escapeShellArg source} ${escapeShellArg localPath.dest}
       fi
     '')
     localPaths
