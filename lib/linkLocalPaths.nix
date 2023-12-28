@@ -1,7 +1,12 @@
 {
   coerceLocalPathAttr,
   lib,
+  pkgs,
 }: let
+  inherit (builtins) toString;
+  inherit (pkgs) symlinkJoin;
+  inherit (lib) optionalString;
+  inherit (lib.filesystem) pathIsDirectory;
   inherit (lib.strings) concatMapStringsSep;
 in
   {
@@ -11,24 +16,26 @@ in
     concatMapStringsSep
     "\n" (localPath_: let
       localPath = coerceLocalPathAttr localPath_;
-      linkCommand = ''
-        echo "typst-nix: linking ${localPath.src} to ${localPath.dest}"
-        ln -sfT ${localPath.src} ${localPath.dest}
-      '';
-    in
-      if forceLocalPaths
-      then ''
-        if [ -e ${localPath.dest} ]; then
-          echo "typst-nix: removing ${localPath.dest}"
-          rm -rf ${localPath.dest}
-        fi
-        ${linkCommand}
-      ''
-      else ''
-        if [ -e ${localPath.dest} ] && [ ! -L ${localPath.dest} ]; then
-          echo "typst-nix: ${localPath.dest} already exists; skipping"
+      source =
+        if !pathIsDirectory (toString localPath.src)
+        then localPath.src
         else
-          ${linkCommand}
-        fi
-      '')
+          (symlinkJoin {
+            name = "symlink" + optionalString (localPath ? dest) "-${localPath.dest}";
+            paths = [localPath.src];
+          });
+      lnAdditionalOpts = optionalString forceLocalPaths "--force";
+      cpAdditionalOpts =
+        if forceLocalPaths
+        then "--force"
+        else "--no-clobber";
+    in ''
+      if [ ! -d ${source} ]; then
+        echo "typst-nix: linking ${localPath.src} to ${localPath.dest}"
+        ln ${lnAdditionalOpts} -sT ${source} ${localPath.dest}
+      else
+        echo "typst-nix: linking ${localPath.src} to ${localPath.dest} recursively"
+        cp ${cpAdditionalOpts} -RT --no-dereference --no-preserve=mode ${source} ${localPath.dest}
+      fi
+    '')
     localPaths
