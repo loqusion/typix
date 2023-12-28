@@ -4,15 +4,15 @@ A generic derivation for running Typst commands.
 
 ## Parameters
 
-**Note:** All parameters for `stdenv.mkDerivation` are also available.
+**Note:** All parameters for `stdenv.mkDerivation`[^stdenv] are also available.
 
 ### `buildPhaseTypstCommand`
 
-Command (or commands) to run during
-[`buildPhase`](https://nixos.org/manual/nixpkgs/stable/#build-phase). Any output
-should typically be written to `$out`, e.g. `typsts compile <source> "$out"`.
+Command (or commands) to run during [`buildPhase`][nix-derivation-build-phase].
+Any output should typically be written to `$out`, e.g. `typsts compile <source>
+"$out"`.
 
-See also: [Typst CLI Usage](https://github.com/typst/typst#usage)
+See also: [Typst CLI Usage][typst-cli-usage]
 
 ### `src`
 
@@ -24,8 +24,7 @@ List of sources specifying paths to font files that will be made available to
 your Typst project. With this, you can compile Typst projects even when the
 fonts it uses are not available on your system.
 
-Used for setting `TYPST_FONT_PATHS` (see
-[`text`](https://typst.app/docs/reference/text/text/)).
+Used for setting `TYPST_FONT_PATHS` (see [`text`][typst-text]).
 
 #### Example { #fontpaths-example }
 
@@ -47,14 +46,13 @@ Used for setting `TYPST_FONT_PATHS` (see
 ### `installPhaseCommand` (optional) { #installphasecommand }
 
 Command (or commands) to run during
-[`installPhase`](https://nixos.org/manual/nixpkgs/stable/#ssec-install-phase).
+[`installPhase`][nix-derivation-install-phase].
 
 ### `localPaths` (optional) { #localpaths }
 
 List of sources that will be made locally available to your Typst project.
 Useful for projects which rely on remote resources, such as
-[images](https://typst.app/docs/reference/visualize/image/) or
-[data](https://typst.app/docs/reference/data-loading/).
+[images][typst-image] or [data][typst-data].
 
 Each element of the list is an attribute set with the following keys:
 
@@ -103,6 +101,13 @@ Then, reference the files in Typst:
 
 - [`mkTypstDerivation`](https://github.com/loqusion/typst.nix/blob/main/lib/mkTypstDerivation.nix)
 
-## See also
+## Footnotes
 
-- [`stdenv`](https://nixos.org/manual/nixpkgs/stable/#chap-stdenv)
+[^stdenv]: [`stdenv`](https://nixos.org/manual/nixpkgs/stable/#chap-stdenv)
+
+[nix-derivation-build-phase]: https://nixos.org/manual/nixpkgs/stable/#build-phase
+[nix-derivation-install-phase]: https://nixos.org/manual/nixpkgs/stable/#ssec-install-phase
+[typst-cli-usage]: https://github.com/typst/typst#usage
+[typst-data]: https://typst.app/docs/reference/data-loading/
+[typst-image]: https://typst.app/docs/reference/visualize/image/
+[typst-text]: https://typst.app/docs/reference/text/text/
