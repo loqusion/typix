@@ -15,7 +15,7 @@
 }: let
   inherit (builtins) removeAttrs;
   inherit (lib) optionalString;
-  inherit (lib.strings) concatStringsSep escapeShellArg;
+  inherit (lib.strings) concatStringsSep toShellVars;
 
   typstOptsString = args.typstOptsString or (typstOptsFromArgs args);
   typstProjectOutput =
@@ -55,6 +55,8 @@ in
         })
         + ''
 
-          ${typstWatchCommand} ${typstOptsString} ${escapeShellArg typstProjectSource} ${escapeShellArg typstProjectOutput}
+          ${toShellVars {inherit typstProjectOutput typstProjectSource;}}
+          out=''${1:-''${typstProjectOutput:?not defined}}
+          ${typstWatchCommand} ${typstOptsString} "$typstProjectSource" "$out"
         '';
     })

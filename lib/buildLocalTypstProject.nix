@@ -6,7 +6,7 @@
   typst,
   typstOptsFromArgs,
 }: args @ {typstProjectSource ? "main.typ", ...}: let
-  inherit (lib.strings) escapeShellArg;
+  inherit (lib.strings) toShellVars;
 
   typstOptsString = typstOptsFromArgs args;
   typstProjectOutput =
@@ -24,6 +24,8 @@ in
     name = "typst-build";
 
     text = ''
-      cp -LT --no-preserve=mode ${buildTypstProjectImport} ${escapeShellArg typstProjectOutput}
+      ${toShellVars {inherit typstProjectOutput;}}
+      out=''${1:-''${typstProjectOutput:?not defined}}
+      cp -LT --no-preserve=mode ${buildTypstProjectImport} "$out"
     '';
   }
