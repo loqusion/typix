@@ -10,10 +10,11 @@
   inherit (builtins) removeAttrs;
   inherit (lib.strings) escapeShellArg;
 
-  typstOpts = typstOptsFromArgs args;
+  typstOptsString = args.typstOptsString or (typstOptsFromArgs args);
   cleanedArgs = removeAttrs args [
     "typstCompileCommand"
     "typstOpts"
+    "typstOptsString"
     "typstProjectOutput"
     "typstProjectSource"
   ];
@@ -21,6 +22,6 @@ in
   mkTypstDerivation (cleanedArgs
     // {
       buildPhaseTypstCommand = ''
-        ${typstCompileCommand} ${typstOpts} ${escapeShellArg typstProjectSource} "$out"
+        ${typstCompileCommand} ${typstOptsString} ${escapeShellArg typstProjectSource} "$out"
       '';
     })

@@ -17,7 +17,7 @@
   inherit (lib) optionalString;
   inherit (lib.strings) concatStringsSep escapeShellArg;
 
-  typstOpts = typstOptsFromArgs args;
+  typstOptsString = args.typstOptsString or (typstOptsFromArgs args);
   typstProjectOutput =
     args.typstProjectOutput
     or (inferTypstProjectOutput (
@@ -30,6 +30,7 @@
     "localPaths"
     "text"
     "typstOpts"
+    "typstOptsString"
     "typstProjectOutput"
     "typstProjectSource"
     "typstWatchCommand"
@@ -54,6 +55,6 @@ in
         })
         + ''
 
-          ${typstWatchCommand} ${typstOpts} ${escapeShellArg typstProjectSource} ${escapeShellArg typstProjectOutput}
+          ${typstWatchCommand} ${typstOptsString} ${escapeShellArg typstProjectSource} ${escapeShellArg typstProjectOutput}
         '';
     })

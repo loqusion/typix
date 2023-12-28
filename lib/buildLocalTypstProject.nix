@@ -4,18 +4,19 @@
   lib,
   pkgs,
   typst,
+  typstOptsFromArgs,
 }: args @ {typstProjectSource ? "main.typ", ...}: let
   inherit (lib.strings) escapeShellArg;
 
+  typstOptsString = typstOptsFromArgs args;
   typstProjectOutput =
     args.typstProjectOutput
-    or (
-      inferTypstProjectOutput (
-        {inherit typstProjectSource;} // args
-      )
-    );
+    or (inferTypstProjectOutput (
+      {inherit typstProjectSource;} // args
+    ));
+
   buildTypstProjectDerivation = buildTypstProject (
-    args // {inherit typstProjectOutput typstProjectSource;}
+    args // {inherit typstOptsString typstProjectSource;}
   );
   buildTypstProjectImport = builtins.path {path = buildTypstProjectDerivation;};
 in
