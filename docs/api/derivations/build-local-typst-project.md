@@ -31,8 +31,12 @@ The only parameters recognized by `buildLocalTypstProject` are as follows:
 
 Destination path for Typst output.
 
+<!-- markdownlint-disable link-fragments -->
+
 If omitted, will be inferred from [`typstProjectSource`](#typstprojectsource) —
 for example, `page.typ` will become `page.pdf` for PDF output.
+
+<!--markdownlint-restore -->
 
 ### `typstProjectSource` (optional)
 
