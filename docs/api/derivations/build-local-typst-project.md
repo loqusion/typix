@@ -1,6 +1,6 @@
 # buildLocalTypstProject
 
-A derivation for building a Typst project _and then_ copying the result to the
+A derivation for compiling a Typst project _and then_ copying the result to the
 current directory.
 
 <div class="warning">
