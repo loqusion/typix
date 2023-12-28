@@ -15,7 +15,7 @@
       )
     );
   buildTypstProjectDerivation = buildTypstProject (
-    args // {inherit typstProjectOutput typstProjectSource;}
+    args // {inherit typstProjectSource;}
   );
   buildTypstProjectImport = builtins.path {path = buildTypstProjectDerivation;};
 in
