@@ -8,7 +8,7 @@ A generic derivation for running Typst commands.
 
 ### `buildPhaseTypstCommand`
 
-The command (or commands) to run during
+Command (or commands) to run during
 [`buildPhase`](https://nixos.org/manual/nixpkgs/stable/#build-phase). Any output
 should typically be written to `$out`, e.g. `typsts compile <source> "$out"`.
 
@@ -46,7 +46,7 @@ Used for setting `TYPST_FONT_PATHS` (see
 
 ### `installPhaseCommand` (optional) { #installphasecommand }
 
-The command (or commands) to run during
+Command (or commands) to run during
 [`installPhase`](https://nixos.org/manual/nixpkgs/stable/#ssec-install-phase).
 
 ### `localPaths` (optional) { #localpaths }
