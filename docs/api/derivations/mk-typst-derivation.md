@@ -9,9 +9,10 @@ A generic derivation for running Typst commands.
 ### `buildPhaseTypstCommand`
 
 The command (or commands) to run during
-[`buildPhase`](https://nixos.org/manual/nixpkgs/stable/#build-phase).
+[`buildPhase`](https://nixos.org/manual/nixpkgs/stable/#build-phase). Any output
+should typically be written to `$out`, e.g. `typsts compile <source> "$out"`.
 
-> See also: [Typst CLI Usage](https://github.com/typst/typst#usage)
+See also: [Typst CLI Usage](https://github.com/typst/typst#usage)
 
 ### `src`
 
