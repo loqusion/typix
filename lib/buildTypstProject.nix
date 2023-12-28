@@ -14,6 +14,7 @@
   cleanedArgs = removeAttrs args [
     "typstCompileCommand"
     "typstOpts"
+    "typstProjectOutput"
     "typstProjectSource"
   ];
 in
