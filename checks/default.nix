@@ -7,44 +7,65 @@
 in
   onlyDrvs (lib.makeScope myLib.newScope (self: let
     callPackage = self.newScope {};
-  in {
-    buildLocal = myLib.buildLocalTypstProject {
+    typstProjectSource = "main.typ";
+    fontPaths = [
+      "${pkgs.roboto}/share/fonts/truetype"
+    ];
+    localPaths = [
+      {
+        src = ./fixtures/icons;
+        dest = "icons";
+      }
+    ];
+  in rec {
+    buildLocal = callPackage ./build-local.nix {};
+    buildLocalSimple = buildLocal {
+      inherit typstProjectSource;
       src = myLib.cleanTypstSource ./simple;
+    };
+    buildLocalSimpleWithFonts = buildLocal {
+      inherit fontPaths typstProjectSource;
+      src = myLib.cleanTypstSource ./simple-with-fonts;
+    };
+    buildLocalSimpleWithLocalPaths = buildLocal {
+      inherit localPaths typstProjectSource;
+      src = myLib.cleanTypstSource ./simple-with-local-paths;
     };
 
     devShell = myLib.devShell rec {
+      inherit localPaths;
       checks = {
         simple = myLib.buildTypstProject {
+          inherit localPaths typstProjectSource;
           src = myLib.cleanTypstSource ./simple;
-          inherit localPaths;
         };
       };
-      localPaths = [
-        {
-          src = ./fixtures/icons;
-          dest = "icons";
-        }
-      ];
     };
 
     simple = myLib.buildTypstProject {
+      inherit typstProjectSource;
       src = myLib.cleanTypstSource ./simple;
     };
     simpleWithFonts = myLib.buildTypstProject {
+      inherit fontPaths typstProjectSource;
       src = myLib.cleanTypstSource ./simple-with-fonts;
-      fontPaths = [
-        "${pkgs.roboto}/share/fonts/truetype"
-      ];
     };
     simpleWithLocalPaths = myLib.buildTypstProject {
+      inherit localPaths typstProjectSource;
       src = myLib.cleanTypstSource ./simple-with-local-paths;
-      localPaths = [
-        {
-          src = ./fixtures/icons;
-          dest = "icons";
-        }
-      ];
     };
 
-    watch = callPackage ./watch {};
+    watch = callPackage ./watch.nix {};
+    watchSimple = watch {
+      inherit typstProjectSource;
+      src = myLib.cleanTypstSource ./simple;
+    };
+    watchSimpleWithFonts = watch {
+      inherit fontPaths typstProjectSource;
+      src = myLib.cleanTypstSource ./simple-with-fonts;
+    };
+    watchSimpleWithLocalPaths = watch {
+      inherit localPaths typstProjectSource;
+      src = myLib.cleanTypstSource ./simple-with-local-paths;
+    };
   }))
