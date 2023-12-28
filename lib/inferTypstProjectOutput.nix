@@ -11,10 +11,12 @@
     then format
     else
       lib.flip lib.trivial.warn "" ''
-        typst.nix could not infer the typst output extension since ${format} is not supported
+        typst.nix could not infer the typst output extension since ${format} is unsupported
         to silence this warning consider one of the following:
         - set the format option to one of: pdf, svg, png
         - set `typstProjectOutput` explicitly
+        - if ${format} is supported by typst but not by typst.nix, please open a
+          PR at https://github.com/loqusion/typst.nix
       '';
 in
   name + lib.optionalString (extension != "") ".${extension}"
