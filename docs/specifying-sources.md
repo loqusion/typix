@@ -14,4 +14,6 @@ and string interpolation (via `${...}`) in the case of `fontPaths` and
   expensive to copy to the Nix store, resulting in longer build times and higher
   disk usage
 
+> **TODO:** Add more
+
 <https://discourse.nixos.org/t/filtering-source-trees-with-nix-and-nixpkgs/19148>

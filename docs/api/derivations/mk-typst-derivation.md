@@ -16,6 +16,8 @@ See also: [Typst CLI Usage](https://github.com/typst/typst#usage)
 
 ### `src`
 
+> **TODO**
+
 ### `fontPaths` (optional) { #fontpaths }
 
 List of sources specifying paths to font files that will be made available to
