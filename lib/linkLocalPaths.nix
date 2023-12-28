@@ -29,13 +29,18 @@ in
         if forceLocalPaths
         then "--force"
         else "--no-clobber";
-    in ''
-      if [ ! -d ${escapeShellArg source} ]; then
-        echo "typst-nix: linking ${localPath.src} to ${localPath.dest}"
-        ln ${lnAdditionalOpts} -sT ${escapeShellArg source} ${escapeShellArg localPath.dest}
-      else
-        echo "typst-nix: linking ${localPath.src} to ${localPath.dest} recursively"
-        cp ${cpAdditionalOpts} -RT --no-dereference --no-preserve=mode ${escapeShellArg source} ${escapeShellArg localPath.dest}
-      fi
-    '')
+    in
+      # We don't want a refusal to overwrite existing files to cause nix to fail, so we add `|| true`
+      # to the commands this applies to
+      ''
+        if [ ! -d ${escapeShellArg source} ]; then
+          echo "typst-nix: linking ${localPath.src} to ${localPath.dest}"
+          ln ${lnAdditionalOpts} -sT ${escapeShellArg source} ${escapeShellArg localPath.dest} ||
+            true
+        else
+          echo "typst-nix: linking ${localPath.src} to ${localPath.dest} recursively"
+          cp ${cpAdditionalOpts} -RT --no-dereference --no-preserve=mode ${escapeShellArg source} ${escapeShellArg localPath.dest} ||
+            true
+        fi
+      '')
     localPaths
