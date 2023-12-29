@@ -1,7 +1,6 @@
 # buildLocalTypstProject
 
-A derivation for compiling a Typst project _and then_ copying the result to the
-current directory.
+A derivation for compiling a Typst project to the current directory.
 
 This is essentially a script which wraps
 [`buildTypstProject`](build-typst-project.md).
