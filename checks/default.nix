@@ -60,10 +60,18 @@ in
             exit 1
           fi
           hash=$(sha256sum "$FILE_TO_CHECK" | awk '{ print $1 }')
+          if [ -z "$hash" ]; then
+            echo "unable to obtain hash for $FILE_TO_CHECK"
+            exit 1
+          fi
         '';
         postBuild = ''
           hash=''${hash:?not defined}
           new_hash=$(sha256sum "$FILE_TO_CHECK" | awk '{ print $1 }')
+          if [ -z "$new_hash" ]; then
+            echo "unable to obtain hash for $FILE_TO_CHECK"
+            exit 1
+          fi
           if [ "$hash" ${op} "$new_hash" ]; then
             echo ${errorMsg}
             echo
