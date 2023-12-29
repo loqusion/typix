@@ -116,4 +116,5 @@ in
     };
 
     watchOverlappingLocalPaths = overlappingLocalPathsInvariant watch "icons/link.svg";
+    watchOverlappingLocalPathsForce = overlappingLocalPathsForce watch "icons/link.svg";
   }))
