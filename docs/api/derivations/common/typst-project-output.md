@@ -8,9 +8,13 @@ Destination path for Typst output.
 
 <!-- ANCHOR: buildlocaltypstproject -->
 
+<!-- markdownlint-disable link-fragments -->
+
 If omitted, it will be inferred from
-[`typstProjectSource`](build-typst-project.md#typstprojectsource) — for example,
+[`typstProjectSource`](#typstprojectsource) — for example,
 `page.typ` will become `page.pdf` for PDF output.
+
+<!-- markdownlint-restore -->
 
 <!-- ANCHOR_END: buildlocaltypstproject -->
 

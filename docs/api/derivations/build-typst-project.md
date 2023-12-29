@@ -9,15 +9,33 @@ If you want to build to the project directory, use
 
 All parameters accepted by
 [`mkTypstDerivation`](mk-typst-derivation.md#parameters) are also accepted by
-`buildTypstProject` (except for
-[`buildPhaseTypstCommand`](mk-typst-derivation.md#buildphasetypstcommand), which
-is constructed from the below parameters).
+`buildTypstProject`. They are repeated below for convenience.
+
+### `fontPaths` (optional) { #fontpaths }
+
+{{#include common/font-paths.md}}
+
+#### Example { #fontpaths-example }
+
+{{#include common/font-paths-example.md:buildtypstproject_example}}
+
+### `installPhaseCommand` (optional) { #installphasecommand }
+
+{{#include common/install-phase-command.md}}
+
+### `localPaths` (optional) { #localpaths }
+
+{{#include common/local-paths.md}}
+
+#### Example { #localpaths-example }
+
+{{#include common/local-paths-example.md:head}}
+{{#include common/local-paths-example.md:buildtypstproject_example}}
+{{#include common/local-paths-example.md:tail}}
 
 ### `typstCompileCommand` (optional) { #typstcompilecommand }
 
-Base Typst command to run to compile the project. `buildTypstProject` will
-append other arguments based on the other parameters you supply. Default is
-`typst compile`.
+{{#include common/typst-compile-command.md}}
 
 ### `typstOpts` (optional) { #typstopts }
 

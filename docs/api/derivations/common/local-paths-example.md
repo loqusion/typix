@@ -7,6 +7,62 @@ project with something like:
 
 <!-- ANCHOR_END: head -->
 
+<!-- ANCHOR: buildlocaltypstproject_example -->
+
+```nix
+{
+  inputs = {
+    font-awesome = {
+      url = "github:FortAwesome/Font-Awesome";
+      flake = false;
+    };
+  };
+
+  outputs = { typst-nix, font-awesome }: let
+    system = "x86_64-linux";
+  in {
+    packages.${system}.default = typst-nix.lib.${system}.buildLocalTypstProject {
+      localPaths = [
+        {
+          dest = "icons";
+          src = "${font-awesome}/svgs/regular";
+        }
+      ];
+    };
+  };
+}
+```
+
+<!-- ANCHOR_END: buildlocaltypstproject_example -->
+
+<!-- ANCHOR: buildtypstproject_example -->
+
+```nix
+{
+  inputs = {
+    font-awesome = {
+      url = "github:FortAwesome/Font-Awesome";
+      flake = false;
+    };
+  };
+
+  outputs = { typst-nix, font-awesome }: let
+    system = "x86_64-linux";
+  in {
+    packages.${system}.default = typst-nix.lib.${system}.buildTypstProject {
+      localPaths = [
+        {
+          dest = "icons";
+          src = "${font-awesome}/svgs/regular";
+        }
+      ];
+    };
+  };
+}
+```
+
+<!-- ANCHOR_END: buildtypstproject_example -->
+
 <!-- ANCHOR: mktypstderivation_example -->
 
 ```nix

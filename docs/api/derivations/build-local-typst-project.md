@@ -23,12 +23,60 @@ https://nixos.org/manual/nix/stable/language/import-from-derivation
 
 All parameters accepted by
 [`buildTypstProject`](build-typst-project.md#parameters) are also accepted by
-`buildLocalTypstProject`.
+`buildLocalTypstProject`. They are repeated below for convenience.
+
+### `fontPaths` (optional) { #fontpaths }
+
+{{#include common/font-paths.md}}
+
+#### Example { #fontpaths-example }
+
+{{#include common/font-paths-example.md:buildlocaltypstproject_example}}
+
+### `installPhaseCommand` (optional) { #installphasecommand }
+
+{{#include common/install-phase-command.md}}
+
+### `localPaths` (optional) { #localpaths }
+
+{{#include common/local-paths.md}}
+
+#### Example { #localpaths-example }
+
+{{#include common/local-paths-example.md:head}}
+{{#include common/local-paths-example.md:buildlocaltypstproject_example}}
+{{#include common/local-paths-example.md:tail}}
+
+### `typstCompileCommand` (optional) { #typstcompilecommand }
+
+{{#include common/typst-compile-command.md}}
+
+### `typstOpts` (optional) { #typstopts }
+
+{{#include common/typst-opts.md:head}}
+
+<!-- markdownlint-disable link-fragments -->
+
+These are in addition to any options you manually pass in
+[`typstCompileCommand`](#typstcompilecommand).
+
+<!-- markdownlint-restore -->
+
+{{#include common/typst-opts.md:tail}}
+
+#### Example { #typstopts-example }
+
+{{#include common/typst-opts-example.md:head}}
+{{#include common/typst-opts-example.md:typstcompile}}
 
 ### `typstProjectOutput` (optional) { #typstprojectoutput }
 
 {{#include common/typst-project-output.md:head}}
 {{#include common/typst-project-output.md:buildlocaltypstproject}}
+
+### `typstProjectSource` (optional) { #typstprojectsource }
+
+{{#include common/typst-project-source.md}}
 
 ## Source
 

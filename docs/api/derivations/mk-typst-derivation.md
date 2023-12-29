@@ -28,8 +28,7 @@ See also: [Typst CLI Usage][typst-cli-usage]
 
 ### `installPhaseCommand` (optional) { #installphasecommand }
 
-Command (or commands) to run during
-[`installPhase`][nix-derivation-install-phase].
+{{#include common/install-phase-command.md}}
 
 ### `localPaths` (optional) { #localpaths }
 
@@ -50,5 +49,4 @@ Command (or commands) to run during
 [^stdenv]: [`stdenv`](https://nixos.org/manual/nixpkgs/stable/#chap-stdenv)
 
 [nix-derivation-build-phase]: https://nixos.org/manual/nixpkgs/stable/#build-phase
-[nix-derivation-install-phase]: https://nixos.org/manual/nixpkgs/stable/#ssec-install-phase
 [typst-cli-usage]: https://github.com/typst/typst#usage
