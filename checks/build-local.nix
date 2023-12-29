@@ -6,7 +6,8 @@
   build-local-drv = buildLocalTypstProject ({
       name = "build-local-check";
     }
-    // args);
+    // args
+    // runCommandDrvAttr);
 in
   pkgs.runCommand "build-local" (runCommandDrvAttr
     // {
