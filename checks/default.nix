@@ -68,4 +68,26 @@ in
       inherit localPaths typstProjectSource;
       src = myLib.cleanTypstSource ./simple-with-local-paths;
     };
+
+    watchOverlappingLocalPaths =
+      watch {
+        INVARIANT_FILE = "icons/link.svg";
+        preBuild = ''
+          hash=$(sha256sum "$INVARIANT_FILE" | awk '{ print $1 }')
+        '';
+        postBuild = ''
+          hash=''${hash:?not defined}
+          new_hash=$(sha256sum "$INVARIANT_FILE" | awk '{ print $1 }')
+          if [ "$hash" != "$new_hash" ]; then
+            echo "$INVARIANT_FILE has been overwritten by watchTypstProject when it should have stayed the same"
+            echo
+            echo "old hash: $hash"
+            echo "new hash: $new_hash"
+            exit 1
+          fi
+        '';
+      } {
+        inherit localPaths typstProjectSource;
+        src = ./overlapping-local-paths;
+      };
   }))
