@@ -32,7 +32,7 @@ in
       src = myLib.cleanTypstSource ./simple-with-local-paths;
     };
 
-    buildLocalOverlappingLocalPaths = overlappingLocalPaths buildLocal "icons/link.svg";
+    buildLocalOverlappingLocalPaths = overlappingLocalPathsInvariant buildLocal "icons/link.svg";
 
     devShell = myLib.devShell rec {
       inherit localPaths;
@@ -44,27 +44,38 @@ in
       };
     };
 
-    overlappingLocalPaths = util: invariantFile:
-      util {
-        INVARIANT_FILE = invariantFile;
+    overlappingLocalPaths = isInvariant: util: file:
+      util (let
+        op =
+          if isInvariant
+          then "!="
+          else "=";
+        errorMsg =
+          if isInvariant
+          then "$FILE_TO_CHECK has been overwritten when it should have stayed the same"
+          else "$FILE_TO_CHECK was not overwritten when forceLocalPaths is true";
+      in {
+        FILE_TO_CHECK = file;
         preBuild = ''
-          hash=$(sha256sum "$INVARIANT_FILE" | awk '{ print $1 }')
+          hash=$(sha256sum "$FILE_TO_CHECK" | awk '{ print $1 }')
         '';
         postBuild = ''
           hash=''${hash:?not defined}
-          new_hash=$(sha256sum "$INVARIANT_FILE" | awk '{ print $1 }')
-          if [ "$hash" != "$new_hash" ]; then
-            echo "$INVARIANT_FILE has been overwritten by watchTypstProject when it should have stayed the same"
+          new_hash=$(sha256sum "$FILE_TO_CHECK" | awk '{ print $1 }')
+          if [ "$hash" ${op} "$new_hash" ]; then
+            echo "${errorMsg}"
             echo
             echo "old hash: $hash"
             echo "new hash: $new_hash"
             exit 1
           fi
         '';
-      } {
+      }) {
         inherit localPaths typstProjectSource;
         src = ./overlapping-local-paths;
       };
+    overlappingLocalPathsInvariant = overlappingLocalPaths true;
+    overlappingLocalPathsForce = overlappingLocalPaths false;
 
     simple = myLib.buildTypstProject {
       inherit typstProjectSource;
@@ -93,5 +104,5 @@ in
       src = myLib.cleanTypstSource ./simple-with-local-paths;
     };
 
-    watchOverlappingLocalPaths = overlappingLocalPaths watch "icons/link.svg";
+    watchOverlappingLocalPaths = overlappingLocalPathsInvariant watch "icons/link.svg";
   }))
