@@ -32,7 +32,7 @@ in
       src = myLib.cleanTypstSource ./simple-with-local-paths;
     };
 
-    devShell = myLib.devShell rec {
+    devShell = myLib.devShell {
       inherit localPaths;
       checks = {
         simple = myLib.buildTypstProject {
