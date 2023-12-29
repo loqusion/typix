@@ -21,7 +21,9 @@
 in
   mkTypstDerivation (cleanedArgs
     // {
-      buildPhaseTypstCommand = ''
-        ${typstCompileCommand} ${typstOptsString} ${escapeShellArg typstProjectSource} "$out"
-      '';
+      buildPhaseTypstCommand =
+        args.buildPhaseTypstCommand
+        or ''
+          ${typstCompileCommand} ${typstOptsString} ${escapeShellArg typstProjectSource} "$out"
+        '';
     })
