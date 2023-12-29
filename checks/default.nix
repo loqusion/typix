@@ -32,8 +32,6 @@ in
       src = myLib.cleanTypstSource ./simple-with-local-paths;
     };
 
-    buildLocalOverlappingLocalPaths = overlappingLocalPathsInvariant buildLocal "icons/link.svg";
-
     devShell = myLib.devShell rec {
       inherit localPaths;
       checks = {
