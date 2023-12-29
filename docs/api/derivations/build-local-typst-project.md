@@ -25,7 +25,7 @@ https://nixos.org/manual/nix/stable/language/import-from-derivation
 All parameters accepted by [`buildTypstProject`](build-typst-project.md) are
 also accepted by `buildLocalTypstProject`.
 
-### `typstProjectOutput` (optional)
+### `typstProjectOutput` (optional) { #typstprojectoutput }
 
 Destination path for Typst output.
 
