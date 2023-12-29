@@ -2,7 +2,7 @@
   lib,
   pkgs,
   watchTypstProject,
-}: args: let
+}: runCommandDrvAttr: args: let
   cleanedArgs = builtins.removeAttrs args [
     "src"
   ];
@@ -13,11 +13,14 @@
     }
     // cleanedArgs);
 in
-  pkgs.runCommand "watch" {
-    nativeBuildInputs = [
-      watch-drv
-    ];
-  } ''
-    cp -RLT ${args.src} .
+  pkgs.runCommand "watch" (runCommandDrvAttr
+    // {
+      nativeBuildInputs =
+        (runCommandDrvAttr.nativeBuildInputs or [])
+        ++ [
+          watch-drv
+        ];
+    }) ''
+    cp -RLT --no-preserve=mode ${args.src} .
     ${lib.getExe watch-drv} "$out"
   ''

@@ -19,15 +19,15 @@ in
     ];
   in rec {
     buildLocal = callPackage ./build-local.nix {};
-    buildLocalSimple = buildLocal {
+    buildLocalSimple = buildLocal {} {
       inherit typstProjectSource;
       src = myLib.cleanTypstSource ./simple;
     };
-    buildLocalSimpleWithFonts = buildLocal {
+    buildLocalSimpleWithFonts = buildLocal {} {
       inherit fontPaths typstProjectSource;
       src = myLib.cleanTypstSource ./simple-with-fonts;
     };
-    buildLocalSimpleWithLocalPaths = buildLocal {
+    buildLocalSimpleWithLocalPaths = buildLocal {} {
       inherit localPaths typstProjectSource;
       src = myLib.cleanTypstSource ./simple-with-local-paths;
     };
@@ -56,15 +56,15 @@ in
     };
 
     watch = callPackage ./watch.nix {};
-    watchSimple = watch {
+    watchSimple = watch {} {
       inherit typstProjectSource;
       src = myLib.cleanTypstSource ./simple;
     };
-    watchSimpleWithFonts = watch {
+    watchSimpleWithFonts = watch {} {
       inherit fontPaths typstProjectSource;
       src = myLib.cleanTypstSource ./simple-with-fonts;
     };
-    watchSimpleWithLocalPaths = watch {
+    watchSimpleWithLocalPaths = watch {} {
       inherit localPaths typstProjectSource;
       src = myLib.cleanTypstSource ./simple-with-local-paths;
     };
