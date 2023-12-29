@@ -22,5 +22,7 @@ in
         ];
     }) ''
     cp -RLT --no-preserve=mode ${args.src} .
+    runHook preBuild
     ${lib.getExe watch-drv} "$out"
+    runHook postBuild
   ''

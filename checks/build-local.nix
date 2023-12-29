@@ -16,5 +16,7 @@ in
           build-local-drv
         ];
     }) ''
+    runHook preBuild
     ${lib.getExe build-local-drv} "$out"
+    runHook postBuild
   ''
