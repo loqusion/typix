@@ -28,11 +28,8 @@ All parameters accepted by
 
 ### `typstProjectOutput` (optional) { #typstprojectoutput }
 
-Destination path for Typst output.
-
-If omitted, it will be inferred from
-[`typstProjectSource`](build-typst-project.md#typstprojectsource) — for example,
-`page.typ` will become `page.pdf` for PDF output.
+{{#include common/typst-project-output.md:head}}
+{{#include common/typst-project-output.md:buildlocaltypstproject}}
 
 ## Source
 

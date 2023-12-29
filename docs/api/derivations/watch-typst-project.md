@@ -12,17 +12,70 @@ are also supported (besides `text`).
 
 ### `fontPaths` (optional) { #fontpaths }
 
+{{#include common/font-paths.md}}
+
+#### Example { #fontpaths-example }
+
+{{#include common/font-paths-example.md:watchtypstproject_example}}
+
 ### `forceLocalPaths` (optional) { #forcelocalpaths }
+
+<!-- markdownlint-disable link-fragments -->
+
+If there are any conflicts between [`localPaths`](#localpaths) and files in your
+project directory, they will not be overwritten unless `forceLocalPaths` is
+`true`.
+
+<!-- markdownlint-restore -->
 
 ### `localPaths` (optional) { #localpaths }
 
+{{#include common/local-paths.md}}
+
+<!-- markdownlint-disable link-fragments -->
+
+**NOTE:** Any paths specified here will not overwrite files in your project
+directory, unless you set [`forceLocalPaths`](#forcelocalpaths) to `true`.
+
+<!-- markdownlint-restore -->
+
+#### Example { #localpaths-example }
+
+{{#include common/local-paths-example.md:head}}
+{{#include common/local-paths-example.md:watchtypstproject_example}}
+{{#include common/local-paths-example.md:tail}}
+
 ### `typstOpts` (optional) { #typstopts }
+
+{{#include common/typst-opts.md:head}}
+
+<!-- markdownlint-disable link-fragments -->
+
+These are in addition to any options you manually pass in
+[`typstWatchCommand`](#typstwatchcommand).
+
+<!-- markdownlint-restore -->
+
+{{#include common/typst-opts.md:tail}}
+
+#### Example { #typstopts-example }
+
+{{#include common/typst-opts-example.md:head}}
+{{#include common/typst-opts-example.md:typstwatch}}
 
 ### `typstProjectOutput` (optional) { #typstprojectoutput }
 
+{{#include common/typst-project-output.md:head}}
+{{#include common/typst-project-output.md:watchtypstproject}}
+
 ### `typstProjectSource` (optional) { #typstprojectsource }
 
+{{#include common/typst-project-source.md}}
+
 ### `typstWatchCommand` (optional) { #typstwatchcommand }
+
+Base Typst command to run to watch the project. Other arguments will be appended
+based on the other parameters you supply. Default is `typst watch`.
 
 ## Source
 

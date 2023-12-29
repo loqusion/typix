@@ -21,40 +21,25 @@ append other arguments based on the other parameters you supply. Default is
 
 ### `typstOpts` (optional) { #typstopts }
 
+{{#include common/typst-opts.md:head}}
+
 <!-- markdownlint-disable link-fragments -->
 
-Attrset specifying command-line options to pass to `typstCompileCommand`, in
-addition to any that you manually pass in
+These are in addition to any options you manually pass in
 [`typstCompileCommand`](#typstcompilecommand).
 
 <!-- markdownlint-restore -->
 
-Default:
-
-```nix
-{
-  format = "pdf";
-}
-```
+{{#include common/typst-opts.md:tail}}
 
 #### Example { #typstopts-example }
 
-```nix
-{
-  format = "png";
-  ppi = 300;
-}
-```
-
-...will result in a command like:
-
-```sh
-typst compile --format png --ppi 300 <source> <output>
-```
+{{#include common/typst-opts-example.md:head}}
+{{#include common/typst-opts-example.md:typstcompile}}
 
 ### `typstProjectSource` (optional) { #typstprojectsource }
 
-Typst input file to compile. Default is `main.typ`.
+{{#include common/typst-project-source.md}}
 
 ## Source
 
