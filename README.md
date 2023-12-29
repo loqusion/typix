@@ -1,4 +1,4 @@
 # typst.nix
 
 > [!WARNING]
-> The project is still in its early stages. It is not ready for use yet.
+> The project is currently experimental. Expect breaking changes.
