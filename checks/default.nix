@@ -52,18 +52,22 @@ in
           else "=";
         errorMsg =
           if isInvariant
-          then "$FILE_TO_CHECK has been overwritten when it should have stayed the same"
-          else "$FILE_TO_CHECK was not overwritten when forceLocalPaths is true";
+          then ''$FILE_TO_CHECK was overwritten\; it should stay the same when forceLocalPaths is false''
+          else ''$FILE_TO_CHECK was not overwritten\; it should be overwritten when forceLocalPaths is true'';
       in {
         FILE_TO_CHECK = file;
         preBuild = ''
+          if [ ! -e "$FILE_TO_CHECK" ]; then
+            echo "$FILE_TO_CHECK does not exist; unable to run check"
+            exit 1
+          fi
           hash=$(sha256sum "$FILE_TO_CHECK" | awk '{ print $1 }')
         '';
         postBuild = ''
           hash=''${hash:?not defined}
           new_hash=$(sha256sum "$FILE_TO_CHECK" | awk '{ print $1 }')
           if [ "$hash" ${op} "$new_hash" ]; then
-            echo "${errorMsg}"
+            echo ${errorMsg}
             echo
             echo "old hash: $hash"
             echo "new hash: $new_hash"
@@ -73,6 +77,7 @@ in
       }) {
         inherit localPaths typstProjectSource;
         src = ./overlapping-local-paths;
+        forceLocalPaths = !isInvariant;
       };
     overlappingLocalPathsInvariant = overlappingLocalPaths true;
     overlappingLocalPathsForce = overlappingLocalPaths false;
