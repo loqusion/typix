@@ -21,7 +21,9 @@ in
           watch-drv
         ];
     }) ''
+    # This is needed to imitate a user's project directory
     cp -RLT --no-preserve=mode ${args.src} .
+
     runHook preBuild
     ${lib.getExe watch-drv} "$out"
     runHook postBuild
