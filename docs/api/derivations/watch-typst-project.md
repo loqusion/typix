@@ -24,7 +24,7 @@ are also supported (besides `text`).
 
 If there are any conflicts between [`localPaths`](#localpaths) and files in your
 project directory, they will not be overwritten unless `forceLocalPaths` is
-`true`.
+`true`. Default is `false`.
 
 <!-- markdownlint-restore -->
 
