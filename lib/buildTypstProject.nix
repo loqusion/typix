@@ -4,7 +4,7 @@
   typstOptsFromArgs,
 }: args @ {
   typstCompileCommand ? "typst compile",
-  typstProjectSource ? "main.typ",
+  typstSource ? "main.typ",
   ...
 }: let
   inherit (builtins) removeAttrs;
@@ -15,8 +15,8 @@
     "typstCompileCommand"
     "typstOpts"
     "typstOptsString"
-    "typstProjectOutput"
-    "typstProjectSource"
+    "typstOutput"
+    "typstSource"
   ];
 in
   mkTypstDerivation (cleanedArgs
@@ -24,6 +24,6 @@ in
       buildPhaseTypstCommand =
         args.buildPhaseTypstCommand
         or ''
-          ${typstCompileCommand} ${typstOptsString} ${escapeShellArg typstProjectSource} "$out"
+          ${typstCompileCommand} ${typstOptsString} ${escapeShellArg typstSource} "$out"
         '';
     })

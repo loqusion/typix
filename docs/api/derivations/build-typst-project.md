@@ -55,7 +55,7 @@ These are in addition to any options you manually pass in
 {{#include common/typst-opts-example.md:head}}
 {{#include common/typst-opts-example.md:typstcompile}}
 
-### `typstProjectSource` (optional) { #typstprojectsource }
+### `typstSource` (optional) { #typstsource }
 
 {{#include common/typst-project-source.md}}
 

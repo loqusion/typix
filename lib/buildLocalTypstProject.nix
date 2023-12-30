@@ -5,18 +5,18 @@
   pkgs,
   typst,
   typstOptsFromArgs,
-}: args @ {typstProjectSource ? "main.typ", ...}: let
+}: args @ {typstSource ? "main.typ", ...}: let
   inherit (lib.strings) toShellVars;
 
   typstOptsString = typstOptsFromArgs args;
-  typstProjectOutput =
-    args.typstProjectOutput
+  typstOutput =
+    args.typstOutput
     or (inferTypstProjectOutput (
-      {inherit typstProjectSource;} // args
+      {inherit typstSource;} // args
     ));
 
   buildTypstProjectDerivation = buildTypstProject (
-    args // {inherit typstOptsString typstProjectSource;}
+    args // {inherit typstOptsString typstSource;}
   );
   buildTypstProjectImport = builtins.path {path = buildTypstProjectDerivation;};
 in
@@ -24,8 +24,8 @@ in
     name = "typst-build";
 
     text = ''
-      ${toShellVars {inherit typstProjectOutput;}}
-      out=''${1:-''${typstProjectOutput:?not defined}}
+      ${toShellVars {inherit typstOutput;}}
+      out=''${1:-''${typstOutput:?not defined}}
       cp -LT --no-preserve=mode ${buildTypstProjectImport} "$out"
     '';
   }

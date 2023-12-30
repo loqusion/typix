@@ -32,7 +32,7 @@
 
       commonArgs = {
         src = typstNixLib.cleanTypstSource ./.;
-        typstProjectSource = "main.typ";
+        typstSource = "main.typ";
 
         fontPaths = [
           # Add paths to fonts here
@@ -49,15 +49,15 @@
       };
 
       build-script = typstNixLib.buildLocalTypstProject {
-        inherit (commonArgs) src typstProjectSource fontPaths localPaths;
+        inherit (commonArgs) src typstSource fontPaths localPaths;
       };
 
       watch-script = typstNixLib.watchTypstProject {
-        inherit (commonArgs) typstProjectSource fontPaths localPaths;
+        inherit (commonArgs) typstSource fontPaths localPaths;
       };
     in {
       packages.default = typstNixLib.buildTypstProject {
-        inherit (commonArgs) src typstProjectSource fontPaths localPaths;
+        inherit (commonArgs) src typstSource fontPaths localPaths;
       };
 
       apps = rec {

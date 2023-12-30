@@ -9,7 +9,7 @@
   fontPaths ? [],
   forceLocalPaths ? false,
   localPaths ? [],
-  typstProjectSource ? "main.typ",
+  typstSource ? "main.typ",
   typstWatchCommand ? "typst watch",
   ...
 }: let
@@ -18,10 +18,10 @@
   inherit (lib.strings) concatStringsSep toShellVars;
 
   typstOptsString = args.typstOptsString or (typstOptsFromArgs args);
-  typstProjectOutput =
-    args.typstProjectOutput
+  typstOutput =
+    args.typstOutput
     or (inferTypstProjectOutput (
-      {inherit typstProjectSource;} // args
+      {inherit typstSource;} // args
     ));
 
   cleanedArgs = removeAttrs args [
@@ -31,8 +31,8 @@
     "text"
     "typstOpts"
     "typstOptsString"
-    "typstProjectOutput"
-    "typstProjectSource"
+    "typstOutput"
+    "typstSource"
     "typstWatchCommand"
   ];
 in
@@ -55,8 +55,8 @@ in
         })
         + ''
 
-          ${toShellVars {inherit typstProjectOutput typstProjectSource;}}
-          out=''${1:-''${typstProjectOutput:?not defined}}
-          ${typstWatchCommand} ${typstOptsString} "$typstProjectSource" "$out"
+          ${toShellVars {inherit typstOutput typstSource;}}
+          out=''${1:-''${typstOutput:?not defined}}
+          ${typstWatchCommand} ${typstOptsString} "$typstSource" "$out"
         '';
     })

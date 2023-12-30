@@ -11,7 +11,7 @@ Destination path for Typst output.
 <!-- markdownlint-disable link-fragments -->
 
 If omitted, it will be inferred from
-[`typstProjectSource`](#typstprojectsource) — for example,
+[`typstSource`](#typstsource) — for example,
 `page.typ` will become `page.pdf` for PDF output.
 
 <!-- markdownlint-restore -->
@@ -23,7 +23,7 @@ If omitted, it will be inferred from
 <!-- markdownlint-disable link-fragments -->
 
 If omitted, it will be inferred from
-[`typstProjectSource`](#typstprojectsource) — for example,
+[`typstSource`](#typstsource) — for example,
 `page.typ` will become `page.pdf` for PDF output.
 
 <!-- markdownlint-restore -->

@@ -7,7 +7,7 @@
 in
   onlyDrvs (lib.makeScope myLib.newScope (self: let
     callPackage = self.newScope {};
-    typstProjectSource = "main.typ";
+    typstSource = "main.typ";
     fontPaths = [
       "${pkgs.roboto}/share/fonts/truetype"
     ];
@@ -20,15 +20,15 @@ in
   in rec {
     buildLocal = callPackage ./build-local.nix {};
     buildLocalSimple = buildLocal {} {
-      inherit typstProjectSource;
+      inherit typstSource;
       src = myLib.cleanTypstSource ./simple;
     };
     buildLocalSimpleWithFonts = buildLocal {} {
-      inherit fontPaths typstProjectSource;
+      inherit fontPaths typstSource;
       src = myLib.cleanTypstSource ./simple-with-fonts;
     };
     buildLocalSimpleWithLocalPaths = buildLocal {} {
-      inherit localPaths typstProjectSource;
+      inherit localPaths typstSource;
       src = myLib.cleanTypstSource ./simple-with-local-paths;
     };
 
@@ -36,7 +36,7 @@ in
       inherit localPaths;
       checks = {
         simple = myLib.buildTypstProject {
-          inherit localPaths typstProjectSource;
+          inherit localPaths typstSource;
           src = myLib.cleanTypstSource ./simple;
         };
       };
@@ -81,7 +81,7 @@ in
           fi
         '';
       }) {
-        inherit localPaths typstProjectSource;
+        inherit localPaths typstSource;
         src = ./overlapping-local-paths;
         forceLocalPaths = !isInvariant;
       };
@@ -89,29 +89,29 @@ in
     overlappingLocalPathsForce = overlappingLocalPaths false;
 
     simple = myLib.buildTypstProject {
-      inherit typstProjectSource;
+      inherit typstSource;
       src = myLib.cleanTypstSource ./simple;
     };
     simpleWithFonts = myLib.buildTypstProject {
-      inherit fontPaths typstProjectSource;
+      inherit fontPaths typstSource;
       src = myLib.cleanTypstSource ./simple-with-fonts;
     };
     simpleWithLocalPaths = myLib.buildTypstProject {
-      inherit localPaths typstProjectSource;
+      inherit localPaths typstSource;
       src = myLib.cleanTypstSource ./simple-with-local-paths;
     };
 
     watch = callPackage ./watch.nix {};
     watchSimple = watch {} {
-      inherit typstProjectSource;
+      inherit typstSource;
       src = myLib.cleanTypstSource ./simple;
     };
     watchSimpleWithFonts = watch {} {
-      inherit fontPaths typstProjectSource;
+      inherit fontPaths typstSource;
       src = myLib.cleanTypstSource ./simple-with-fonts;
     };
     watchSimpleWithLocalPaths = watch {} {
-      inherit localPaths typstProjectSource;
+      inherit localPaths typstSource;
       src = myLib.cleanTypstSource ./simple-with-local-paths;
     };
 

@@ -63,12 +63,12 @@ These are in addition to any options you manually pass in
 {{#include common/typst-opts-example.md:head}}
 {{#include common/typst-opts-example.md:typstwatch}}
 
-### `typstProjectOutput` (optional) { #typstprojectoutput }
+### `typstOutput` (optional) { #typstoutput }
 
 {{#include common/typst-project-output.md:head}}
 {{#include common/typst-project-output.md:watchtypstproject}}
 
-### `typstProjectSource` (optional) { #typstprojectsource }
+### `typstSource` (optional) { #typstsource }
 
 {{#include common/typst-project-source.md}}
 

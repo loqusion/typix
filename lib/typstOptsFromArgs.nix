@@ -13,12 +13,12 @@
     else null;
 
   inferredFormatFromTypstProjectOutput =
-    if ((origArgs ? typstOpts.format) || (! origArgs ? typstProjectOutput))
+    if ((origArgs ? typstOpts.format) || (! origArgs ? typstOutput))
     then null
     else let
-      inherit (origArgs) typstProjectOutput;
+      inherit (origArgs) typstOutput;
       supportedExtensions = ["pdf" "svg" "png"];
-      extension = pathExtension typstProjectOutput;
+      extension = pathExtension typstOutput;
     in
       if (elem extension supportedExtensions)
       then extension
@@ -29,7 +29,7 @@
       format = inferredFormatFromTypstProjectOutput;
     };
   };
-  defaultArgs = optionalAttrs (! origArgs ? typstProjectOutput) {
+  defaultArgs = optionalAttrs (! origArgs ? typstOutput) {
     typstOpts = {
       format = "pdf";
     };
