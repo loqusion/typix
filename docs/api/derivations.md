@@ -3,7 +3,8 @@
 > TODO: Short explanation of derivations
 
 - [`buildLocalTypstProject`](derivations/build-local-typst-project.md) — A
-  derivation for compiling a Typst project to the current directory.
+  derivation for compiling a Typst project and copying the output to the current
+  directory.
 - [`buildTypstProject`](derivations/build-typst-project.md) — A derivation for
   compiling a Typst project.
 - [`mkTypstDerivation`](derivations/mk-typst-derivation.md) — A generic
