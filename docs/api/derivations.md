@@ -7,6 +7,7 @@
   directory.
 - [`buildTypstProject`](derivations/build-typst-project.md) — A derivation for
   compiling a Typst project.
+- [`devShell`](derivations/dev-shell.md) — **TODO**
 - [`mkTypstDerivation`](derivations/mk-typst-derivation.md) — A generic
   derivation for running Typst commands.
 - [`watchTypstDerivation`](derivations/watch-typst-project.md) — A derivation
