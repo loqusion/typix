@@ -8,7 +8,7 @@
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
   in {
-    packages.${system}.default = typst-nix.lib.${system}.buildLocalTypstProject {
+    apps.${system}.default = typst-nix.lib.${system}.buildLocalTypstProject {
       fontPaths = [
         "${pkgs.roboto}/share/fonts/truetype"
       ];

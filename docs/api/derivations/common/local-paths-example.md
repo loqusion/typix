@@ -21,7 +21,7 @@ project with something like:
   outputs = { typst-nix, font-awesome }: let
     system = "x86_64-linux";
   in {
-    packages.${system}.default = typst-nix.lib.${system}.buildLocalTypstProject {
+    apps.${system}.default = typst-nix.lib.${system}.buildLocalTypstProject {
       localPaths = [
         {
           dest = "icons";
