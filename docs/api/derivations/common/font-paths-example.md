@@ -38,6 +38,25 @@
 
 <!-- ANCHOR_END: buildtypstproject_example -->
 
+<!-- ANCHOR: devshell_example -->
+
+```nix
+{
+  outputs = { nixpkgs, typst-nix }: let
+    system = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages.${system};
+  in {
+    devShells.${system}.default = typst-nix.lib.${system}.devShell {
+      fontPaths = [
+        "${pkgs.roboto}/share/fonts/truetype"
+      ];
+    };
+  };
+}
+```
+
+<!-- ANCHOR_END: devshell_example -->
+
 <!-- ANCHOR: mktypstderivation_example -->
 
 ```nix

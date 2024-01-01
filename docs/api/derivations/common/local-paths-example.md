@@ -63,6 +63,34 @@ project with something like:
 
 <!-- ANCHOR_END: buildtypstproject_example -->
 
+<!-- ANCHOR: devshell_example -->
+
+```nix
+{
+  inputs = {
+    font-awesome = {
+      url = "github:FortAwesome/Font-Awesome";
+      flake = false;
+    };
+  };
+
+  outputs = { typst-nix, font-awesome }: let
+    system = "x86_64-linux";
+  in {
+    devShells.${system}.default = typst-nix.lib.${system}.devShell {
+      localPaths = [
+        {
+          dest = "icons";
+          src = "${font-awesome}/svgs/regular";
+        }
+      ];
+    };
+  };
+}
+```
+
+<!-- ANCHOR_END: devshell_example -->
+
 <!-- ANCHOR: mktypstderivation_example -->
 
 ```nix
