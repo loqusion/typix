@@ -39,7 +39,7 @@
 in
   pkgs.writeShellApplication (cleanedArgs
     // {
-      name = args.name or args.scriptName or "typst-watch";
+      name = args.scriptName or args.name or "typst-watch";
 
       runtimeInputs =
         (args.runtimeInputs or [])
