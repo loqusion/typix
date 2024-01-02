@@ -48,6 +48,12 @@ All parameters accepted by
 {{#include common/local-paths-example.md:buildlocaltypstproject_example}}
 {{#include common/local-paths-example.md:tail}}
 
+### `scriptName` (optional) { #scriptname }
+
+{{#include common/script-name.md}}
+
+Default is `typst-build`.
+
 ### `typstCompileCommand` (optional) { #typstcompilecommand }
 
 {{#include common/typst-compile-command.md}}

@@ -46,6 +46,12 @@ directory, unless you set [`forceLocalPaths`](#forcelocalpaths) to `true`.
 {{#include common/local-paths-example.md:watchtypstproject_example}}
 {{#include common/local-paths-example.md:tail}}
 
+### `scriptName` (optional) { #scriptname }
+
+{{#include common/script-name.md}}
+
+Default is `typst-watch`.
+
 ### `typstOpts` (optional) { #typstopts }
 
 {{#include common/typst-opts.md:head}}
