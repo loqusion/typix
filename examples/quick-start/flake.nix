@@ -48,6 +48,10 @@
         ];
       };
 
+      build-drv = typstNixLib.buildTypstProject {
+        inherit (commonArgs) src typstSource fontPaths localPaths;
+      };
+
       build-script = typstNixLib.buildLocalTypstProject {
         inherit (commonArgs) src typstSource fontPaths localPaths;
       };
@@ -56,9 +60,11 @@
         inherit (commonArgs) typstSource fontPaths localPaths;
       };
     in {
-      packages.default = typstNixLib.buildTypstProject {
-        inherit (commonArgs) src typstSource fontPaths localPaths;
+      checks = {
+        inherit build-drv build-script watch-script;
       };
+
+      packages.default = build-drv;
 
       apps = rec {
         default = watch;
