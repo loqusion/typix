@@ -31,6 +31,7 @@ in
     text = ''
       ${toShellVars {inherit typstOutput;}}
       out=''${1:-''${typstOutput:?not defined}}
+      mkdir -p "$(dirname "$out")"
       cp -LT --no-preserve=mode ${buildTypstProjectImport} "$out"
     '';
   }
