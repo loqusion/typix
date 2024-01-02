@@ -25,7 +25,9 @@ are also supported (besides `text`).
 
 If there are any conflicts between [`localPaths`](#localpaths) and files in your
 project directory, they will not be overwritten unless `forceLocalPaths` is
-`true`. Default is `false`.
+`true`.
+
+Default is `false`.
 
 <!-- markdownlint-restore -->
 
@@ -79,10 +81,14 @@ These are in addition to any options you manually pass in
 
 {{#include common/typst-project-source.md}}
 
+Default is `main.typ`.
+
 ### `typstWatchCommand` (optional) { #typstwatchcommand }
 
 Base Typst command to run to watch the project. Other arguments will be appended
-based on the other parameters you supply. Default is `typst watch`.
+based on the other parameters you supply.
+
+Default is `typst watch`.
 
 ## Source
 

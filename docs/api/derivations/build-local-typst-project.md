@@ -58,6 +58,8 @@ Default is `typst-build`.
 
 {{#include common/typst-compile-command.md}}
 
+Default is `typst compile`.
+
 ### `typstOpts` (optional) { #typstopts }
 
 {{#include common/typst-opts.md:head}}
@@ -84,6 +86,8 @@ These are in addition to any options you manually pass in
 ### `typstSource` (optional) { #typstsource }
 
 {{#include common/typst-project-source.md}}
+
+Default is `main.typ`.
 
 ## Source
 
