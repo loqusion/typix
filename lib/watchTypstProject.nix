@@ -28,6 +28,7 @@
     "fontPaths"
     "forceLocalPaths"
     "localPaths"
+    "scriptName"
     "text"
     "typstOpts"
     "typstOptsString"
@@ -38,7 +39,7 @@
 in
   pkgs.writeShellApplication (cleanedArgs
     // {
-      name = args.name or "typst-watch";
+      name = args.name or args.scriptName or "typst-watch";
 
       runtimeInputs =
         (args.runtimeInputs or [])

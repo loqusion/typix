@@ -6,6 +6,7 @@
   typst,
   typstOptsFromArgs,
 }: args @ {typstSource ? "main.typ", ...}: let
+  inherit (builtins) removeAttrs;
   inherit (lib.strings) toShellVars;
 
   typstOptsString = typstOptsFromArgs args;
@@ -16,12 +17,16 @@
     ));
 
   buildTypstProjectDerivation = buildTypstProject (
-    args // {inherit typstOptsString typstSource;}
+    cleanedArgs // {inherit typstOptsString typstSource;}
   );
   buildTypstProjectImport = builtins.path {path = buildTypstProjectDerivation;};
+
+  cleanedArgs = removeAttrs args [
+    "scriptName"
+  ];
 in
   pkgs.writeShellApplication {
-    name = "typst-build";
+    name = args.scriptName or "typst-build";
 
     text = ''
       ${toShellVars {inherit typstOutput;}}
