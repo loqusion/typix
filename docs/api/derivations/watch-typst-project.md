@@ -1,6 +1,7 @@
 # watchTypstProject
 
-A derivation for a script that watches an input file and recompiles on changes.
+Returns a derivation for a script that watches an input file and recompiles on
+changes.
 
 This script is exposed to the user's environment, so expect the output to not be
 reproducible.

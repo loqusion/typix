@@ -1,6 +1,6 @@
 # buildTypstProject
 
-A derivation for compiling a Typst project.
+Returns a derivation for compiling a Typst project.
 
 If you want to build to the project directory, use
 [`buildLocalTypstProject`](build-local-typst-project.md) instead.
