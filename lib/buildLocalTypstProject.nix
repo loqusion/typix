@@ -9,7 +9,7 @@
   inherit (builtins) removeAttrs;
   inherit (lib.strings) toShellVars;
 
-  typstOptsString = typstOptsFromArgs args;
+  typstOptsString = args.typstOptsString or (typstOptsFromArgs args);
   typstOutput =
     args.typstOutput
     or (inferTypstProjectOutput (
