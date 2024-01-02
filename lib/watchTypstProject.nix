@@ -58,6 +58,7 @@ in
 
           ${toShellVars {inherit typstOutput typstSource;}}
           out=''${1:-''${typstOutput:?not defined}}
+          mkdir -p "$(dirname "$out")"
           ${typstWatchCommand} ${typstOptsString} "$typstSource" "$out"
         '';
     })
