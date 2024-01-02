@@ -11,7 +11,7 @@ This is essentially a script which wraps
 Using this derivation requires
 <a href="https://nixos.org/manual/nix/stable/command-ref/conf-file#conf-allow-import-from-derivation">
 <code>allow-import-from-derivation</code></a>
-to be <code>true</code>.
+to be <code>true</code> (which is the default at the time of writing).
 
 More info:
 <a href="https://nixos.org/manual/nix/stable/language/import-from-derivation">
