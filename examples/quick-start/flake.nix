@@ -48,14 +48,22 @@
         ];
       };
 
+      # Compile a Typst project, *without* copying the result
+      # to the current directory
       build-drv = typstNixLib.buildTypstProject {
         inherit (commonArgs) src typstSource fontPaths localPaths;
       };
 
+      # Compile a Typst project, and then copy the result
+      # to the current directory
       build-script = typstNixLib.buildLocalTypstProject {
         inherit (commonArgs) src typstSource fontPaths localPaths;
       };
 
+      # Watch a project and recompile on changes
+      #
+      # *Warning*: Do not rely on this for reproducible output,
+      # as it is exposed to the user's environment
       watch-script = typstNixLib.watchTypstProject {
         inherit (commonArgs) typstSource fontPaths localPaths;
       };
