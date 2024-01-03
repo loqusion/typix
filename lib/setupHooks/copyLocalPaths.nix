@@ -3,17 +3,21 @@
   lib,
   makeSetupHook,
 }: localPaths: let
-  inherit (lib.strings) concatMapStringsSep;
+  inherit (lib.strings) concatMapStringsSep toShellVars;
   copyAllLocalPaths =
     concatMapStringsSep
     "\n" (localPath_: let
       localPath = coerceLocalPathAttr localPath_;
     in ''
-      mkdir -p ${localPath.dest}
-      echo "Copying ${localPath.src} to ${localPath.dest}"
-      cp -LTR --reflink=auto --no-preserve=mode ${localPath.src} ${localPath.dest}
-      if [ ${localPath.dest} != "." ]; then
-        rmdir --ignore-fail-on-non-empty ${localPath.dest}
+      ${toShellVars {
+        localPathSrc = localPath.src;
+        localPathDest = localPath.dest;
+      }}
+      mkdir -p "$localPathDest"
+      echo "Copying $localPathSrc to $localPathDest"
+      cp -LTR --reflink=auto --no-preserve=mode "$localPathSrc" "$localPathDest"
+      if [ "$localPathDest" != "." ]; then
+        rmdir --ignore-fail-on-non-empty "$localPathDest"
       fi
     '')
     localPaths;
