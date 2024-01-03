@@ -15,3 +15,14 @@ jobs:
       - uses: cachix/install-nix-action@v24
       - name: flake check
         run: nix flake check
+
+  examples:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v24
+      - name: check examples
+        run: |
+          for f in $(find ./examples -maxdepth 1 -mindepth 1 -type d | sort -u); do
+            nix flake check --no-write-lock-file "$f"
+          done
