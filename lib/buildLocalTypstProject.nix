@@ -3,7 +3,6 @@
   inferTypstProjectOutput,
   lib,
   pkgs,
-  typst,
   typstOptsFromArgs,
 }: args @ {typstSource ? "main.typ", ...}: let
   inherit (builtins) removeAttrs;

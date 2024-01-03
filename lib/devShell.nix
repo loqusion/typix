@@ -1,5 +1,4 @@
 {
-  coerceLocalPathAttr,
   lib,
   linkLocalPaths,
   mkShell,
