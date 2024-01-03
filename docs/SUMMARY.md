@@ -7,7 +7,7 @@
 
 # Recipes
 
-- [Specifying sources](specifying-sources.md)
+- [Specifying sources](recipes/specifying-sources.md)
 
 # API Reference
 
