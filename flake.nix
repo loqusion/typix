@@ -1,6 +1,11 @@
 {
   description = "";
 
+  nixConfig = {
+    extra-substituters = ["https://typst-nix.cachix.org"];
+    extra-trusted-public-keys = ["typst-nix.cachix.org-1:OzDUMt0nd4wlI1AHucBPnchl4utWXeFTtUFt8XZ3DbA="];
+  };
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
   };
