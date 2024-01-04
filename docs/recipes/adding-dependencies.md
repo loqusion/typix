@@ -7,18 +7,18 @@ automatically fetched and made available in a sandboxed environment.
 Examples of dependencies you might want to add:
 
 - [Font files][typst-text--font] —
-  [`fontPaths`](/api/derivations/mk-typst-derivation.md#fontpaths)
+  [`fontPaths`](../api/derivations/mk-typst-derivation.md#fontpaths)
 - [Image files][typst-image] —
-  [`localPaths`](/api/derivations/mk-typst-derivation.md#localpaths)
+  [`localPaths`](../api/derivations/mk-typst-derivation.md#localpaths)
 - [Data files][typst-data] (e.g. [JSON][typst-data-json],
   [TOML][typst-data-toml], [XML][typst-data-xml]) —
-  [`localPaths`](/api/derivations/mk-typst-derivation.md#localpaths)
+  [`localPaths`](../api/derivations/mk-typst-derivation.md#localpaths)
 
 ## Fonts
 
 Any fonts which are supported by Typst can also be used in projects with
 Typst.nix. The only requirement is to add them to the `fontPaths` attr of any
-[derivation builder](/api/derivations.md) you use.
+[derivation builder](../api/derivations.md) you use.
 
 ### [nixpkgs][nixpkgs]
 
