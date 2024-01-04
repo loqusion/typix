@@ -20,8 +20,8 @@ these is usually as simple as
 > but the problem with this approach is that every change to a file tracked by
 > git will invalidate the cache and trigger a rebuild.
 
-To include more files in a source tree, you can use a combination of different
-functions in [`lib.fileset`][nixpkgs-fileset] such as
+To include more _local files_[^fileset-note] in a source tree, you can use a
+combination of different functions in [`lib.fileset`][nixpkgs-fileset] such as
 [`lib.fileset.unions`][nixpkgs-fileset-unions],
 [`lib.fileset.fromSource`][nixpkgs-fileset-fromsource], and
 [`lib.fileset.toSource`][nixpkgs-fileset-tosource], like so:
@@ -63,6 +63,12 @@ This will create a source tree that looks something like:
 │  └── localpath.svg
 └── ...
 ```
+
+<!-- prettier-ignore-start -->
+[^fileset-note]: `lib.fileset` functions can only be used with local files, not
+e.g. flake inputs, which is what
+[`localPaths`](../api/derivations/mk-typst-derivation.md#localpaths) is for.
+<!-- prettier-ignore-end -->
 
 > **TODO:** Add more
 
