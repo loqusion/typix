@@ -1,4 +1,4 @@
-# Adding Dependencies
+# Adding dependencies
 
 You can add dependencies to your [flake
 inputs][nix-ref-flake--inputs][^zero-to-nix--flakes] so that Typst compilation
