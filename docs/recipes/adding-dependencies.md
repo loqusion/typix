@@ -110,8 +110,8 @@ Here's what you need to know:
   otherwise made known to the Typst compiler (e.g. via
   [`--font-path`][typst-man--font-path]).
 
-See ["Specifying sources"](./specifying-sources.md) for information on how to
-expand a source tree to include the files you need.
+See ["Specifying sources"](./specifying-sources.md#expanding-a-source-tree) for
+information on how to expand a source tree to include the files you need.
 
 [nix-ref-flake--inputs]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake#flake-inputs
 [nix-ref-flake--references]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake#flake-references
