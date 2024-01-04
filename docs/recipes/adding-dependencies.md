@@ -79,8 +79,9 @@ Here, we can see that the relative path should be `share/fonts/truetype`, so in
 Nix makes it easy to add GitHub repositories as flake inputs with [URL-like
 syntax][nix-ref-flake--url].
 
-Here's an example of specifying a GitHub flake input and adding it to
-[`localPaths`](../api/derivations/mk-typst-derivation.md#localpaths):
+Here's an example of specifying a GitHub URL as a flake input and adding it to
+[`localPaths`](../api/derivations/mk-typst-derivation.md#localpaths), specifying
+that we want the `svgs/regular` directory to be accessible from `icons`:
 
 {{#include ../api/derivations/common/local-paths-example.md:mktypstderivation_example}}
 
