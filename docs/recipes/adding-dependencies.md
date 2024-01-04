@@ -90,6 +90,31 @@ With this, we can use it in Typst as if it were any other local path:
 
 {{#include ../api/derivations/common/local-paths-example.md:typst_example}}
 
+## Using local files
+
+If all else fails, you can always manually download what you need and move it to
+your Typst project directory.
+
+Here's what you need to know:
+
+- The Typst compiler invoked by
+  [`buildTypstProject`](../api/derivations/build-typst-project.md),
+  [`buildLocalTypstProject`](../api/derivations/build-local-typst-project.md),
+  etc. won't see the files you've added unless they're present in one of the
+  source tree parameters — in practice, these are
+  [`src`](../api/derivations/mk-typst-derivation.md#src),
+  [`fontPaths`](../api/derivations/mk-typst-derivation.md#fontpaths), and
+  [`localPaths`](../api/derivations/mk-typst-derivation.md#localpaths). (This
+  doesn't apply to
+  [`watchTypstProject`](../api/derivations/watch-typst-project.md).)
+- Paths to font files must still be passed in
+  [`fontPaths`](../api/derivations/mk-typst-derivation.md#fontpaths) or
+  otherwise made known to the Typst compiler (e.g. via
+  [`--font-path`][typst-man--font-path]).
+
+See ["Specifying sources"](./specifying-sources.md) for information on how to
+expand a source tree to include the files you need.
+
 [nix-ref-flake--inputs]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake#flake-inputs
 [nix-ref-flake--references]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake#flake-references
 [nix-ref-flake--url]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake#url-like-syntax
@@ -99,5 +124,6 @@ With this, we can use it in Typst as if it were any other local path:
 [typst-data-xml]: https://typst.app/docs/reference/data-loading/xml/
 [typst-data]: https://typst.app/docs/reference/data-loading/
 [typst-image]: https://typst.app/docs/reference/visualize/image/
+[typst-man--font-path]: https://man.archlinux.org/man/typst-compile.1.en#font
 [typst-text--font]: https://typst.app/docs/reference/text/text/#parameters-font
 [unix-tree]: https://gitlab.com/OldManProgrammer/unix-tree
