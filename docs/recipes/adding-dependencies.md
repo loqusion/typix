@@ -1,8 +1,10 @@
 # Adding Dependencies
 
-You can add dependencies to your project using Typst.nix so that compilation
-does not depend on the state of the local system: instead, any dependencies are
-automatically fetched and made available in a sandboxed environment.
+You can add dependencies to your [flake
+inputs][nix-ref-flake-inputs][^zero-to-nix--flakes] so that Typst compilation
+does not depend on the transient state of the local system: instead, any
+dependencies are automatically fetched and made available in a sandboxed
+environment.
 
 Examples of dependencies you might want to add:
 
@@ -14,16 +16,15 @@ Examples of dependencies you might want to add:
   [TOML][typst-data-toml], [XML][typst-data-xml]) —
   [`localPaths`](../api/derivations/mk-typst-derivation.md#localpaths)
 
-## Fonts
+For a more complete description of how to specify flake inputs, see the Nix
+Reference Manual [section on flakerefs][nix-ref-flake-references].
 
-Any fonts which are supported by Typst can also be used in projects with
-Typst.nix. The only requirement is to add them to the `fontPaths` attr of any
-[derivation builder](../api/derivations.md) you use.
+[^zero-to-nix--flakes]: See also: <https://zero-to-nix.com/concepts/flakes>
 
-### [nixpkgs][nixpkgs]
+## [nixpkgs][nixpkgs]
 
-Many popular fonts have been uploaded as packages to [nixpkgs][nixpkgs], so it's
-good to try that before anything else.
+Many popular fonts have been uploaded as packages to [nixpkgs][nixpkgs], so if
+you're wanting to add a font it's good to try that before anything else.
 
 To determine the path(s) to the files you wish to include, first run the
 following command (which creates a symbolic link named `result` in the current
@@ -74,6 +75,14 @@ Here, we can see that the relative path should be `share/fonts/truetype`, so in
 
 {{#include ../api/derivations/common/font-paths-example.md:mktypstderivation_example}}
 
+## [GitHub](https://github.com)
+
+> TODO
+
+<!-- GitHub hosts a good deal of fonts and icon libraries. -->
+
+[nix-ref-flake-inputs]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake#flake-inputs
+[nix-ref-flake-references]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake#flake-references
 [nixpkgs]: https://search.nixos.org/packages
 [typst-data-json]: https://typst.app/docs/reference/data-loading/json/
 [typst-data-toml]: https://typst.app/docs/reference/data-loading/toml/
