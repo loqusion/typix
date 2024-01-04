@@ -66,8 +66,6 @@ result
             ├── Roboto-Regular.ttf
             ├── Roboto-ThinItalic.ttf
             └── Roboto-Thin.ttf
-
-4 directories, 20 files
 ```
 
 Here, we can see that the relative path should be `share/fonts/truetype`, so in
