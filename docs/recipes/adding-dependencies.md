@@ -21,7 +21,7 @@ Reference Manual [section on flakerefs][nix-ref-flake--references].
 
 [^zero-to-nix--flakes]: See also: <https://zero-to-nix.com/concepts/flakes>
 
-## [nixpkgs][nixpkgs]
+## nixpkgs
 
 Many popular fonts are available as packages to [nixpkgs][nixpkgs], so if you're
 wanting to add a font it's good to try that before anything else.
@@ -75,10 +75,10 @@ Here, we can see that the relative path should be `share/fonts/truetype`, so in
 
 {{#include ../api/derivations/common/font-paths-example.md:mktypstderivation_example}}
 
-## [GitHub](https://github.com)
+## GitHub
 
-GitHub hosts a great deal of fonts and icon libraries, and Nix makes it easy to
-add GitHub repositories as flake inputs with [URL-like
+[GitHub](https://github.com) hosts a great deal of fonts and icon libraries, and
+Nix makes it easy to add GitHub repositories as flake inputs with [URL-like
 syntax][nix-ref-flake--url].
 
 Here's an example of specifying a GitHub flake input and adding it to
