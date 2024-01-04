@@ -23,8 +23,8 @@ Reference Manual [section on flakerefs][nix-ref-flake-references].
 
 ## [nixpkgs][nixpkgs]
 
-Many popular fonts have been uploaded as packages to [nixpkgs][nixpkgs], so if
-you're wanting to add a font it's good to try that before anything else.
+Many popular fonts are available as packages to [nixpkgs][nixpkgs], so if you're
+wanting to add a font it's good to try that before anything else.
 
 To determine the path(s) to the files you wish to include, first run the
 following command (which creates a symbolic link named `result` in the current
