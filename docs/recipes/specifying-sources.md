@@ -20,8 +20,8 @@ these is usually as simple as
 > but the problem with this approach is that every change to a file tracked by
 > git will invalidate the cache and trigger a rebuild.
 
-You can use a combination of different functions in
-[`lib.fileset`][nixpkgs-fileset] such as
+To include more files in a source tree, you can use a combination of different
+functions in [`lib.fileset`][nixpkgs-fileset] such as
 [`lib.fileset.unions`][nixpkgs-fileset-unions],
 [`lib.fileset.fromSource`][nixpkgs-fileset-fromsource], and
 [`lib.fileset.toSource`][nixpkgs-fileset-tosource], like so:
