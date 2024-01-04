@@ -31,7 +31,7 @@ following command (which creates a symbolic link named `result` in the current
 directory):
 
 ```bash
-nix-build '<nixpkgs>' --attr PACKAGE_NAME
+nix-build '<nixpkgs>' --out-link result --attr PACKAGE_NAME
 ```
 
 Then explore the `result` with whichever commands you like — for instance, using
