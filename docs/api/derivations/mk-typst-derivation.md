@@ -46,7 +46,8 @@ See also: [Typst CLI Usage][typst-cli-usage]
 
 ## Footnotes
 
-[^stdenv]: [`stdenv`](https://nixos.org/manual/nixpkgs/stable/#chap-stdenv)
+[^stdenv]: [`stdenv`][nix-ref-stdenv] (not for the faint of heart)
 
 [nix-derivation-build-phase]: https://nixos.org/manual/nixpkgs/stable/#build-phase
+[nix-ref-stdenv]: https://nixos.org/manual/nixpkgs/stable/#chap-stdenv
 [typst-cli-usage]: https://github.com/typst/typst#usage
