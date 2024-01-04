@@ -7,5 +7,7 @@ title = "Typst.nix"
 
 [output.html]
 theme = "theme"
+default-theme = "ayu"
+preferred-dark-theme = "ayu"
 git-repository-url = "https://github.com/loqusion/typst.nix"
 edit-url-template = "https://github.com/loqusion/typst.nix/edit/main/docs/{path}"
