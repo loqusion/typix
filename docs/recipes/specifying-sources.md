@@ -33,12 +33,13 @@ functions in [`lib.fileset`][nixpkgs-fileset] such as
     pkgs = nixpkgs.legacyPackages.${system};
     inherit (pkgs) lib;
     typstNixLib = typst-nix.lib.${system};
+    myTypstSource = typstNixLib.cleanTypstSource ./.;
   in {
     packages.${system}.default = typstNixLib.mkTypstDerivation {
       src = lib.fileset.toSource {
         root = ./.;
         fileset = lib.fileset.unions [
-          (lib.fileset.fromSource (typstNixLib.cleanTypstSource ./.))
+          (lib.fileset.fromSource myTypstSource)
           ./localpath.svg
           ./other/localpath.svg
           ./another
