@@ -25,15 +25,13 @@ Typst.nix. The only requirement is to add them to the `fontPaths` attr of any
 Many popular fonts have been uploaded as packages to [nixpkgs][nixpkgs], so it's
 good to try that before anything else.
 
-To determine the path(s) to the font files you wish to include, first run the
+To determine the path(s) to the files you wish to include, first run the
 following command (which creates a symbolic link named `result` in the current
 directory):
 
 ```bash
 nix-build '<nixpkgs>' --attr PACKAGE_NAME
 ```
-
-(replacing `PACKAGE_NAME` with the package containing your desired font)
 
 Then explore the `result` with whichever commands you like — for instance, using
 [`unix-tree`][unix-tree]:
