@@ -49,7 +49,7 @@ functions in [`lib.fileset`][nixpkgs-fileset] such as
 }
 ```
 
-The source tree created in this example might look something like:
+This will create a source tree that looks something like:
 
 ```text
 /nix/store/...
