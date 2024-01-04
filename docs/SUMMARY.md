@@ -7,6 +7,7 @@
 
 # Recipes
 
+- [Adding Dependencies](recipes/adding-dependencies.md)
 - [Specifying sources](recipes/specifying-sources.md)
 
 # API Reference
