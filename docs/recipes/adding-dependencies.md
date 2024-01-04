@@ -1,7 +1,7 @@
 # Adding Dependencies
 
 You can add dependencies to your [flake
-inputs][nix-ref-flake-inputs][^zero-to-nix--flakes] so that Typst compilation
+inputs][nix-ref-flake--inputs][^zero-to-nix--flakes] so that Typst compilation
 does not depend on the transient state of the local system: instead, any
 dependencies are automatically fetched and made available in a sandboxed
 environment.
@@ -17,7 +17,7 @@ Examples of dependencies you might want to add:
   [`localPaths`](../api/derivations/mk-typst-derivation.md#localpaths)
 
 For a more complete description of how to specify flake inputs, see the Nix
-Reference Manual [section on flakerefs][nix-ref-flake-references].
+Reference Manual [section on flakerefs][nix-ref-flake--references].
 
 [^zero-to-nix--flakes]: See also: <https://zero-to-nix.com/concepts/flakes>
 
@@ -77,12 +77,22 @@ Here, we can see that the relative path should be `share/fonts/truetype`, so in
 
 ## [GitHub](https://github.com)
 
-> TODO
+GitHub hosts a great deal of fonts and icon libraries, and Nix makes it easy to
+add GitHub repositories as flake inputs with [URL-like
+syntax][nix-ref-flake--url].
 
-<!-- GitHub hosts a good deal of fonts and icon libraries. -->
+Here's an example of specifying a GitHub flake input and adding it to
+[`localPaths`](../api/derivations/mk-typst-derivation.md#localpaths):
 
-[nix-ref-flake-inputs]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake#flake-inputs
-[nix-ref-flake-references]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake#flake-references
+{{#include ../api/derivations/common/local-paths-example.md:mktypstderivation_example}}
+
+With this, we can use it in Typst as if it were any other local path:
+
+{{#include ../api/derivations/common/local-paths-example.md:typst_example}}
+
+[nix-ref-flake--inputs]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake#flake-inputs
+[nix-ref-flake--references]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake#flake-references
+[nix-ref-flake--url]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake#url-like-syntax
 [nixpkgs]: https://search.nixos.org/packages
 [typst-data-json]: https://typst.app/docs/reference/data-loading/json/
 [typst-data-toml]: https://typst.app/docs/reference/data-loading/toml/

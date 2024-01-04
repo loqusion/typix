@@ -147,6 +147,14 @@ project with something like:
 
 <!-- ANCHOR_END: watchtypstproject_example -->
 
+<!-- ANCHOR: typst_example -->
+
+```typst
+#image("icons/heart.svg")
+```
+
+<!-- ANCHOR_END: typst_example -->
+
 <!-- ANCHOR: tail -->
 
 Then, reference the files in Typst:
