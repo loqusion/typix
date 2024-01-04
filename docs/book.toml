@@ -6,5 +6,6 @@ src = "."
 title = "Typst.nix"
 
 [output.html]
+theme = "theme"
 git-repository-url = "https://github.com/loqusion/typst.nix"
 edit-url-template = "https://github.com/loqusion/typst.nix/edit/main/docs/{path}"
