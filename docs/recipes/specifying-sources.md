@@ -77,8 +77,8 @@ You can do source filtering primarily using
 [`lib.sources`][nixpkgs-sources] such as
 [`lib.sources.cleanSourceWith`][nixpkgs-sources-cleansourcewith].
 
-A more detailed explanation can be found here:
-<https://discourse.nixos.org/t/filtering-source-trees-with-nix-and-nixpkgs/19148>
+A more detailed explanation can be found in the Nix discussion: ["Filtering
+Source Trees with Nix and Nixpkgs"][nix-discussion-source-filtering].
 
 Here's an example which picks specific files by name:
 
@@ -117,3 +117,4 @@ Here's an example which picks specific files by name:
 [nixpkgs-sources-cleansource]: https://nixos.org/manual/nixpkgs/stable/#function-library-lib.sources.cleanSource
 [nixpkgs-sources-cleansourcewith]: https://nixos.org/manual/nixpkgs/stable/#function-library-lib.sources.cleanSourceWith
 [nixpkgs-sources]: https://nixos.org/manual/nixpkgs/stable/#sec-functions-library-sources
+[nix-discussion-source-filtering]: https://discourse.nixos.org/t/filtering-source-trees-with-nix-and-nixpkgs/19148
