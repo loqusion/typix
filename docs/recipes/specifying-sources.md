@@ -70,12 +70,50 @@ e.g. flake inputs, which is what
 [`localPaths`](../api/derivations/mk-typst-derivation.md#localpaths) is for.
 <!-- prettier-ignore-end -->
 
-> **TODO:** Add more
+## Source filtering
 
+You can do source filtering primarily using
+[`builtins.filterSource`][nix-builtins-filtersource] and functions in
+[`lib.sources`][nixpkgs-sources] such as
+[`lib.sources.cleanSourceWith`][nixpkgs-sources-cleansourcewith].
+
+A more detailed explanation can be found here:
 <https://discourse.nixos.org/t/filtering-source-trees-with-nix-and-nixpkgs/19148>
 
+Here's an example which picks specific files by name:
+
+```nix
+{
+  outputs = { nixpkgs, typst-nix, font-awesome }: let
+    system = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages.${system};
+
+    fontAwesomeSubset = let
+      icons = [
+        "gem.svg"
+        "heart.svg"
+        "lightbulb.svg"
+      ];
+    in lib.sources.cleanSourceWith {
+      src = "${font-awesome}/svgs/regular";
+      filter = path: type:
+        builtins.any (icon: builtins.baseNameOf path == icon) icons;
+    };
+  in {
+    packages.${system}.default = typst-nix.lib.${system}.mkTypstDerivation {
+      localPaths = [
+        fontAwesomeSubset
+      ];
+    };
+  };
+}
+```
+
+[nix-builtins-filtersource]: https://nixos.org/manual/nix/stable/language/builtins.html#builtins-filterSource
 [nixpkgs-fileset-fromsource]: https://nixos.org/manual/nixpkgs/stable/#function-library-lib.fileset.fromSource
 [nixpkgs-fileset-tosource]: https://nixos.org/manual/nixpkgs/stable/#function-library-lib.fileset.toSource
 [nixpkgs-fileset-unions]: https://nixos.org/manual/nixpkgs/stable/#function-library-lib.fileset.unions
 [nixpkgs-fileset]: https://nixos.org/manual/nixpkgs/stable/#sec-functions-library-fileset
 [nixpkgs-sources-cleansource]: https://nixos.org/manual/nixpkgs/stable/#function-library-lib.sources.cleanSource
+[nixpkgs-sources-cleansourcewith]: https://nixos.org/manual/nixpkgs/stable/#function-library-lib.sources.cleanSourceWith
+[nixpkgs-sources]: https://nixos.org/manual/nixpkgs/stable/#sec-functions-library-sources
