@@ -110,6 +110,7 @@ Here's an example which picks specific files by name:
 ```
 
 [nix-builtins-filtersource]: https://nixos.org/manual/nix/stable/language/builtins.html#builtins-filterSource
+[nix-discussion-source-filtering]: https://discourse.nixos.org/t/filtering-source-trees-with-nix-and-nixpkgs/19148
 [nixpkgs-fileset-fromsource]: https://nixos.org/manual/nixpkgs/stable/#function-library-lib.fileset.fromSource
 [nixpkgs-fileset-tosource]: https://nixos.org/manual/nixpkgs/stable/#function-library-lib.fileset.toSource
 [nixpkgs-fileset-unions]: https://nixos.org/manual/nixpkgs/stable/#function-library-lib.fileset.unions
@@ -117,4 +118,3 @@ Here's an example which picks specific files by name:
 [nixpkgs-sources-cleansource]: https://nixos.org/manual/nixpkgs/stable/#function-library-lib.sources.cleanSource
 [nixpkgs-sources-cleansourcewith]: https://nixos.org/manual/nixpkgs/stable/#function-library-lib.sources.cleanSourceWith
 [nixpkgs-sources]: https://nixos.org/manual/nixpkgs/stable/#sec-functions-library-sources
-[nix-discussion-source-filtering]: https://discourse.nixos.org/t/filtering-source-trees-with-nix-and-nixpkgs/19148
