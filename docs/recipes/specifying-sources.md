@@ -46,7 +46,7 @@ combination of different functions in [`lib.fileset`][nixpkgs-fileset] such as
         ];
       };
     };
-  }
+  };
 }
 ```
 
