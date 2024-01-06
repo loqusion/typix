@@ -25,14 +25,10 @@
       else null;
 
   inferredTypstOpts = optionalAttrs (!isNull inferredFormatFromTypstProjectOutput) {
-    typstOpts = {
-      format = inferredFormatFromTypstProjectOutput;
-    };
+    typstOpts.format = inferredFormatFromTypstProjectOutput;
   };
   defaultArgs = optionalAttrs (! origArgs ? typstOutput) {
-    typstOpts = {
-      format = "pdf";
-    };
+    typstOpts.format = "pdf";
   };
 
   args =
