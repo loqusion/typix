@@ -1,3 +1,1 @@
-# Introduction
-
-There's nothing here yet!
+../README.md
