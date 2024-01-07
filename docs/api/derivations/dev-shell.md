@@ -1,5 +1,8 @@
 # devShell
 
+Sets up a shell environment that activates with [`nix develop`][nix-develop] or
+[`direnv`][direnv].
+
 > **TODO**
 
 ## Parameters
@@ -53,5 +56,7 @@ directory, unless you set [`forceLocalPaths`](#forcelocalpaths) to `true`.
 
 - [`devShell`](https://github.com/loqusion/typst.nix/blob/main/lib/devShell.nix)
 
-[nix-derivation-mk-shell]: https://nixos.org/manual/nixpkgs/stable/#sec-pkgs-mkShell
+[direnv]: https://direnv.net/
 [nix-derivation-mk-shell-attributes]: https://nixos.org/manual/nixpkgs/stable/#sec-pkgs-mkShell-attributes
+[nix-derivation-mk-shell]: https://nixos.org/manual/nixpkgs/stable/#sec-pkgs-mkShell
+[nix-develop]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-develop
