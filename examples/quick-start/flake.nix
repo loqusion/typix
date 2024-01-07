@@ -64,7 +64,7 @@
 
       # Watch a project and recompile on changes
       #
-      # *Warning*: Do not rely on this for reproducible output,
+      # Do not rely on this for reproducible output,
       # as it is exposed to the user's environment
       watch-script = typstNixLib.watchTypstProject commonArgs;
     in {
