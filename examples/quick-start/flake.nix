@@ -87,7 +87,9 @@
       devShells.default = typstNixLib.devShell {
         inherit (commonArgs) fontPaths localPaths;
         packages = [
-          build-script
+          # WARNING: Don't run `typst-build` directly, instead use `nix run .#build`
+          # See https://github.com/loqusion/typst.nix/issues/2
+          # build-script
           watch-script
           # More packages can be added here, like typstfmt
           # pkgs.typstfmt
