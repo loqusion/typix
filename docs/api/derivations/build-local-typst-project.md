@@ -20,6 +20,16 @@ https://nixos.org/manual/nix/stable/language/import-from-derivation
 
 </div>
 
+<div class="warning">
+
+Invoking the script produced by this derivation directly is currently
+unsupported. Instead, use `nix run`.
+
+See [this issue](https://github.com/loqusion/typst.nix/issues/2) for more
+information.
+
+</div>
+
 ## Parameters
 
 All parameters accepted by
