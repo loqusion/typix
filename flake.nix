@@ -73,7 +73,9 @@
       devShells.default = pkgs.mkShell {
         nativeBuildInputs = with pkgs; [
           alejandra
+          markdownlint-cli
           mdbook
+          nodePackages.prettier
         ];
       };
     });
