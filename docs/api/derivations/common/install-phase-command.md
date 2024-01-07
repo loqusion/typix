@@ -1,6 +1,6 @@
 <!-- markdownlint-disable first-line-h1 -->
 
 Command (or commands) to run during
-[`installPhase`][nix-derivation-install-phase].
+[`installPhase`][nixpkgs-installphase].
 
-[nix-derivation-install-phase]: https://nixos.org/manual/nixpkgs/stable/#ssec-install-phase
+[nixpkgs-installphase]: https://nixos.org/manual/nixpkgs/stable/#ssec-install-phase

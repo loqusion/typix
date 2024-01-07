@@ -8,8 +8,8 @@ A generic derivation builder for running Typst commands.
 
 ### `buildPhaseTypstCommand`
 
-Command (or commands) to run during [`buildPhase`][nix-derivation-build-phase].
-Any output should typically be written to `$out`, e.g. `typsts compile <source>
+Command (or commands) to run during [`buildPhase`][nixpkgs-buildphase]. Any
+output should typically be written to `$out`, e.g. `typsts compile <source>
 "$out"`.
 
 See also: [Typst CLI Usage][typst-cli-usage]
@@ -46,8 +46,8 @@ See also: [Typst CLI Usage][typst-cli-usage]
 
 ## Footnotes
 
-[^stdenv]: [`stdenv`][nix-ref-stdenv] (not for the faint of heart)
+[^stdenv]: [`stdenv`][nixpkgs-stdenv] (not for the faint of heart)
 
-[nix-derivation-build-phase]: https://nixos.org/manual/nixpkgs/stable/#build-phase
-[nix-ref-stdenv]: https://nixos.org/manual/nixpkgs/stable/#chap-stdenv
+[nixpkgs-buildphase]: https://nixos.org/manual/nixpkgs/stable/#build-phase
+[nixpkgs-stdenv]: https://nixos.org/manual/nixpkgs/stable/#chap-stdenv
 [typst-cli-usage]: https://github.com/typst/typst#usage

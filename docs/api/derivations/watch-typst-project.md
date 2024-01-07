@@ -8,8 +8,9 @@ reproducible.
 
 ## Parameters
 
-**Note:** All parameters for [`writeShellApplication`][write-shell-application]
-are also supported (besides `text`).
+**Note:** All parameters for
+[`writeShellApplication`][nixpkgs-writeshellapplication] are also supported
+(besides `text`).
 
 ### `fontPaths` (optional) { #fontpaths }
 
@@ -94,4 +95,4 @@ Default is `typst watch`.
 
 - [`watchTypstProject`](https://github.com/loqusion/typst.nix/blob/main/lib/watchTypstProject.nix)
 
-[write-shell-application]: https://nixos.org/manual/nixpkgs/stable/#trivial-builder-writeShellApplication
+[nixpkgs-writeshellapplication]: https://nixos.org/manual/nixpkgs/stable/#trivial-builder-writeShellApplication

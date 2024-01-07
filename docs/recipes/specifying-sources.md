@@ -21,8 +21,8 @@ these is usually as simple as
 > git will invalidate the cache and trigger a rebuild.
 
 To include more _local files_[^fileset-note] in a source tree, you can use a
-combination of different functions in [`lib.fileset`][nixpkgs-fileset] such as
-[`lib.fileset.unions`][nixpkgs-fileset-unions],
+combination of different functions in [`lib.fileset`][nixpkgs-fileset]
+such as [`lib.fileset.unions`][nixpkgs-fileset-unions],
 [`lib.fileset.fromSource`][nixpkgs-fileset-fromsource], and
 [`lib.fileset.toSource`][nixpkgs-fileset-tosource], like so:
 
@@ -73,7 +73,7 @@ e.g. flake inputs, which is what
 ## Source filtering
 
 You can do source filtering primarily using
-[`builtins.filterSource`][nix-builtins-filtersource] and functions in
+[`builtins.filterSource`][nix-ref-builtins-filtersource] and functions in
 [`lib.sources`][nixpkgs-sources] such as
 [`lib.sources.cleanSourceWith`][nixpkgs-sources-cleansourcewith].
 
@@ -109,8 +109,8 @@ Here's an example which picks specific files by name:
 }
 ```
 
-[nix-builtins-filtersource]: https://nixos.org/manual/nix/stable/language/builtins.html#builtins-filterSource
 [nix-discussion-source-filtering]: https://discourse.nixos.org/t/filtering-source-trees-with-nix-and-nixpkgs/19148
+[nix-ref-builtins-filtersource]: https://nixos.org/manual/nix/stable/language/builtins.html#builtins-filterSource
 [nixpkgs-fileset-fromsource]: https://nixos.org/manual/nixpkgs/stable/#function-library-lib.fileset.fromSource
 [nixpkgs-fileset-tosource]: https://nixos.org/manual/nixpkgs/stable/#function-library-lib.fileset.toSource
 [nixpkgs-fileset-unions]: https://nixos.org/manual/nixpkgs/stable/#function-library-lib.fileset.unions

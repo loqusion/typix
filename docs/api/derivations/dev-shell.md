@@ -1,18 +1,18 @@
 # devShell
 
-Sets up a shell environment that activates with [`nix develop`][nix-develop] or
-[`direnv`][direnv].
+Sets up a shell environment that activates with [`nix develop`][nix-ref-develop]
+or [`direnv`][direnv].
 
 > **TODO**
 
 ## Parameters
 
-**Note:** All parameters for [`mkShell`][nix-derivation-mk-shell] are also
+**Note:** All parameters for [`mkShell`][nixpkgs-mkshell] are also
 supported.
 
 ### extraShellHook (optional) { #extrashellhook }
 
-Bash statements added to the [`shellHook`][nix-derivation-mk-shell-attributes]
+Bash statements added to the [`shellHook`][nixpkgs-mkshell-attributes]
 attribute.
 
 ### `fontPaths` (optional) { #fontpaths }
@@ -57,6 +57,6 @@ directory, unless you set [`forceLocalPaths`](#forcelocalpaths) to `true`.
 - [`devShell`](https://github.com/loqusion/typst.nix/blob/main/lib/devShell.nix)
 
 [direnv]: https://direnv.net/
-[nix-derivation-mk-shell-attributes]: https://nixos.org/manual/nixpkgs/stable/#sec-pkgs-mkShell-attributes
-[nix-derivation-mk-shell]: https://nixos.org/manual/nixpkgs/stable/#sec-pkgs-mkShell
-[nix-develop]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-develop
+[nix-ref-develop]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-develop
+[nixpkgs-mkshell-attributes]: https://nixos.org/manual/nixpkgs/stable/#sec-pkgs-mkShell-attributes
+[nixpkgs-mkshell]: https://nixos.org/manual/nixpkgs/stable/#sec-pkgs-mkShell

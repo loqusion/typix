@@ -46,4 +46,3 @@ What this example does does:
 [direnv]: https://direnv.net/
 [nix-dev-declarative-shell]: https://nix.dev/tutorials/first-steps/declarative-shell
 [nix-ref-develop]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-develop
-[nix-ref-nixpkgs-mkshell--packages]: https://nixos.org/manual/nixpkgs/stable/#sec-pkgs-mkShell-attributes

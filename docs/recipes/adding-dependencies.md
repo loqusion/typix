@@ -1,25 +1,25 @@
 # Adding dependencies
 
 You can add dependencies to your [flake
-inputs][nix-ref-flake--inputs][^zero-to-nix--flakes] so that Typst compilation
+inputs][nix-ref-flake-inputs][^zero-to-nix-flakes] so that Typst compilation
 does not depend on the transient state of the local system: instead, any
 dependencies are automatically fetched and made available in a sandboxed
 environment.
 
 Examples of dependencies you might want to add:
 
-- [Font files][typst-text--font] —
+- [Font files][typst-ref-text--font] —
   [`fontPaths`](../api/derivations/mk-typst-derivation.md#fontpaths)
-- [Image files][typst-image] —
+- [Image files][typst-ref-image] —
   [`localPaths`](../api/derivations/mk-typst-derivation.md#localpaths)
-- [Data files][typst-data] (e.g. [JSON][typst-data-json],
-  [TOML][typst-data-toml], [XML][typst-data-xml]) —
+- [Data files][typst-ref-data-loading] (e.g. [JSON][typst-ref-data-json],
+  [TOML][typst-ref-data-toml], [XML][typst-ref-data-xml]) —
   [`localPaths`](../api/derivations/mk-typst-derivation.md#localpaths)
 
 For a more complete description of how to specify flake inputs, see the Nix
-Reference Manual [section on flakerefs][nix-ref-flake--references].
+Reference Manual [section on flakerefs][nix-ref-flake-references].
 
-[^zero-to-nix--flakes]: See also: <https://zero-to-nix.com/concepts/flakes>
+[^zero-to-nix-flakes]: See also: <https://zero-to-nix.com/concepts/flakes>
 
 ## nixpkgs
 
@@ -77,7 +77,7 @@ Here, we can see that the relative path should be `share/fonts/truetype`, so in
 
 [GitHub](https://github.com) hosts a great deal of fonts and icon libraries, and
 Nix makes it easy to add GitHub repositories as flake inputs with [URL-like
-syntax][nix-ref-flake--url].
+syntax][nix-ref-flake-url].
 
 Here's an example of specifying a GitHub URL as a flake input and adding it to
 [`localPaths`](../api/derivations/mk-typst-derivation.md#localpaths), specifying
@@ -109,20 +109,20 @@ Here's what you need to know:
 - Paths to font files must still be passed in
   [`fontPaths`](../api/derivations/mk-typst-derivation.md#fontpaths) or
   otherwise made known to the Typst compiler (e.g. via
-  [`--font-path`][typst-man--font-path]).
+  [`--font-path`][typst-man-compile--font-path]).
 
 See ["Specifying sources"](./specifying-sources.md#expanding-a-source-tree) for
 information on how to expand a source tree to include the files you need.
 
-[nix-ref-flake--inputs]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake#flake-inputs
-[nix-ref-flake--references]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake#flake-references
-[nix-ref-flake--url]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake#url-like-syntax
+[nix-ref-flake-inputs]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake#flake-inputs
+[nix-ref-flake-references]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake#flake-references
+[nix-ref-flake-url]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake#url-like-syntax
 [nixpkgs]: https://search.nixos.org/packages
-[typst-data-json]: https://typst.app/docs/reference/data-loading/json/
-[typst-data-toml]: https://typst.app/docs/reference/data-loading/toml/
-[typst-data-xml]: https://typst.app/docs/reference/data-loading/xml/
-[typst-data]: https://typst.app/docs/reference/data-loading/
-[typst-image]: https://typst.app/docs/reference/visualize/image/
-[typst-man--font-path]: https://man.archlinux.org/man/typst-compile.1.en#font
-[typst-text--font]: https://typst.app/docs/reference/text/text/#parameters-font
+[typst-man-compile--font-path]: https://man.archlinux.org/man/typst-compile.1.en#font
+[typst-ref-data-json]: https://typst.app/docs/reference/data-loading/json/
+[typst-ref-data-loading]: https://typst.app/docs/reference/data-loading/
+[typst-ref-data-toml]: https://typst.app/docs/reference/data-loading/toml/
+[typst-ref-data-xml]: https://typst.app/docs/reference/data-loading/xml/
+[typst-ref-image]: https://typst.app/docs/reference/visualize/image/
+[typst-ref-text--font]: https://typst.app/docs/reference/text/text/#parameters-font
 [unix-tree]: https://gitlab.com/OldManProgrammer/unix-tree
