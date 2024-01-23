@@ -4,11 +4,11 @@
 
 ```nix
 {
-  outputs = { nixpkgs, typst-nix }: let
+  outputs = { nixpkgs, typix }: let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
   in {
-    apps.${system}.default = typst-nix.lib.${system}.buildLocalTypstProject {
+    apps.${system}.default = typix.lib.${system}.buildLocalTypstProject {
       fontPaths = [
         "${pkgs.roboto}/share/fonts/truetype"
       ];
@@ -23,11 +23,11 @@
 
 ```nix
 {
-  outputs = { nixpkgs, typst-nix }: let
+  outputs = { nixpkgs, typix }: let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
   in {
-    packages.${system}.default = typst-nix.lib.${system}.buildTypstProject {
+    packages.${system}.default = typix.lib.${system}.buildTypstProject {
       fontPaths = [
         "${pkgs.roboto}/share/fonts/truetype"
       ];
@@ -42,11 +42,11 @@
 
 ```nix
 {
-  outputs = { nixpkgs, typst-nix }: let
+  outputs = { nixpkgs, typix }: let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
   in {
-    devShells.${system}.default = typst-nix.lib.${system}.devShell {
+    devShells.${system}.default = typix.lib.${system}.devShell {
       fontPaths = [
         "${pkgs.roboto}/share/fonts/truetype"
       ];
@@ -61,11 +61,11 @@
 
 ```nix
 {
-  outputs = { nixpkgs, typst-nix }: let
+  outputs = { nixpkgs, typix }: let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
   in {
-    packages.${system}.default = typst-nix.lib.${system}.mkTypstDerivation {
+    packages.${system}.default = typix.lib.${system}.mkTypstDerivation {
       fontPaths = [
         "${pkgs.roboto}/share/fonts/truetype"
       ];
@@ -80,11 +80,11 @@
 
 ```nix
 {
-  outputs = { nixpkgs, typst-nix }: let
+  outputs = { nixpkgs, typix }: let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
   in {
-    apps.${system}.default = typst-nix.lib.${system}.watchTypstProject {
+    apps.${system}.default = typix.lib.${system}.watchTypstProject {
       fontPaths = [
         "${pkgs.roboto}/share/fonts/truetype"
       ];

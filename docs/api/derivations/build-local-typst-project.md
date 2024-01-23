@@ -21,7 +21,7 @@ More info: <https://nixos.org/manual/nix/stable/language/import-from-derivation>
 Invoking the script produced by this derivation directly is currently
 unsupported. Instead, use `nix run`.
 
-See [this issue](https://github.com/loqusion/typst.nix/issues/2) for more
+See [this issue](https://github.com/loqusion/typix/issues/2) for more
 information.
 
 </div>
@@ -97,4 +97,4 @@ Default is `main.typ`.
 
 ## Source
 
-- [`buildLocalTypstProject`](https://github.com/loqusion/typst.nix/blob/main/lib/buildLocalTypstProject.nix)
+- [`buildLocalTypstProject`](https://github.com/loqusion/typix/blob/main/lib/buildLocalTypstProject.nix)

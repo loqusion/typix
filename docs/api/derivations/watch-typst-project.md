@@ -93,6 +93,6 @@ Default is `typst watch`.
 
 ## Source
 
-- [`watchTypstProject`](https://github.com/loqusion/typst.nix/blob/main/lib/watchTypstProject.nix)
+- [`watchTypstProject`](https://github.com/loqusion/typix/blob/main/lib/watchTypstProject.nix)
 
 [nixpkgs-writeshellapplication]: https://nixos.org/manual/nixpkgs/stable/#trivial-builder-writeShellApplication

@@ -1,6 +1,6 @@
 # Specifying sources
 
-A number of derivations in Typst.nix accept source trees as parameters, such as
+A number of derivations in Typix accept source trees as parameters, such as
 [`src`](../api/derivations/mk-typst-derivation.md#src),
 [`fontPaths`](../api/derivations/mk-typst-derivation.md#fontpaths), and
 [`localPaths`](../api/derivations/mk-typst-derivation.md#localpaths). Specifying
@@ -28,11 +28,11 @@ such as [`lib.fileset.unions`][nixpkgs-fileset-unions],
 
 ```nix
 {
-  outputs = { nixpkgs, typst-nix }: let
+  outputs = { nixpkgs, typix }: let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
     inherit (pkgs) lib;
-    typstNixLib = typst-nix.lib.${system};
+    typstNixLib = typix.lib.${system};
     myTypstSource = typstNixLib.cleanTypstSource ./.;
   in {
     packages.${system}.default = typstNixLib.mkTypstDerivation {
@@ -84,7 +84,7 @@ Here's an example which picks specific files by name:
 
 ```nix
 {
-  outputs = { nixpkgs, typst-nix, font-awesome }: let
+  outputs = { nixpkgs, typix, font-awesome }: let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
 
@@ -100,7 +100,7 @@ Here's an example which picks specific files by name:
         builtins.any (icon: builtins.baseNameOf path == icon) icons;
     };
   in {
-    packages.${system}.default = typst-nix.lib.${system}.mkTypstDerivation {
+    packages.${system}.default = typix.lib.${system}.mkTypstDerivation {
       localPaths = [
         fontAwesomeSubset
       ];

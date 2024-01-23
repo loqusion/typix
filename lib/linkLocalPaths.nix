@@ -34,11 +34,11 @@ in
       # to the commands this applies to
       ''
         if [ ! -d ${escapeShellArg source} ]; then
-          echo "typst-nix: linking ${localPath.src} to ${localPath.dest}"
+          echo "typix: linking ${localPath.src} to ${localPath.dest}"
           ln ${lnAdditionalOpts} -sT ${escapeShellArg source} ${escapeShellArg localPath.dest} ||
             true
         else
-          echo "typst-nix: linking ${localPath.src} to ${localPath.dest} recursively"
+          echo "typix: linking ${localPath.src} to ${localPath.dest} recursively"
           cp ${cpAdditionalOpts} -RT --no-dereference --no-preserve=mode ${escapeShellArg source} ${escapeShellArg localPath.dest} ||
             true
         fi

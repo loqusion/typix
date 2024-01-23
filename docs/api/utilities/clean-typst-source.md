@@ -11,9 +11,9 @@ Filters a source tree to only contain `*.typ` files and special files such as
 
 ```nix
 {
-  outputs = { nixpkgs, typst-nix }: let
+  outputs = { nixpkgs, typix }: let
     system = "x86_64-linux";
-    typstNixLib = typst-nix.lib.${system};
+    typstNixLib = typix.lib.${system};
   in {
     packages.${system}.default = typstNixLib.mkTypstDerivation {
       src = typstNixLib.cleanTypstSource ./.;

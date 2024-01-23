@@ -1,4 +1,4 @@
-# typst.nix
+# typix
 
 ## Getting Started
 
@@ -6,7 +6,7 @@ After [installing Nix](https://nixos.org/download#download-nix), you can
 initialize a flake from the default template:
 
 ```bash
-nix flake init -t github:loqusion/typst.nix
+nix flake init -t github:loqusion/typix
 ```
 
 Here are some commands you can run from the default template:
@@ -15,4 +15,4 @@ Here are some commands you can run from the default template:
 - `nix run .#build` — compile and copy the output to the current directory
 
 For more information, check out [the
-docs](https://loqusion.github.io/typst.nix/).
+docs](https://loqusion.github.io/typix/).

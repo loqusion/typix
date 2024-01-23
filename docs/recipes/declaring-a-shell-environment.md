@@ -4,14 +4,14 @@ You can automatically pull your project's dependencies into your shell by
 declaring a [shell environment][nix-dev-declarative-shell] and then activating
 it with [`nix develop`][nix-ref-develop] or [`direnv`][direnv].
 
-Here's an example in a flake using Typst.nix's
+Here's an example in a flake using Typix's
 [`devShell`](../api/derivations/dev-shell.md):
 
 ```nix
 {
-  outputs = { typst-nix }: let
+  outputs = { typix }: let
     system = "x86_64-linux";
-    typstNixLib = typst-nix.lib.${system};
+    typstNixLib = typix.lib.${system};
 
     watch-script = typstNixLib.watchTypstProject {/* ... */};
   in {

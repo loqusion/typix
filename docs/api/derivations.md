@@ -6,7 +6,7 @@ As paraphrased from [the Nix Reference Manual][nix-ref-derivations]:
 > input files to repeatably produce output files at uniquely determined file
 > system paths.
 
-The derivation builders defined in Typst.nix extend this behavior by running
+The derivation builders defined in Typix extend this behavior by running
 `typst compile`/`typst watch` in a context where all the dependencies of your
 Typst project (fonts, images, etc.) will be made available to the Typst
 compiler, regardless of if they're already present on the system it runs on.

@@ -42,7 +42,7 @@ See also: [Typst CLI Usage][typst-cli-usage]
 
 ## Source
 
-- [`mkTypstDerivation`](https://github.com/loqusion/typst.nix/blob/main/lib/mkTypstDerivation.nix)
+- [`mkTypstDerivation`](https://github.com/loqusion/typix/blob/main/lib/mkTypstDerivation.nix)
 
 ## Footnotes
 

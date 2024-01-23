@@ -54,7 +54,7 @@ directory, unless you set [`forceLocalPaths`](#forcelocalpaths) to `true`.
 
 ## Source
 
-- [`devShell`](https://github.com/loqusion/typst.nix/blob/main/lib/devShell.nix)
+- [`devShell`](https://github.com/loqusion/typix/blob/main/lib/devShell.nix)
 
 [direnv]: https://direnv.net/
 [nix-ref-develop]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-develop

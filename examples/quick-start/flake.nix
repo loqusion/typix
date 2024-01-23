@@ -4,8 +4,8 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    typst-nix = {
-      url = "github:loqusion/typst.nix";
+    typix = {
+      url = "github:loqusion/typix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -20,7 +20,7 @@
 
   outputs = inputs @ {
     nixpkgs,
-    typst-nix,
+    typix,
     flake-utils,
     ...
   }:
@@ -28,7 +28,7 @@
       pkgs = nixpkgs.legacyPackages.${system};
       inherit (pkgs) lib;
 
-      typstNixLib = typst-nix.lib.${system};
+      typstNixLib = typix.lib.${system};
 
       src = typstNixLib.cleanTypstSource ./.;
       commonArgs = {
@@ -88,7 +88,7 @@
         inherit (commonArgs) fontPaths localPaths;
         packages = [
           # WARNING: Don't run `typst-build` directly, instead use `nix run .#build`
-          # See https://github.com/loqusion/typst.nix/issues/2
+          # See https://github.com/loqusion/typix/issues/2
           # build-script
           watch-script
           # More packages can be added here, like typstfmt

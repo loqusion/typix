@@ -3,11 +3,11 @@ authors = ["loqusion"]
 language = "en"
 multilingual = false
 src = "."
-title = "Typst.nix"
+title = "Typix"
 
 [output.html]
 theme = "theme"
 default-theme = "ayu"
 preferred-dark-theme = "ayu"
-git-repository-url = "https://github.com/loqusion/typst.nix"
-edit-url-template = "https://github.com/loqusion/typst.nix/edit/main/docs/{path}"
+git-repository-url = "https://github.com/loqusion/typix"
+edit-url-template = "https://github.com/loqusion/typix/edit/main/docs/{path}"

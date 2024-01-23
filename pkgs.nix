@@ -15,7 +15,7 @@
     };
   in
     pkgs.stdenv.mkDerivation {
-      name = "typst-nix-mdbook";
+      name = "typix-mdbook";
 
       inherit src;
 

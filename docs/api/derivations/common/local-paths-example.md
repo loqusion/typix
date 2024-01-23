@@ -18,10 +18,10 @@ project with something like:
     };
   };
 
-  outputs = { typst-nix, font-awesome }: let
+  outputs = { typix, font-awesome }: let
     system = "x86_64-linux";
   in {
-    apps.${system}.default = typst-nix.lib.${system}.buildLocalTypstProject {
+    apps.${system}.default = typix.lib.${system}.buildLocalTypstProject {
       localPaths = [
         {
           dest = "icons";
@@ -46,10 +46,10 @@ project with something like:
     };
   };
 
-  outputs = { typst-nix, font-awesome }: let
+  outputs = { typix, font-awesome }: let
     system = "x86_64-linux";
   in {
-    packages.${system}.default = typst-nix.lib.${system}.buildTypstProject {
+    packages.${system}.default = typix.lib.${system}.buildTypstProject {
       localPaths = [
         {
           dest = "icons";
@@ -74,10 +74,10 @@ project with something like:
     };
   };
 
-  outputs = { typst-nix, font-awesome }: let
+  outputs = { typix, font-awesome }: let
     system = "x86_64-linux";
   in {
-    devShells.${system}.default = typst-nix.lib.${system}.devShell {
+    devShells.${system}.default = typix.lib.${system}.devShell {
       localPaths = [
         {
           dest = "icons";
@@ -102,10 +102,10 @@ project with something like:
     };
   };
 
-  outputs = { typst-nix, font-awesome }: let
+  outputs = { typix, font-awesome }: let
     system = "x86_64-linux";
   in {
-    packages.${system}.default = typst-nix.lib.${system}.mkTypstDerivation {
+    packages.${system}.default = typix.lib.${system}.mkTypstDerivation {
       localPaths = [
         {
           dest = "icons";
@@ -130,10 +130,10 @@ project with something like:
     };
   };
 
-  outputs = { typst-nix, font-awesome }: let
+  outputs = { typix, font-awesome }: let
     system = "x86_64-linux";
   in {
-    apps.${system}.default = typst-nix.lib.${system}.watchTypstProject {
+    apps.${system}.default = typix.lib.${system}.watchTypstProject {
       localPaths = [
         {
           dest = "icons";

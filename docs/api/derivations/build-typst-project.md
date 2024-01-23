@@ -65,4 +65,4 @@ Default is `main.typ`.
 
 ## Source
 
-- [`buildTypstProject`](https://github.com/loqusion/typst.nix/blob/main/lib/buildTypstProject.nix)
+- [`buildTypstProject`](https://github.com/loqusion/typix/blob/main/lib/buildTypstProject.nix)
