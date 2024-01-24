@@ -28,9 +28,9 @@
       pkgs = nixpkgs.legacyPackages.${system};
       inherit (pkgs) lib;
 
-      typstNixLib = typix.lib.${system};
+      typixLib = typix.lib.${system};
 
-      src = typstNixLib.cleanTypstSource ./.;
+      src = typixLib.cleanTypstSource ./.;
       commonArgs = {
         typstSource = "main.typ";
 
@@ -50,14 +50,14 @@
 
       # Compile a Typst project, *without* copying the result
       # to the current directory
-      build-drv = typstNixLib.buildTypstProject (commonArgs
+      build-drv = typixLib.buildTypstProject (commonArgs
         // {
           inherit src;
         });
 
       # Compile a Typst project, and then copy the result
       # to the current directory
-      build-script = typstNixLib.buildLocalTypstProject (commonArgs
+      build-script = typixLib.buildLocalTypstProject (commonArgs
         // {
           inherit src;
         });
@@ -66,7 +66,7 @@
       #
       # Do not rely on this for reproducible output,
       # as it is exposed to the user's environment
-      watch-script = typstNixLib.watchTypstProject commonArgs;
+      watch-script = typixLib.watchTypstProject commonArgs;
     in {
       checks = {
         inherit build-drv build-script watch-script;
@@ -84,7 +84,7 @@
         };
       };
 
-      devShells.default = typstNixLib.devShell {
+      devShells.default = typixLib.devShell {
         inherit (commonArgs) fontPaths localPaths;
         packages = [
           # WARNING: Don't run `typst-build` directly, instead use `nix run .#build`

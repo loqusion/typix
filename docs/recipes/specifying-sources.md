@@ -32,10 +32,10 @@ such as [`lib.fileset.unions`][nixpkgs-fileset-unions],
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
     inherit (pkgs) lib;
-    typstNixLib = typix.lib.${system};
-    myTypstSource = typstNixLib.cleanTypstSource ./.;
+    typixLib = typix.lib.${system};
+    myTypstSource = typixLib.cleanTypstSource ./.;
   in {
-    packages.${system}.default = typstNixLib.mkTypstDerivation {
+    packages.${system}.default = typixLib.mkTypstDerivation {
       src = lib.fileset.toSource {
         root = ./.;
         fileset = lib.fileset.unions [

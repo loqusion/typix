@@ -11,13 +11,13 @@ Here's an example in a flake using Typix's
 {
   outputs = { typix }: let
     system = "x86_64-linux";
-    typstNixLib = typix.lib.${system};
+    typixLib = typix.lib.${system};
 
-    watch-script = typstNixLib.watchTypstProject {/* ... */};
+    watch-script = typixLib.watchTypstProject {/* ... */};
   in {
     # packages, apps, etc. omitted
 
-    devShells.${system}.default = typstNixLib.devShell {
+    devShells.${system}.default = typixLib.devShell {
       fontPaths = [/* ... */];
       localPaths = [/* ... */];
       packages = [

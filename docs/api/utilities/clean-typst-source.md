@@ -13,10 +13,10 @@ Filters a source tree to only contain `*.typ` files and special files such as
 {
   outputs = { nixpkgs, typix }: let
     system = "x86_64-linux";
-    typstNixLib = typix.lib.${system};
+    typixLib = typix.lib.${system};
   in {
-    packages.${system}.default = typstNixLib.mkTypstDerivation {
-      src = typstNixLib.cleanTypstSource ./.;
+    packages.${system}.default = typixLib.mkTypstDerivation {
+      src = typixLib.cleanTypstSource ./.;
     };
   };
 }
