@@ -6,7 +6,18 @@ First, [install Nix](https://nixos.org/download#download-nix):
 bash <(curl -L https://nixos.org/nix/install)
 ```
 
-Then, you can initialize a flake from the default template:
+Then enable flakes and the `nix` command ([see here][enable-flakes] for other
+ways):
+
+[enable-flakes]: https://nixos.wiki/wiki/Flakes#Enable_flakes_permanently_in_NixOS
+
+`~/.config/nix/nix.conf`
+
+```ini
+experimental-features = nix-command flakes
+```
+
+Finally, you can initialize a flake from the default template:
 
 ```bash
 nix flake init -t github:loqusion/typix
