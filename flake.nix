@@ -11,66 +11,54 @@
   };
 
   outputs = {nixpkgs, ...}: let
+    inherit (nixpkgs) lib;
+
+    linux32BitSystems = ["i686-linux"];
+    linux64BitSystems = ["x86_64-linux" "aarch64-linux"];
+    linuxSystems = linux32BitSystems ++ linux64BitSystems;
+    darwinSystems = ["x86_64-darwin" "aarch64-darwin"];
+    systems = linuxSystems ++ darwinSystems;
+
+    forAllSystems = lib.genAttrs systems;
+
+    pkgsFor = lib.genAttrs systems (system: nixpkgs.legacyPackages.${system});
+
     mkLib = pkgs:
       import ./lib {
         inherit (pkgs) lib newScope;
       };
+  in {
+    inherit mkLib;
 
-    eachSystem = systems: f: let
-      # Merge together the outputs for all systems.
-      op = attrs: system: let
-        ret = f system;
-        op = attrs: key:
-          attrs
-          // {
-            ${key} =
-              (attrs.${key} or {})
-              // {${system} = ret.${key};};
-          };
-      in
-        builtins.foldl' op attrs (builtins.attrNames ret);
-    in
-      builtins.foldl' op {} systems;
+    overlays.default = _final: _prev: {};
 
-    eachDefaultSystem = eachSystem [
-      "aarch64-linux"
-      "aarch64-darwin"
-      "x86_64-darwin"
-      "x86_64-linux"
-    ];
-  in
-    {
-      inherit mkLib;
-
-      overlays.default = _final: _prev: {};
-
-      templates = rec {
-        default = quick-start;
-        quick-start = {
-          description = "A Typst project";
-          path = ./examples/quick-start;
-        };
+    templates = rec {
+      default = quick-start;
+      quick-start = {
+        description = "A Typst project";
+        path = ./examples/quick-start;
       };
-    }
-    // eachDefaultSystem (system: let
-      pkgs = nixpkgs.legacyPackages.${system};
+    };
 
-      lib = mkLib pkgs;
+    checks = forAllSystems (system: let
+      pkgs = pkgsFor.${system};
+    in (pkgs.callPackages ./checks {
+      inherit pkgs;
+      myLib = mkLib pkgs;
+    }));
 
-      packages = import ./pkgs.nix {
-        inherit pkgs;
-      };
+    lib = forAllSystems (system: mkLib pkgsFor.${system});
 
-      checks = pkgs.callPackages ./checks {
-        inherit pkgs;
-        myLib = mkLib pkgs;
-      };
+    packages = forAllSystems (system: (
+      import ./pkgs.nix {pkgs = pkgsFor.${system};}
+    ));
+
+    formatter = forAllSystems (system: pkgsFor.${system}.alejandra);
+
+    devShells = forAllSystems (system: let
+      pkgs = pkgsFor.${system};
     in {
-      inherit checks lib packages;
-
-      formatter = pkgs.alejandra;
-
-      devShells.default = pkgs.mkShell {
+      default = pkgs.mkShell {
         nativeBuildInputs = with pkgs; [
           alejandra
           markdownlint-cli
@@ -79,4 +67,5 @@
         ];
       };
     });
+  };
 }
