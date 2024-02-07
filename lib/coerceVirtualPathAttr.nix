@@ -13,4 +13,4 @@ in
       src = "${virtualPath.src}";
       dest = virtualPath.dest or ".";
     }
-    else throw "Invalid virtualPath"
+    else throw "Invalid virtualPath: must be string or attrset"
