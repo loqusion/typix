@@ -39,7 +39,7 @@
           # "${pkgs.roboto}/share/fonts/truetype"
         ];
 
-        localPaths = [
+        virtualPaths = [
           # Add paths that must be locally accessible to typst here
           # {
           #   dest = "icons";
@@ -85,7 +85,7 @@
       };
 
       devShells.default = typixLib.devShell {
-        inherit (commonArgs) fontPaths localPaths;
+        inherit (commonArgs) fontPaths virtualPaths;
         packages = [
           # WARNING: Don't run `typst-build` directly, instead use `nix run .#build`
           # See https://github.com/loqusion/typix/issues/2

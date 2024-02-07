@@ -1,16 +1,16 @@
 {
   lib,
-  linkLocalPaths,
+  linkVirtualPaths,
   mkShell,
   typst,
 }: args @ {
   checks ? {},
   extraShellHook ? "",
   fontPaths ? [],
-  forceLocalPaths ? false,
+  forceVirtualPaths ? false,
   inputsFrom ? [],
-  localPaths ? [],
   packages ? [],
+  virtualPaths ? [],
   ...
 }: let
   inherit (builtins) removeAttrs;
@@ -21,9 +21,9 @@
     "checks"
     "extraShellHook"
     "fontPaths"
-    "forceLocalPaths"
+    "forceVirtualPaths"
     "inputsFrom"
-    "localPaths"
+    "virtualPaths"
   ];
 in
   mkShell (cleanedArgs
@@ -41,8 +41,8 @@ in
 
       shellHook =
         args.shellHook
-        or (optionalString (localPaths != []) (linkLocalPaths {
-          inherit localPaths forceLocalPaths;
+        or (optionalString (virtualPaths != []) (linkVirtualPaths {
+          inherit virtualPaths forceVirtualPaths;
         }))
         + optionalString (extraShellHook != "") ''
 

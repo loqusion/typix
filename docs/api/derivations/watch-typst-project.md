@@ -20,34 +20,17 @@ reproducible.
 
 {{#include common/font-paths-example.md:watchtypstproject_example}}
 
-### `forceLocalPaths` (optional) { #forcelocalpaths }
+### `forceVirtualPaths` (optional) { #forcevirtualpaths }
 
 <!-- markdownlint-disable link-fragments -->
 
-If there are any conflicts between [`localPaths`](#localpaths) and files in your
-project directory, they will not be overwritten unless `forceLocalPaths` is
+If there are any conflicts between [`virtualPaths`](#virtualpaths) and files in your
+project directory, they will not be overwritten unless `forceVirtualPaths` is
 `true`.
 
 Default is `false`.
 
 <!-- markdownlint-restore -->
-
-### `localPaths` (optional) { #localpaths }
-
-{{#include common/local-paths.md}}
-
-<!-- markdownlint-disable link-fragments -->
-
-**NOTE:** Any paths specified here will not overwrite files in your project
-directory, unless you set [`forceLocalPaths`](#forcelocalpaths) to `true`.
-
-<!-- markdownlint-restore -->
-
-#### Example { #localpaths-example }
-
-{{#include common/local-paths-example.md:head}}
-{{#include common/local-paths-example.md:watchtypstproject_example}}
-{{#include common/local-paths-example.md:tail}}
 
 ### `scriptName` (optional) { #scriptname }
 
@@ -90,6 +73,23 @@ Base Typst command to run to watch the project. Other arguments will be appended
 based on the other parameters you supply.
 
 Default is `typst watch`.
+
+### `virtualPaths` (optional) { #virtualpaths }
+
+{{#include common/virtual-paths.md}}
+
+<!-- markdownlint-disable link-fragments -->
+
+**NOTE:** Any paths specified here will not overwrite files in your project
+directory, unless you set [`forceVirtualPaths`](#forcevirtualpaths) to `true`.
+
+<!-- markdownlint-restore -->
+
+#### Example { #virtualpaths-example }
+
+{{#include common/virtual-paths-example.md:head}}
+{{#include common/virtual-paths-example.md:watchtypstproject_example}}
+{{#include common/virtual-paths-example.md:tail}}
 
 ## Source
 

@@ -30,15 +30,15 @@ See also: [Typst CLI Usage][typst-cli-usage]
 
 {{#include common/install-phase-command.md}}
 
-### `localPaths` (optional) { #localpaths }
+### `virtualPaths` (optional) { #virtualpaths }
 
-{{#include common/local-paths.md}}
+{{#include common/virtual-paths.md}}
 
-#### Example { #localpaths-example }
+#### Example { #virtualpaths-example }
 
-{{#include common/local-paths-example.md:head}}
-{{#include common/local-paths-example.md:mktypstderivation_example}}
-{{#include common/local-paths-example.md:tail}}
+{{#include common/virtual-paths-example.md:head}}
+{{#include common/virtual-paths-example.md:mktypstderivation_example}}
+{{#include common/virtual-paths-example.md:tail}}
 
 ## Source
 

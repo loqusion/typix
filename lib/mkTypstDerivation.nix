@@ -1,5 +1,5 @@
 {
-  copyLocalPathsHook,
+  copyVirtualPathsHook,
   lib,
   stdenv,
   typst,
@@ -7,7 +7,7 @@
   buildPhaseTypstCommand,
   fontPaths ? [],
   installPhaseCommand ? "",
-  localPaths ? [],
+  virtualPaths ? [],
   ...
 }: let
   inherit (builtins) baseNameOf getEnv removeAttrs;
@@ -18,7 +18,7 @@
     "buildPhaseTypstCommand"
     "fontPaths"
     "installPhaseCommand"
-    "localPaths"
+    "virtualPaths"
   ];
 
   name =
@@ -47,7 +47,7 @@ in
         (args.nativeBuildInputs or [])
         ++ [
           typst
-          (copyLocalPathsHook localPaths)
+          (copyVirtualPathsHook virtualPaths)
         ];
 
       buildPhase =

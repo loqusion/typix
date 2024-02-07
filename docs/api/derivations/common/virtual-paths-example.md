@@ -22,7 +22,7 @@ project with something like:
     system = "x86_64-linux";
   in {
     apps.${system}.default = typix.lib.${system}.buildTypstProjectLocal {
-      localPaths = [
+      virtualPaths = [
         {
           dest = "icons";
           src = "${font-awesome}/svgs/regular";
@@ -50,7 +50,7 @@ project with something like:
     system = "x86_64-linux";
   in {
     packages.${system}.default = typix.lib.${system}.buildTypstProject {
-      localPaths = [
+      virtualPaths = [
         {
           dest = "icons";
           src = "${font-awesome}/svgs/regular";
@@ -78,7 +78,7 @@ project with something like:
     system = "x86_64-linux";
   in {
     devShells.${system}.default = typix.lib.${system}.devShell {
-      localPaths = [
+      virtualPaths = [
         {
           dest = "icons";
           src = "${font-awesome}/svgs/regular";
@@ -106,7 +106,7 @@ project with something like:
     system = "x86_64-linux";
   in {
     packages.${system}.default = typix.lib.${system}.mkTypstDerivation {
-      localPaths = [
+      virtualPaths = [
         {
           dest = "icons";
           src = "${font-awesome}/svgs/regular";
@@ -134,7 +134,7 @@ project with something like:
     system = "x86_64-linux";
   in {
     apps.${system}.default = typix.lib.${system}.watchTypstProject {
-      localPaths = [
+      virtualPaths = [
         {
           dest = "icons";
           src = "${font-awesome}/svgs/regular";

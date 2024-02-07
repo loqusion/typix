@@ -23,34 +23,34 @@ attribute.
 
 {{#include common/font-paths-example.md:devshell_example}}
 
-### `forceLocalPaths` (optional) { #forcelocalpaths }
+### `forceVirtualPaths` (optional) { #forcevirtualpaths }
 
 <!-- markdownlint-disable link-fragments -->
 
-If there are any conflicts between [`localPaths`](#localpaths) and files in your
-project directory, they will not be overwritten unless `forceLocalPaths` is
+If there are any conflicts between [`virtualPaths`](#virtualpaths) and files in your
+project directory, they will not be overwritten unless `forceVirtualPaths` is
 `true`.
 
 Default is `false`.
 
 <!-- markdownlint-restore -->
 
-### `localPaths` (optional) { #localpaths }
+### `virtualPaths` (optional) { #virtualpaths }
 
-{{#include common/local-paths.md}}
+{{#include common/virtual-paths.md}}
 
 <!-- markdownlint-disable link-fragments -->
 
 **NOTE:** Any paths specified here will not overwrite files in your project
-directory, unless you set [`forceLocalPaths`](#forcelocalpaths) to `true`.
+directory, unless you set [`forceVirtualPaths`](#forcevirtualpaths) to `true`.
 
 <!-- markdownlint-restore -->
 
-#### Example { #localpaths-example }
+#### Example { #virtualpaths-example }
 
-{{#include common/local-paths-example.md:head}}
-{{#include common/local-paths-example.md:devshell_example}}
-{{#include common/local-paths-example.md:tail}}
+{{#include common/virtual-paths-example.md:head}}
+{{#include common/virtual-paths-example.md:devshell_example}}
+{{#include common/virtual-paths-example.md:tail}}
 
 ## Source
 

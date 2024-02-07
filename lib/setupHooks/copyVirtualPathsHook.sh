@@ -1,0 +1,6 @@
+copyVirtualPaths() {
+	:
+	@copyAllVirtualPaths@
+}
+
+preBuildHooks+=(copyVirtualPaths)

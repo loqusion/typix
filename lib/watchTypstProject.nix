@@ -1,16 +1,16 @@
 {
   inferTypstProjectOutput,
   lib,
-  linkLocalPaths,
+  linkVirtualPaths,
   pkgs,
   typst,
   typstOptsFromArgs,
 }: args @ {
   fontPaths ? [],
-  forceLocalPaths ? false,
-  localPaths ? [],
+  forceVirtualPaths ? false,
   typstSource ? "main.typ",
   typstWatchCommand ? "typst watch",
+  virtualPaths ? [],
   ...
 }: let
   inherit (builtins) removeAttrs;
@@ -26,8 +26,7 @@
 
   cleanedArgs = removeAttrs args [
     "fontPaths"
-    "forceLocalPaths"
-    "localPaths"
+    "forceVirtualPaths"
     "scriptName"
     "text"
     "typstOpts"
@@ -35,6 +34,7 @@
     "typstOutput"
     "typstSource"
     "typstWatchCommand"
+    "virtualPaths"
   ];
 in
   pkgs.writeShellApplication (cleanedArgs
@@ -51,8 +51,8 @@ in
         optionalString (fontPaths != []) ''
           export TYPST_FONT_PATHS=${concatStringsSep ":" fontPaths}
         ''
-        + optionalString (localPaths != []) (linkLocalPaths {
-          inherit localPaths forceLocalPaths;
+        + optionalString (virtualPaths != []) (linkVirtualPaths {
+          inherit virtualPaths forceVirtualPaths;
         })
         + ''
 

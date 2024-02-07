@@ -8,11 +8,11 @@ in {
   buildTypstProjectLocal = callPackage ./buildTypstProjectLocal.nix {};
   buildTypstProject = callPackage ./buildTypstProject.nix {};
   cleanTypstSource = callPackage ./cleanTypstSource.nix {};
-  coerceLocalPathAttr = callPackage ./coerceLocalPathAttr.nix {};
-  copyLocalPathsHook = callPackage ./setupHooks/copyLocalPaths.nix {};
+  coerceVirtualPathAttr = callPackage ./coerceVirtualPathAttr.nix {};
+  copyVirtualPathsHook = callPackage ./setupHooks/copyVirtualPaths.nix {};
   devShell = callPackage ./devShell.nix {};
   inferTypstProjectOutput = callPackage ./inferTypstProjectOutput.nix {};
-  linkLocalPaths = callPackage ./linkLocalPaths.nix {};
+  linkVirtualPaths = callPackage ./linkVirtualPaths.nix {};
   mkTypstDerivation = callPackage ./mkTypstDerivation.nix {};
   typstOptsFromArgs = callPackage ./typstOptsFromArgs.nix {};
   watchTypstProject = callPackage ./watchTypstProject.nix {};

@@ -11,10 +11,10 @@ Examples of dependencies you might want to add:
 - [Font files][typst-ref-text--font] —
   [`fontPaths`](../api/derivations/mk-typst-derivation.md#fontpaths)
 - [Image files][typst-ref-image] —
-  [`localPaths`](../api/derivations/mk-typst-derivation.md#localpaths)
+  [`virtualPaths`](../api/derivations/mk-typst-derivation.md#virtualpaths)
 - [Data files][typst-ref-data-loading] (e.g. [JSON][typst-ref-data-json],
   [TOML][typst-ref-data-toml], [XML][typst-ref-data-xml]) —
-  [`localPaths`](../api/derivations/mk-typst-derivation.md#localpaths)
+  [`virtualPaths`](../api/derivations/mk-typst-derivation.md#virtualpaths)
 
 For a more complete description of how to specify flake inputs, see the Nix
 Reference Manual [section on flakerefs][nix-ref-flake-references].
@@ -80,14 +80,14 @@ Nix makes it easy to add GitHub repositories as flake inputs with [URL-like
 syntax][nix-ref-flake-url].
 
 Here's an example of specifying a GitHub URL as a flake input and adding it to
-[`localPaths`](../api/derivations/mk-typst-derivation.md#localpaths), specifying
+[`virtualPaths`](../api/derivations/mk-typst-derivation.md#virtualpaths), specifying
 that we want the `svgs/regular` directory to be accessible from `icons`:
 
-{{#include ../api/derivations/common/local-paths-example.md:mktypstderivation_example}}
+{{#include ../api/derivations/common/virtual-paths-example.md:mktypstderivation_example}}
 
 With this, we can use it in Typst as if it were any other local path:
 
-{{#include ../api/derivations/common/local-paths-example.md:typst_example}}
+{{#include ../api/derivations/common/virtual-paths-example.md:typst_example}}
 
 ## Using local files
 
@@ -103,7 +103,7 @@ Here's what you need to know:
   source tree parameters — in practice, these are
   [`src`](../api/derivations/mk-typst-derivation.md#src),
   [`fontPaths`](../api/derivations/mk-typst-derivation.md#fontpaths), and
-  [`localPaths`](../api/derivations/mk-typst-derivation.md#localpaths). (This
+  [`virtualPaths`](../api/derivations/mk-typst-derivation.md#virtualpaths). (This
   doesn't apply to
   [`watchTypstProject`](../api/derivations/watch-typst-project.md).)
 - Paths to font files must still be passed in

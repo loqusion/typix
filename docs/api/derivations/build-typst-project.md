@@ -23,16 +23,6 @@ All parameters accepted by
 
 {{#include common/install-phase-command.md}}
 
-### `localPaths` (optional) { #localpaths }
-
-{{#include common/local-paths.md}}
-
-#### Example { #localpaths-example }
-
-{{#include common/local-paths-example.md:head}}
-{{#include common/local-paths-example.md:buildtypstproject_example}}
-{{#include common/local-paths-example.md:tail}}
-
 ### `typstCompileCommand` (optional) { #typstcompilecommand }
 
 {{#include common/typst-compile-command.md}}
@@ -62,6 +52,16 @@ These are in addition to any options you manually pass in
 {{#include common/typst-project-source.md}}
 
 Default is `main.typ`.
+
+### `virtualPaths` (optional) { #virtualpaths }
+
+{{#include common/virtual-paths.md}}
+
+#### Example { #virtualpaths-example }
+
+{{#include common/virtual-paths-example.md:head}}
+{{#include common/virtual-paths-example.md:buildtypstproject_example}}
+{{#include common/virtual-paths-example.md:tail}}
 
 ## Source
 

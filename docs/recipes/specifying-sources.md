@@ -3,11 +3,11 @@
 A number of derivations in Typix accept source trees as parameters, such as
 [`src`](../api/derivations/mk-typst-derivation.md#src),
 [`fontPaths`](../api/derivations/mk-typst-derivation.md#fontpaths), and
-[`localPaths`](../api/derivations/mk-typst-derivation.md#localpaths). Specifying
+[`virtualPaths`](../api/derivations/mk-typst-derivation.md#virtualpaths). Specifying
 these is usually as simple as
 [`cleanTypstSource`](../api/utilities/clean-typst-source.md) in the case of
 `src` and string interpolation (via `${...}`) in the case of `fontPaths` and
-`localPaths`, but there are situations where more is required or desirable:
+`virtualPaths`, but there are situations where more is required or desirable:
 
 - `cleanTypstSource` omits local files which are required by your Typst project
 - An input you're sourcing contains a large number of files which would be
@@ -40,8 +40,8 @@ such as [`lib.fileset.unions`][nixpkgs-fileset-unions],
         root = ./.;
         fileset = lib.fileset.unions [
           (lib.fileset.fromSource myTypstSource)
-          ./localpath.svg
-          ./other/localpath.svg
+          ./path.svg
+          ./other/path.svg
           ./another
         ];
       };
@@ -55,19 +55,19 @@ This will create a source tree that looks something like:
 ```text
 /nix/store/...
 ├── another
-│  ├── localpath1.svg
-│  ├── localpath2.svg
-│  └── localpath3.svg
-├── localpath.svg
+│  ├── path1.svg
+│  ├── path2.svg
+│  └── path3.svg
+├── path.svg
 ├── other
-│  └── localpath.svg
+│  └── path.svg
 └── ...
 ```
 
 <!-- prettier-ignore-start -->
 [^fileset-note]: `lib.fileset` functions can only be used with local files, not
 e.g. flake inputs, which is what
-[`localPaths`](../api/derivations/mk-typst-derivation.md#localpaths) is for.
+[`virtualPaths`](../api/derivations/mk-typst-derivation.md#virtualpaths) is for.
 <!-- prettier-ignore-end -->
 
 ## Source filtering
@@ -101,7 +101,7 @@ Here's an example which picks specific files by name:
     };
   in {
     packages.${system}.default = typix.lib.${system}.mkTypstDerivation {
-      localPaths = [
+      virtualPaths = [
         fontAwesomeSubset
       ];
     };

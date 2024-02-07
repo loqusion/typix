@@ -11,7 +11,7 @@ in
     fontPaths = [
       "${pkgs.roboto}/share/fonts/truetype"
     ];
-    localPaths = [
+    virtualPaths = [
       {
         src = ./fixtures/icons;
         dest = "icons";
@@ -27,22 +27,22 @@ in
       inherit fontPaths typstSource;
       src = myLib.cleanTypstSource ./simple-with-fonts;
     };
-    buildLocalSimpleWithLocalPaths = buildLocal {} {
-      inherit localPaths typstSource;
-      src = myLib.cleanTypstSource ./simple-with-local-paths;
+    buildLocalSimpleWithVirtualPaths = buildLocal {} {
+      inherit virtualPaths typstSource;
+      src = myLib.cleanTypstSource ./simple-with-virtual-paths;
     };
 
     devShell = myLib.devShell {
-      inherit localPaths;
+      inherit virtualPaths;
       checks = {
         simple = myLib.buildTypstProject {
-          inherit localPaths typstSource;
+          inherit virtualPaths typstSource;
           src = myLib.cleanTypstSource ./simple;
         };
       };
     };
 
-    overlappingLocalPaths = isInvariant: util: file:
+    overlappingVirtualPaths = isInvariant: util: file:
       util (let
         op =
           if isInvariant
@@ -50,8 +50,8 @@ in
           else "=";
         errorMsg =
           if isInvariant
-          then ''$FILE_TO_CHECK was overwritten\; it should stay the same when forceLocalPaths is false''
-          else ''$FILE_TO_CHECK was not overwritten\; it should be overwritten when forceLocalPaths is true'';
+          then ''$FILE_TO_CHECK was overwritten\; it should stay the same when forceVirtualPaths is false''
+          else ''$FILE_TO_CHECK was not overwritten\; it should be overwritten when forceVirtualPaths is true'';
       in {
         FILE_TO_CHECK = file;
         preBuild = ''
@@ -81,12 +81,12 @@ in
           fi
         '';
       }) {
-        inherit localPaths typstSource;
-        src = ./overlapping-local-paths;
-        forceLocalPaths = !isInvariant;
+        inherit virtualPaths typstSource;
+        src = ./overlapping-virtual-paths;
+        forceVirtualPaths = !isInvariant;
       };
-    overlappingLocalPathsInvariant = overlappingLocalPaths true;
-    overlappingLocalPathsForce = overlappingLocalPaths false;
+    overlappingVirtualPathsInvariant = overlappingVirtualPaths true;
+    overlappingVirtualPathsForce = overlappingVirtualPaths false;
 
     simple = myLib.buildTypstProject {
       inherit typstSource;
@@ -96,9 +96,9 @@ in
       inherit fontPaths typstSource;
       src = myLib.cleanTypstSource ./simple-with-fonts;
     };
-    simpleWithLocalPaths = myLib.buildTypstProject {
-      inherit localPaths typstSource;
-      src = myLib.cleanTypstSource ./simple-with-local-paths;
+    simpleWithVirtualPaths = myLib.buildTypstProject {
+      inherit virtualPaths typstSource;
+      src = myLib.cleanTypstSource ./simple-with-virtual-paths;
     };
 
     watch = callPackage ./watch.nix {};
@@ -110,11 +110,11 @@ in
       inherit fontPaths typstSource;
       src = myLib.cleanTypstSource ./simple-with-fonts;
     };
-    watchSimpleWithLocalPaths = watch {} {
-      inherit localPaths typstSource;
-      src = myLib.cleanTypstSource ./simple-with-local-paths;
+    watchSimpleWithVirtualPaths = watch {} {
+      inherit virtualPaths typstSource;
+      src = myLib.cleanTypstSource ./simple-with-virtual-paths;
     };
 
-    watchOverlappingLocalPaths = overlappingLocalPathsInvariant watch "icons/link.svg";
-    watchOverlappingLocalPathsForce = overlappingLocalPathsForce watch "icons/link.svg";
+    watchOverlappingVirtualPaths = overlappingVirtualPathsInvariant watch "icons/link.svg";
+    watchOverlappingVirtualPathsForce = overlappingVirtualPathsForce watch "icons/link.svg";
   }))

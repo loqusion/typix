@@ -19,7 +19,7 @@ Here's an example in a flake using Typix's
 
     devShells.${system}.default = typixLib.devShell {
       fontPaths = [/* ... */];
-      localPaths = [/* ... */];
+      virtualPaths = [/* ... */];
       packages = [
         watch-script
       ];
@@ -33,10 +33,10 @@ What this example does does:
 - Fonts added to [`fontPaths`](../api/derivations/dev-shell.md#fontpaths) will
   be made available to `typst` commands via the `TYPST_FONT_PATHS` environment
   variable.
-- Files in [`localPaths`](../api/derivations/dev-shell.md#localpaths) will be
+- Files in [`virtualPaths`](../api/derivations/dev-shell.md#virtualpaths) will be
   recursively symlinked to the current directory (only overwriting existing
   files when
-  [`forceLocalPaths`](../api/derivations/dev-shell.md#forcelocalpaths) is
+  [`forceVirtualPaths`](../api/derivations/dev-shell.md#forcevirtualpaths) is
   `true`).
 - For convenience, the
   [`typst-watch`](../api/derivations/watch-typst-project.md#scriptname) script
