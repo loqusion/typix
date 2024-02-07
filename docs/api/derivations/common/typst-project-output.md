@@ -6,7 +6,7 @@ Destination path for Typst output.
 
 <!-- ANCHOR_END: head -->
 
-<!-- ANCHOR: buildlocaltypstproject -->
+<!-- ANCHOR: buildtypstprojectlocal -->
 
 <!-- markdownlint-disable link-fragments -->
 
@@ -16,7 +16,7 @@ If omitted, it will be inferred from
 
 <!-- markdownlint-restore -->
 
-<!-- ANCHOR_END: buildlocaltypstproject -->
+<!-- ANCHOR_END: buildtypstprojectlocal -->
 
 <!-- ANCHOR: watchtypstproject -->
 

@@ -14,7 +14,7 @@
 # API Reference
 
 - [Derivations](api/derivations.md)
-  - [buildLocalTypstProject](api/derivations/build-local-typst-project.md)
+  - [buildTypstProjectLocal](api/derivations/build-typst-project-local.md)
   - [buildTypstProject](api/derivations/build-typst-project.md)
   - [devShell](api/derivations/dev-shell.md)
   - [mkTypstDerivation](api/derivations/mk-typst-derivation.md)

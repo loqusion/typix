@@ -5,7 +5,7 @@
 lib.makeScope newScope (self: let
   inherit (self) callPackage;
 in {
-  buildLocalTypstProject = callPackage ./buildLocalTypstProject.nix {};
+  buildTypstProjectLocal = callPackage ./buildTypstProjectLocal.nix {};
   buildTypstProject = callPackage ./buildTypstProject.nix {};
   cleanTypstSource = callPackage ./cleanTypstSource.nix {};
   coerceLocalPathAttr = callPackage ./coerceLocalPathAttr.nix {};

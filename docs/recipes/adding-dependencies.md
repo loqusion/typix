@@ -98,7 +98,7 @@ Here's what you need to know:
 
 - The Typst compiler invoked by
   [`buildTypstProject`](../api/derivations/build-typst-project.md),
-  [`buildLocalTypstProject`](../api/derivations/build-local-typst-project.md),
+  [`buildTypstProjectLocal`](../api/derivations/build-typst-project-local.md),
   etc. won't see the files you've added unless they're present in one of the
   source tree parameters — in practice, these are
   [`src`](../api/derivations/mk-typst-derivation.md#src),

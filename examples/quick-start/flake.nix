@@ -57,7 +57,7 @@
 
       # Compile a Typst project, and then copy the result
       # to the current directory
-      build-script = typixLib.buildLocalTypstProject (commonArgs
+      build-script = typixLib.buildTypstProjectLocal (commonArgs
         // {
           inherit src;
         });

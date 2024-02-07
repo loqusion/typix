@@ -7,7 +7,7 @@ project with something like:
 
 <!-- ANCHOR_END: head -->
 
-<!-- ANCHOR: buildlocaltypstproject_example -->
+<!-- ANCHOR: buildtypstprojectlocal_example -->
 
 ```nix
 {
@@ -21,7 +21,7 @@ project with something like:
   outputs = { typix, font-awesome }: let
     system = "x86_64-linux";
   in {
-    apps.${system}.default = typix.lib.${system}.buildLocalTypstProject {
+    apps.${system}.default = typix.lib.${system}.buildTypstProjectLocal {
       localPaths = [
         {
           dest = "icons";
@@ -33,7 +33,7 @@ project with something like:
 }
 ```
 
-<!-- ANCHOR_END: buildlocaltypstproject_example -->
+<!-- ANCHOR_END: buildtypstprojectlocal_example -->
 
 <!-- ANCHOR: buildtypstproject_example -->
 

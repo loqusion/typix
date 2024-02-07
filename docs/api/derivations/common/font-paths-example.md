@@ -1,6 +1,6 @@
 <!-- markdownlint-disable-file first-line-h1 -->
 
-<!-- ANCHOR: buildlocaltypstproject_example -->
+<!-- ANCHOR: buildtypstprojectlocal_example -->
 
 ```nix
 {
@@ -8,7 +8,7 @@
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
   in {
-    apps.${system}.default = typix.lib.${system}.buildLocalTypstProject {
+    apps.${system}.default = typix.lib.${system}.buildTypstProjectLocal {
       fontPaths = [
         "${pkgs.roboto}/share/fonts/truetype"
       ];
@@ -17,7 +17,7 @@
 }
 ```
 
-<!-- ANCHOR_END: buildlocaltypstproject_example -->
+<!-- ANCHOR_END: buildtypstprojectlocal_example -->
 
 <!-- ANCHOR: buildtypstproject_example -->
 

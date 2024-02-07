@@ -11,7 +11,7 @@ The derivation builders defined in Typix extend this behavior by running
 Typst project (fonts, images, etc.) will be made available to the Typst
 compiler, regardless of if they're already present on the system it runs on.
 
-- [`buildLocalTypstProject`](derivations/build-local-typst-project.md) — Returns
+- [`buildTypstProjectLocal`](derivations/build-typst-project-local.md) — Returns
   a derivation for compiling a Typst project and copying the output to the
   current directory.
 - [`buildTypstProject`](derivations/build-typst-project.md) — Returns a

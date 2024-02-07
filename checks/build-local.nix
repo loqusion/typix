@@ -1,9 +1,9 @@
 {
   lib,
   pkgs,
-  buildLocalTypstProject,
+  buildTypstProjectLocal,
 }: runCommandDrvAttr: args: let
-  build-local-drv = buildLocalTypstProject ({
+  build-local-drv = buildTypstProjectLocal ({
       name = "build-local-check";
     }
     // args

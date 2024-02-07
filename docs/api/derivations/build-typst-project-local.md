@@ -1,4 +1,4 @@
-# buildLocalTypstProject
+# buildTypstProjectLocal
 
 Returns a derivation for compiling a Typst project and copying the output to the
 current directory.
@@ -30,7 +30,7 @@ information.
 
 All parameters accepted by
 [`buildTypstProject`](build-typst-project.md#parameters) are also accepted by
-`buildLocalTypstProject`. They are repeated below for convenience.
+`buildTypstProjectLocal`. They are repeated below for convenience.
 
 ### `fontPaths` (optional) { #fontpaths }
 
@@ -38,7 +38,7 @@ All parameters accepted by
 
 #### Example { #fontpaths-example }
 
-{{#include common/font-paths-example.md:buildlocaltypstproject_example}}
+{{#include common/font-paths-example.md:buildtypstprojectlocal_example}}
 
 ### `installPhaseCommand` (optional) { #installphasecommand }
 
@@ -51,7 +51,7 @@ All parameters accepted by
 #### Example { #localpaths-example }
 
 {{#include common/local-paths-example.md:head}}
-{{#include common/local-paths-example.md:buildlocaltypstproject_example}}
+{{#include common/local-paths-example.md:buildtypstprojectlocal_example}}
 {{#include common/local-paths-example.md:tail}}
 
 ### `scriptName` (optional) { #scriptname }
@@ -87,7 +87,7 @@ These are in addition to any options you manually pass in
 ### `typstOutput` (optional) { #typstoutput }
 
 {{#include common/typst-project-output.md:head}}
-{{#include common/typst-project-output.md:buildlocaltypstproject}}
+{{#include common/typst-project-output.md:buildtypstprojectlocal}}
 
 ### `typstSource` (optional) { #typstsource }
 
@@ -97,4 +97,4 @@ Default is `main.typ`.
 
 ## Source
 
-- [`buildLocalTypstProject`](https://github.com/loqusion/typix/blob/main/lib/buildLocalTypstProject.nix)
+- [`buildTypstProjectLocal`](https://github.com/loqusion/typix/blob/main/lib/buildTypstProjectLocal.nix)
