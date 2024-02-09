@@ -28,11 +28,7 @@ Typix aims to make it easier to use [Nix](https://nixos.org/) in
   - [images](https://typst.app/docs/reference/visualize/image/)
   - [data](https://typst.app/docs/reference/data-loading/)
 
-<div class="warning">
-
 [Typst packages](https://typst.app/docs/packages/) are currently unsupported.
-
-</div>
 
 ## Getting Started
 
