@@ -2,7 +2,7 @@
   <img
     src="https://raw.githubusercontent.com/loqusion/typix/main/.github/assets/logo_1544x1544.png"
     alt="Typix Logo"
-    width="100"
+    width="150"
   /><br />
   Typix
 </h1>
