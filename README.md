@@ -7,6 +7,31 @@
   Typix
 </h1>
 
+Typix aims to make it easier to use [Nix](https://nixos.org/) in
+[Typst](https://github.com/typst/typst) projects.
+
+- **Dependency management**: supports arbitrary dependencies including fonts,
+  images, and data
+- **Reproducible**: via a hermetically sealed build environment
+
+## Features
+
+- Automatically fetch dependencies and compile in a single command (`nix run
+.#build`)
+- Watch input files and recompile on changes (`nix run .#watch`)
+- Set up a shell environment with all dependencies made available via
+  environment variables and symlinks
+- Fully extensible via
+  [`mkTypstDerivation`](https://loqusion.github.io/typix/api/derivations/mk-typst-derivation.html)
+- Support for dependencies such as:
+  - [fonts](https://typst.app/docs/reference/text/text/#parameters-font)
+  - [images](https://typst.app/docs/reference/visualize/image/)
+  - [data](https://typst.app/docs/reference/data-loading/)
+
+> [!NOTE]
+>
+> [Typst packages](https://typst.app/docs/packages/) are currently unsupported.
+
 ## Getting Started
 
 After [installing Nix](https://nixos.org/download#download-nix) and [enabling
