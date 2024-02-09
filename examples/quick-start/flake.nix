@@ -63,9 +63,6 @@
         });
 
       # Watch a project and recompile on changes
-      #
-      # Do not rely on this for reproducible output,
-      # as it is exposed to the user's environment
       watch-script = typixLib.watchTypstProject commonArgs;
     in {
       checks = {
