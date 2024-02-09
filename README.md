@@ -4,7 +4,7 @@
     alt="Typix Logo"
     width="150"
   /><br />
-  <span style="font-size: 24px">Typix</span>
+  Typix
 </h1>
 
 ## Getting Started
