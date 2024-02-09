@@ -1,6 +1,6 @@
 <!-- markdownlint-disable-file first-line-h1 -->
 
-List of sources that will be made locally available to your Typst project.
+List of sources that will be made virtually available to your Typst project.
 Useful for projects which rely on remote resources, such as
 [images][typst-ref-image] or [data][typst-ref-data-loading].
 

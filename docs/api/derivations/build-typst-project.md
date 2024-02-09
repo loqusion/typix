@@ -11,6 +11,10 @@ All parameters accepted by
 [`mkTypstDerivation`](mk-typst-derivation.md#parameters) are also accepted by
 `buildTypstProject`. They are repeated below for convenience.
 
+### `src`
+
+{{#include common/src.md}}
+
 ### `fontPaths` (optional) { #fontpaths }
 
 {{#include common/font-paths.md}}

@@ -32,6 +32,10 @@ All parameters accepted by
 [`buildTypstProject`](build-typst-project.md#parameters) are also accepted by
 `buildTypstProjectLocal`. They are repeated below for convenience.
 
+### `src`
+
+{{#include common/src.md}}
+
 ### `fontPaths` (optional) { #fontpaths }
 
 {{#include common/font-paths.md}}

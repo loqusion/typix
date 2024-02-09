@@ -16,7 +16,7 @@ See also: [Typst CLI Usage][typst-cli-usage]
 
 ### `src`
 
-> **TODO**
+{{#include common/src.md}}
 
 ### `fontPaths` (optional) { #fontpaths }
 
