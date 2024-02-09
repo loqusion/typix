@@ -96,6 +96,11 @@ in
       inherit fontPaths typstSource;
       src = myLib.cleanTypstSource ./simple-with-fonts;
     };
+    # TODO: add support for typst packages
+    # simpleWithTypstPackages = myLib.buildTypstProject {
+    #   inherit typstSource;
+    #   src = myLib.cleanTypstSource ./simple-with-typst-packages;
+    # };
     simpleWithVirtualPaths = myLib.buildTypstProject {
       inherit virtualPaths typstSource;
       src = myLib.cleanTypstSource ./simple-with-virtual-paths;
