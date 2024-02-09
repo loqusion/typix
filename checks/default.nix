@@ -115,6 +115,11 @@ in
       inherit fontPaths typstSource;
       src = myLib.cleanTypstSource ./simple-with-fonts;
     };
+    # TODO: see above
+    # watchSimpleWithTypstPackages = watch {} {
+    #   inherit typstSource;
+    #   src = myLib.cleanTypstSource ./simple-with-typst-packages;
+    # };
     watchSimpleWithVirtualPaths = watch {} {
       inherit virtualPaths typstSource;
       src = myLib.cleanTypstSource ./simple-with-virtual-paths;
