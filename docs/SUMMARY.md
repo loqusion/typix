@@ -10,6 +10,7 @@
 - [Adding dependencies](recipes/adding-dependencies.md)
 - [Specifying sources](recipes/specifying-sources.md)
 - [Declaring a shell environment](recipes/declaring-a-shell-environment.md)
+- [Using Typst packages](recipes/using-typst-packages.md)
 
 # API Reference
 
