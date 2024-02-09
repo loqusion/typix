@@ -10,6 +10,9 @@
    xml:space="preserve"
    inkscape:version="1.3.2 (091e20ef0f, 2023-11-25, custom)"
    sodipodi:docname="logo_1544x1544.svg"
+   inkscape:export-filename="logo_1544x1544.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -165,7 +168,7 @@
          d="m 7.8008499,17.893975 c 0,1.107341 0.1588845,1.850425 0.4766634,2.229252 0.3177688,0.378826 0.895544,0.568241 1.7332757,0.568241 0.866688,0 1.978918,-0.437109 3.336692,-1.311326 l 0.866687,1.442457 c -2.542269,2.127261 -4.6366633,3.190892 -6.2833198,3.190892 -1.6466567,0 -2.946658,-0.393397 -3.8999843,-1.180192 C 3.0775374,22.017362 2.6008742,20.589476 2.6008742,18.549636 V 7.0974762 H 0.43421515 L 0.08755009,5.4801754 2.6008742,4.6933901 V 2.5515592 L 7.8008499,0.1474731 V 4.9556552 L 12.914186,4.5622576 12.437474,7.403452 7.8008499,7.2286087 Z"
          fill="currentColor"
          id="path1"
-         style="fill:#181825;fill-opacity:1;stroke:#cdd6f4;stroke-width:0.789252;stroke-dasharray:none;stroke-opacity:1" /></g><g
+         style="fill:#1e1e2e;fill-opacity:1;stroke:#cdd6f4;stroke-width:0.789252;stroke-dasharray:none;stroke-opacity:1;stroke-linejoin:round;stroke-linecap:butt;stroke-miterlimit:4" /></g><g
        id="g2"
        transform="matrix(2.090156,0,0,2.090156,445.27457,365.68831)"><g
          id="layer7"
