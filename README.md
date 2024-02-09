@@ -1,10 +1,10 @@
-<h1 align="center" style="border: none; font-size: 24px">
+<h1 align="center">
   <img
     src="https://raw.githubusercontent.com/loqusion/typix/main/.github/assets/logo_1544x1544.png"
     alt="Typix Logo"
     width="150"
   /><br />
-  Typix
+  <span style="font-size: 24px">Typix</span>
 </h1>
 
 ## Getting Started
