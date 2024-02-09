@@ -16,10 +16,13 @@ compiler, regardless of if they're already present on the system it runs on.
   current directory.
 - [`buildTypstProject`](derivations/build-typst-project.md) — Returns a
   derivation for compiling a Typst project.
-- [`devShell`](derivations/dev-shell.md) — **TODO**
+- [`devShell`](derivations/dev-shell.md) — Sets up a shell environment that
+  activates with [`nix develop`][nix-ref-develop] or [`direnv`][direnv].
 - [`mkTypstDerivation`](derivations/mk-typst-derivation.md) — A generic
   derivation builder for running Typst commands.
 - [`watchTypstDerivation`](derivations/watch-typst-project.md) — Returns a
   derivation for a script that watches an input file and recompiles on changes.
 
+[direnv]: https://direnv.net/
 [nix-ref-derivations]: https://nixos.org/manual/nix/stable/language/derivations.html
+[nix-ref-develop]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-develop

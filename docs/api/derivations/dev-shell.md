@@ -3,8 +3,6 @@
 Sets up a shell environment that activates with [`nix develop`][nix-ref-develop]
 or [`direnv`][direnv].
 
-> **TODO**
-
 ## Parameters
 
 **Note:** All parameters for [`mkShell`][nixpkgs-mkshell] are also
