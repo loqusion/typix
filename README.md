@@ -29,9 +29,8 @@ Typix aims to make it easier to use [Nix](https://nixos.org/) in
   - [data](https://typst.app/docs/reference/data-loading/)
 
 [Typst packages](https://typst.app/docs/packages/) are currently unsupported,
-however a
-[workaround](https://loqusion.github.io/typix/recipes/using-typst-packages.html)
-exists.
+however there is a
+[workaround](https://loqusion.github.io/typix/recipes/using-typst-packages.html).
 
 ## Getting Started
 
