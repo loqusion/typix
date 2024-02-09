@@ -21,7 +21,7 @@ Typix aims to make it easier to use [Nix](https://nixos.org/) in
 - Watch input files and recompile on changes (`nix run .#watch`)
 - Set up a shell environment with all dependencies made available via
   environment variables and symlinks
-- Fully extensible via
+- Extensible via
   [`mkTypstDerivation`](https://loqusion.github.io/typix/api/derivations/mk-typst-derivation.html)
 - Support for dependencies such as:
   - [fonts](https://typst.app/docs/reference/text/text/#parameters-font)
