@@ -1,6 +1,6 @@
 # mkTypstDerivation
 
-A generic derivation builder for running Typst commands.
+A generic derivation constructor for running Typst commands.
 
 ## Parameters
 

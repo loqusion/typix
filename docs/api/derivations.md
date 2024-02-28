@@ -6,7 +6,7 @@ As paraphrased from [the Nix Reference Manual][nix-ref-derivations]:
 > input files to repeatably produce output files at uniquely determined file
 > system paths.
 
-The derivation builders defined in Typix extend this behavior by running
+The derivation constructors defined in Typix extend this behavior by running
 `typst compile`/`typst watch` in a context where all the dependencies of your
 Typst project (fonts, images, etc.) will be made available to the Typst
 compiler, regardless of if they're already present on the system it runs on.
@@ -19,7 +19,7 @@ compiler, regardless of if they're already present on the system it runs on.
 - [`devShell`](derivations/dev-shell.md) — Sets up a shell environment that
   activates with [`nix develop`][nix-ref-develop] or [`direnv`][direnv].
 - [`mkTypstDerivation`](derivations/mk-typst-derivation.md) — A generic
-  derivation builder for running Typst commands.
+  derivation constructor for running Typst commands.
 - [`watchTypstDerivation`](derivations/watch-typst-project.md) — Returns a
   derivation for a script that watches an input file and recompiles on changes.
 
