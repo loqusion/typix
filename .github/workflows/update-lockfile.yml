@@ -22,10 +22,19 @@ jobs:
         uses: DeterminateSystems/update-flake-lock@v21
         with:
           token: ${{ secrets.GH_TOKEN_FOR_UPDATES }}
+          commit-msg: "chore: update flake.lock"
           pr-title: "chore: update flake.lock"
+          pr-body: |
+            Automated changes by the [update-flake-lock](https://github.com/DeterminateSystems/update-flake-lock) GitHub Action.
+
+            ```
+            {{ env.GIT_COMMIT_MESSAGE }}
+            ```
+
           pr-labels: |
             dependencies
             automated
+          nix-options: --accept-flake-config
       # - name: Merge PR
       #   run: |
       #     gh pr merge --squash --delete-branch --auto "$PR_NUMBER"
