@@ -1,0 +1,27 @@
+name: Publish flake to FlakeHub
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "The existing tag to publish to FlakeHub"
+        type: "string"
+        required: true
+
+jobs:
+  publish-flakehub:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v24
+      - run: |
+          echo ${{ inputs.tag }}
+      # - uses: DeterminateSystems/flakehub-push@v3
+      #   with:
+      #     visibility: public
+      #     name: loqusion/typix
