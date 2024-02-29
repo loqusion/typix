@@ -1,8 +1,8 @@
 name: Update flake lockfile
 on:
   workflow_dispatch:
-  # schedule:
-  #   - cron: ""
+  schedule:
+    - cron: "39 8 7,22 * *"
 
 permissions:
   contents: read
