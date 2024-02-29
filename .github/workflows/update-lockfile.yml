@@ -21,3 +21,6 @@ jobs:
         with:
           token: ${{ secrets.GH_TOKEN_FOR_UPDATES }}
           pr-title: "chore: update flake.lock"
+          pr-labels: |
+            dependencies
+            automated
