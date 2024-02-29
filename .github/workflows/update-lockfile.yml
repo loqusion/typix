@@ -35,9 +35,9 @@ jobs:
             dependencies
             automated
           nix-options: --accept-flake-config
-      # - name: Merge PR
-      #   run: |
-      #     gh pr merge --squash --delete-branch --auto "$PR_NUMBER"
-      #   env:
-      #     GH_TOKEN: ${{ secrets.GH_TOKEN_FOR_UPDATES }}
-      #     PR_NUMBER: ${{ steps.update.outputs.pull-request-number }}
+      - name: Merge PR
+        run: |
+          gh pr merge --squash --delete-branch --auto "$PR_NUMBER"
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN_FOR_UPDATES }}
+          PR_NUMBER: ${{ steps.update.outputs.pull-request-number }}
