@@ -1,4 +1,4 @@
-name: test
+name: Run flake checks
 on:
   pull_request:
     types: [opened, reopened, synchronize]
