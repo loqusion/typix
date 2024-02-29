@@ -27,6 +27,11 @@
       import ./lib {
         inherit (pkgs) lib newScope;
       };
+
+    mkReleaseScript = pkgs:
+      import ./release.nix {
+        inherit pkgs;
+      };
   in {
     inherit mkLib;
 
@@ -52,6 +57,13 @@
     packages = forAllSystems (system: (
       import ./pkgs.nix {pkgs = pkgsFor.${system};}
     ));
+
+    apps = forAllSystems (system: {
+      release = {
+        type = "app";
+        program = lib.getExe (mkReleaseScript pkgsFor.${system});
+      };
+    });
 
     formatter = forAllSystems (system: pkgsFor.${system}.alejandra);
 
