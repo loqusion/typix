@@ -22,7 +22,7 @@ A clear and concise description of what you expected to happen.
 
 **Versions**
 - OS: 
-- Typix: (run `nix flake metadata --json --inputs-from . typix | nix-shell --pure -p jq --run "jq -r '.revision'"`)
+- Typix: (output of `nix flake metadata --json --inputs-from . typix | nix-shell --pure -p jq --run "jq -r '.revision'"`)
 
 **Additional context**
 Add any other context about the problem here.
