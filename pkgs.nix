@@ -14,7 +14,7 @@
         ];
     };
   in
-    pkgs.stdenv.mkDerivation {
+    pkgs.stdenvNoCC.mkDerivation {
       name = "typix-mdbook";
 
       inherit src;
