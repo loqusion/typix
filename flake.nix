@@ -1,5 +1,5 @@
 {
-  description = "";
+  description = "Deterministic Typst compilation with Nix";
 
   nixConfig = {
     extra-substituters = ["https://typst-nix.cachix.org"];
