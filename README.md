@@ -7,6 +7,11 @@
   Typix
 </h1>
 
+<p align="center">
+  <a href="https://flakehub.com/flake/loqusion/typix">
+    <img src="https://img.shields.io/endpoint?style=for-the-badge&color=95b6f9&labelColor=302D41&url=https://flakehub.com/f/loqusion/typix/badge"></a>
+</p>
+
 Typix aims to make it easier to use [Nix](https://nixos.org/) in
 [Typst](https://github.com/typst/typst) projects.
 
