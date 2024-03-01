@@ -17,10 +17,22 @@ jobs:
       id-token: write
       contents: read
     steps:
+      - name: Get git tag
+        id: git-tag
+        run: |
+          if [ -z "$TAG" ]; then
+            echo "::error::Could not determine git tag"
+            exit 1
+          fi
+          echo "tag=$TAG" >>"$GITHUB_OUTPUT"
+        env:
+          TAG: ${{ inputs.tag || github.ref_name }}
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ format('refs/tags/{0}', steps.git-tag.outputs.tag) }}
       - uses: cachix/install-nix-action@v24
       - run: |
-          echo ${{ inputs.tag }}
+          echo ${{ steps.git-tag.outputs.tag }}
       # - uses: DeterminateSystems/flakehub-push@v3
       #   with:
       #     visibility: public
