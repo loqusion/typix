@@ -31,9 +31,8 @@ jobs:
         with:
           ref: ${{ format('refs/tags/{0}', steps.git-tag.outputs.tag) }}
       - uses: cachix/install-nix-action@v24
-      - run: |
-          echo ${{ steps.git-tag.outputs.tag }}
-      # - uses: DeterminateSystems/flakehub-push@v3
-      #   with:
-      #     visibility: public
-      #     name: loqusion/typix
+      - uses: DeterminateSystems/flakehub-push@v3
+        with:
+          visibility: public
+          name: loqusion/typix
+          tag: ${{ steps.git-tag.outputs.tag }}
