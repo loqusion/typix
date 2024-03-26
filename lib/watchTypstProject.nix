@@ -44,6 +44,7 @@ in
       runtimeInputs =
         (args.runtimeInputs or [])
         ++ [
+          pkgs.coreutils
           typst
         ];
 

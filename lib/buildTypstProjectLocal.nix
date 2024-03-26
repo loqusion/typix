@@ -27,6 +27,10 @@ in
   pkgs.writeShellApplication {
     name = args.scriptName or "typst-build";
 
+    runtimeInputs = [
+      pkgs.coreutils
+    ];
+
     text = ''
       ${toShellVars {inherit typstOutput;}}
       out=''${1:-''${typstOutput:?not defined}}
