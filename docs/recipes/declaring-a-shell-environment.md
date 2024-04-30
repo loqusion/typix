@@ -28,7 +28,7 @@ Here's an example in a flake using Typix's
 }
 ```
 
-What this example does does:
+What this example does:
 
 - Fonts added to [`fontPaths`](../api/derivations/dev-shell.md#fontpaths) will
   be made available to `typst` commands via the `TYPST_FONT_PATHS` environment
