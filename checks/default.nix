@@ -32,6 +32,77 @@ in
       src = myLib.cleanTypstSource ./simple-with-virtual-paths;
     };
 
+    copyVirtualPathsHookAssertion = args:
+      pkgs.stdenv.mkDerivation {
+        name = "copyVirtualPathsHookAssertion";
+        src = myLib.cleanTypstSource ./simple;
+        nativeBuildInputs = [
+          (myLib.copyVirtualPathsHook args.virtualPaths)
+        ];
+        buildPhase = ''
+          runHook preBuild
+          touch "$out"
+          runHook postBuild
+        '';
+        postBuild = ''
+          set -euo pipefail
+
+          assertionCommand() {
+            ${args.assertionCommand}
+          }
+
+          if ! assertionCommand; then
+            ${lib.strings.toShellVars {assertionText = args.assertionCommand;}}
+            echo "assertion \`$assertionText\` failed"
+            exit 1
+          fi
+        '';
+      };
+    copyVirtualPathsFileSource = copyVirtualPathsHookAssertion {
+      virtualPaths = ["${./fixtures/icons}/link.svg"];
+      assertionCommand = ''[ -f ./link.svg ]'';
+    };
+    copyVirtualPathsDirectorySource = copyVirtualPathsHookAssertion {
+      virtualPaths = [./fixtures/icons];
+      assertionCommand = ''[ -f ./main.typ ] && [ -f ./link.svg ]'';
+    };
+    copyVirtualPathsFileSourceWithDest = copyVirtualPathsHookAssertion {
+      virtualPaths = [
+        {
+          src = ./fixtures/icons/link.svg;
+          dest = "link.svg";
+        }
+      ];
+      assertionCommand = ''[ -f ./link.svg ]'';
+    };
+    copyVirtualPathsDirectorySourceWithDest = copyVirtualPathsHookAssertion {
+      virtualPaths = [
+        {
+          src = ./fixtures/icons;
+          dest = "icons";
+        }
+      ];
+      assertionCommand = ''[ -d ./icons ] && [ -f ./icons/link.svg ]'';
+    };
+    copyVirtualPathsFileSourceWithDeepDest = copyVirtualPathsHookAssertion {
+      virtualPaths = [
+        {
+          src = ./fixtures/icons/link.svg;
+          dest = "assets/icons/link.svg";
+        }
+      ];
+      assertionCommand = ''[ -d ./assets/icons ] && [ -f ./assets/icons/link.svg ]'';
+    };
+    copyVirtualPathsDirectorySourceWithDeepDest = copyVirtualPathsHookAssertion {
+      virtualPaths = [
+        {
+          src = ./fixtures/icons;
+          dest = "assets/icons";
+        }
+      ];
+      assertionCommand = ''[ -d ./assets/icons ] && [ -f ./assets/icons/link.svg ]'';
+    };
+
     devShell = myLib.devShell {
       inherit virtualPaths;
       checks = {
