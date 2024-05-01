@@ -13,12 +13,18 @@
         virtualPathSrc = virtualPath.src;
         virtualPathDest = virtualPath.dest;
       }}
-      mkdir -p "$virtualPathDest"
+
       echo "Copying $virtualPathSrc to $virtualPathDest"
-      cp -LTR --reflink=auto --no-preserve=mode "$virtualPathSrc" "$virtualPathDest"
-      if [ "$virtualPathDest" != "." ]; then
-        rmdir --ignore-fail-on-non-empty "$virtualPathDest"
+
+      _ensure_parent_exists "$virtualPathDest"
+
+      if [ -f "$virtualPathSrc" ] && _same_path "." "$virtualPathDest"; then
+        cp -Lv --reflink=auto --no-preserve=mode "$virtualPathSrc" "$virtualPathDest"
+      else
+        cp -LTRv --reflink=auto --no-preserve=mode "$virtualPathSrc" "$virtualPathDest"
       fi
+
+      _cleanup_parent "$virtualPathDest"
     '')
     virtualPaths;
 in
