@@ -106,6 +106,8 @@ in
       src = myLib.cleanTypstSource ./simple-with-virtual-paths;
     };
 
+    virtualPathsChecks = callPackage ./virtual-paths.nix {};
+
     watch = callPackage ./watch.nix {};
     watchSimple = watch {} {
       inherit typstSource;
