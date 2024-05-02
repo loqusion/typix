@@ -149,11 +149,7 @@
 
   skip = {
     copyVirtualPathsHook = [];
-    linkVirtualPaths = [
-      "fileSource"
-      "fileSourceWithDeepDest"
-      "directorySourceWithDeepDest"
-    ];
+    linkVirtualPaths = [];
   };
   filterSkip = skipNames:
     filterAttrs
