@@ -6,8 +6,11 @@ Useful for projects which rely on remote resources, such as
 
 Each element of the list is an attribute set with the following keys:
 
-- `src`: path to source directory
-- `dest` (optional): path where files will be made available (defaults to `.`)
+- `src`: path to source file or directory
+- `dest` (optional): path where file(s) will be made available (defaults to `.`)
+  - If `src` is a directory, `dest` will be a directory containing those files.
+    - Specifying the same `dest` for multiple `src` directories will merge them.
+  - If `src` is a file, `dest` will be a copy of that file.
 
 Instead of an attrset, you may use a path which will be interpreted the same as
 if you had specified an attrset with just `src`.
