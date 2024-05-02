@@ -10,17 +10,19 @@
   inherit (lib.lists) all;
   inherit (lib.strings) toShellVars;
 
+  cleanArgs = args:
+    builtins.removeAttrs args [
+      "virtualPaths"
+      "assertionCommand"
+      "linkAssertionCommnad"
+    ];
+
   copyVirtualPathsHookAssertion = args @ {
     virtualPaths,
     assertionCommand,
     ...
-  }: let
-    cleanedArgs = builtins.removeAttrs args [
-      "virtualPaths"
-      "assertionCommand"
-    ];
-  in
-    pkgs.stdenv.mkDerivation (cleanedArgs
+  }:
+    pkgs.stdenv.mkDerivation ((cleanArgs args)
       // {
         src = cleanTypstSource ./simple;
         nativeBuildInputs = [
@@ -50,14 +52,10 @@
   linkVirtualPathsAssertion = args @ {
     virtualPaths,
     assertionCommand,
+    linkAssertionCommand ? "true",
     ...
-  }: let
-    cleanedArgs = builtins.removeAttrs args [
-      "virtualPaths"
-      "assertionCommand"
-    ];
-  in
-    pkgs.stdenv.mkDerivation (cleanedArgs
+  }:
+    pkgs.stdenv.mkDerivation ((cleanArgs args)
       // {
         src = cleanTypstSource ./simple;
         buildPhase = ''
@@ -71,8 +69,17 @@
             ${assertionCommand}
           }
 
+          linkAssertionCommand() {
+            ${linkAssertionCommand}
+          }
+
           if ! assertionCommand; then
             ${toShellVars {assertionText = assertionCommand;}}
+            echo "assertion \`$assertionText\` failed"
+            exit 1
+          fi
+          if ! linkAssertionCommand; then
+            ${toShellVars {assertionText = linkAssertionCommand;}}
             echo "assertion \`$assertionText\` failed"
             exit 1
           fi
@@ -85,11 +92,13 @@
     fileSource = {
       virtualPaths = ["${./fixtures/icons}/link.svg"];
       assertionCommand = ''[ -f ./link.svg ]'';
+      linkAssertionCommand = ''[ -L ./link.svg ]'';
     };
 
     directorySource = {
       virtualPaths = [./fixtures/icons];
       assertionCommand = ''[ -f ./main.typ ] && [ -f ./link.svg ]'';
+      linkAssertionCommand = ''[ -L ./link.svg ]'';
     };
 
     fileSourceWithDest = {
@@ -100,6 +109,7 @@
         }
       ];
       assertionCommand = ''[ -f ./link.svg ]'';
+      linkAssertionCommand = ''[ -L ./link.svg ]'';
     };
 
     directorySourceWithDest = {
@@ -110,6 +120,7 @@
         }
       ];
       assertionCommand = ''[ -d ./icons ] && [ -f ./icons/link.svg ]'';
+      linkAssertionCommand = ''[ ! -L ./icons ] && [ -L ./icons/link.svg ]'';
     };
 
     fileSourceWithDeepDest = {
@@ -120,6 +131,7 @@
         }
       ];
       assertionCommand = ''[ -d ./assets/icons ] && [ -f ./assets/icons/link.svg ]'';
+      linkAssertionCommand = ''[ ! -L ./assets ] && [ ! -L ./assets/icons ] && [ -L ./assets/icons/link.svg ]'';
     };
 
     directorySourceWithDeepDest = {
@@ -130,6 +142,7 @@
         }
       ];
       assertionCommand = ''[ -d ./assets/icons ] && [ -f ./assets/icons/link.svg ]'';
+      linkAssertionCommand = ''[ ! -L ./assets ] && [ ! -L ./assets/icons ] && [ -L ./assets/icons/link.svg ]'';
     };
 
     mergedSources = {
@@ -144,6 +157,7 @@
         }
       ];
       assertionCommand = ''[ -d ./icons ] && [ -f ./icons/link.svg ] && [ -f ./icons/another-link.svg ]'';
+      linkAssertionCommand = ''[ ! -L ./icons ] && [ -L ./icons/link.svg ] && [ -L ./icons/another-link.svg ]'';
     };
   };
 
