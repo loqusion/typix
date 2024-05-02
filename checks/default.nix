@@ -58,63 +58,108 @@ in
           fi
         '';
       };
-    copyVirtualPathsFileSource = copyVirtualPathsHookAssertion {
-      virtualPaths = ["${./fixtures/icons}/link.svg"];
-      assertionCommand = ''[ -f ./link.svg ]'';
+    linkVirtualPathsAssertion = args:
+      pkgs.stdenv.mkDerivation {
+        name = "linkVirtualPathsAssertion";
+        src = myLib.cleanTypstSource ./simple;
+        buildPhase = ''
+          ${myLib.linkVirtualPaths {inherit (args) virtualPaths;}}
+          touch "$out"
+          runHook postBuild
+        '';
+        postBuild = ''
+          set -euo pipefail
+
+          assertionCommand() {
+            ${args.assertionCommand}
+          }
+
+          if ! assertionCommand; then
+            ${lib.strings.toShellVars {assertionText = args.assertionCommand;}}
+            echo "assertion \`$assertionText\` failed"
+            exit 1
+          fi
+        '';
+      };
+    virtualPathsTestAttrs = {
+      fileSource = {
+        virtualPaths = ["${./fixtures/icons}/link.svg"];
+        assertionCommand = ''[ -f ./link.svg ]'';
+      };
+      directorySource = {
+        virtualPaths = [./fixtures/icons];
+        assertionCommand = ''[ -f ./main.typ ] && [ -f ./link.svg ]'';
+      };
+      fileSourceWithDest = {
+        virtualPaths = [
+          {
+            src = ./fixtures/icons/link.svg;
+            dest = "link.svg";
+          }
+        ];
+        assertionCommand = ''[ -f ./link.svg ]'';
+      };
+      directorySourceWithDest = {
+        virtualPaths = [
+          {
+            src = ./fixtures/icons;
+            dest = "icons";
+          }
+        ];
+        assertionCommand = ''[ -d ./icons ] && [ -f ./icons/link.svg ]'';
+      };
+      fileSourceWithDeepDest = {
+        virtualPaths = [
+          {
+            src = ./fixtures/icons/link.svg;
+            dest = "assets/icons/link.svg";
+          }
+        ];
+        assertionCommand = ''[ -d ./assets/icons ] && [ -f ./assets/icons/link.svg ]'';
+      };
+      directorySourceWithDeepDest = {
+        virtualPaths = [
+          {
+            src = ./fixtures/icons;
+            dest = "assets/icons";
+          }
+        ];
+        assertionCommand = ''[ -d ./assets/icons ] && [ -f ./assets/icons/link.svg ]'';
+      };
+      mergedSources = {
+        virtualPaths = [
+          {
+            src = ./fixtures/icons;
+            dest = "icons";
+          }
+          {
+            src = ./fixtures/more-icons;
+            dest = "icons";
+          }
+        ];
+        assertionCommand = ''[ -d ./icons ] && [ -f ./icons/link.svg ] && [ -f ./icons/another-link.svg ]'';
+      };
     };
-    copyVirtualPathsDirectorySource = copyVirtualPathsHookAssertion {
-      virtualPaths = [./fixtures/icons];
-      assertionCommand = ''[ -f ./main.typ ] && [ -f ./link.svg ]'';
-    };
-    copyVirtualPathsFileSourceWithDest = copyVirtualPathsHookAssertion {
-      virtualPaths = [
-        {
-          src = ./fixtures/icons/link.svg;
-          dest = "link.svg";
-        }
-      ];
-      assertionCommand = ''[ -f ./link.svg ]'';
-    };
-    copyVirtualPathsDirectorySourceWithDest = copyVirtualPathsHookAssertion {
-      virtualPaths = [
-        {
-          src = ./fixtures/icons;
-          dest = "icons";
-        }
-      ];
-      assertionCommand = ''[ -d ./icons ] && [ -f ./icons/link.svg ]'';
-    };
-    copyVirtualPathsFileSourceWithDeepDest = copyVirtualPathsHookAssertion {
-      virtualPaths = [
-        {
-          src = ./fixtures/icons/link.svg;
-          dest = "assets/icons/link.svg";
-        }
-      ];
-      assertionCommand = ''[ -d ./assets/icons ] && [ -f ./assets/icons/link.svg ]'';
-    };
-    copyVirtualPathsDirectorySourceWithDeepDest = copyVirtualPathsHookAssertion {
-      virtualPaths = [
-        {
-          src = ./fixtures/icons;
-          dest = "assets/icons";
-        }
-      ];
-      assertionCommand = ''[ -d ./assets/icons ] && [ -f ./assets/icons/link.svg ]'';
-    };
-    copyVirtualPathsMergedSources = copyVirtualPathsHookAssertion {
-      virtualPaths = [
-        {
-          src = ./fixtures/icons;
-          dest = "icons";
-        }
-        {
-          src = ./fixtures/more-icons;
-          dest = "icons";
-        }
-      ];
-      assertionCommand = ''[ -d ./icons ] && [ -f ./icons/link.svg ] && [ -f ./icons/another-link.svg ]'';
-    };
+    copyVirtualPathsFileSource = copyVirtualPathsHookAssertion virtualPathsTestAttrs.fileSource;
+    # linkVirtualPathsFileSource = linkVirtualPathsAssertion virtualPathsTestAttrs.fileSource;
+
+    copyVirtualPathsDirectorySource = copyVirtualPathsHookAssertion virtualPathsTestAttrs.directorySource;
+    linkVirtualPathsDirectorySource = linkVirtualPathsAssertion virtualPathsTestAttrs.directorySource;
+
+    copyVirtualPathsFileSourceWithDest = copyVirtualPathsHookAssertion virtualPathsTestAttrs.fileSourceWithDest;
+    # linkVirtualPathsFileSourceWithDest = linkVirtualPathsAssertion virtualPathsTestAttrs.fileSourceWithDest;
+
+    copyVirtualPathsDirectorySourceWithDest = copyVirtualPathsHookAssertion virtualPathsTestAttrs.directorySourceWithDest;
+    linkVirtualPathsDirectorySourceWithDest = linkVirtualPathsAssertion virtualPathsTestAttrs.directorySourceWithDest;
+
+    copyVirtualPathsFileSourceWithDeepDest = copyVirtualPathsHookAssertion virtualPathsTestAttrs.fileSourceWithDeepDest;
+    # linkVirtualPathsFileSourceWithDeepDest = linkVirtualPathsAssertion virtualPathsTestAttrs.fileSourceWithDeepDest;
+
+    copyVirtualPathsDirectorySourceWithDeepDest = copyVirtualPathsHookAssertion virtualPathsTestAttrs.directorySourceWithDeepDest;
+    # linkVirtualPathsDirectorySourceWithDeepDest = linkVirtualPathsAssertion virtualPathsTestAttrs.directorySourceWithDeepDest;
+
+    copyVirtualPathsMergedSources = copyVirtualPathsHookAssertion virtualPathsTestAttrs.mergedSources;
+    linkVirtualPathsMergedSources = linkVirtualPathsAssertion virtualPathsTestAttrs.mergedSources;
 
     devShell = myLib.devShell {
       inherit virtualPaths;
