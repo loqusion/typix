@@ -102,6 +102,19 @@ in
       ];
       assertionCommand = ''[ -d ./assets/icons ] && [ -f ./assets/icons/link.svg ]'';
     };
+    copyVirtualPathsMergedSources = copyVirtualPathsHookAssertion {
+      virtualPaths = [
+        {
+          src = ./fixtures/icons;
+          dest = "icons";
+        }
+        {
+          src = ./fixtures/more-icons;
+          dest = "icons";
+        }
+      ];
+      assertionCommand = ''[ -d ./icons ] && [ -f ./icons/link.svg ] && [ -f ./icons/another-link.svg ]'';
+    };
 
     devShell = myLib.devShell {
       inherit virtualPaths;
