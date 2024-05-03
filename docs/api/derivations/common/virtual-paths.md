@@ -8,7 +8,7 @@ Each element of the list is an attribute set with the following keys:
 
 - `src`: path to source file or directory
 - `dest` (optional): path where file(s) will be made available (defaults to `.`)
-  - If `src` is a directory, `dest` will be a directory containing those files.
+  - If `src` is a directory, `dest` will be a directory containing the files in that directory..
     - Specifying the same `dest` for multiple `src` directories will merge them.
   - If `src` is a file, `dest` will be a copy of that file.
 
