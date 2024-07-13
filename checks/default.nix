@@ -32,6 +32,18 @@ in
       src = myLib.cleanTypstSource ./simple-with-virtual-paths;
     };
 
+    clean = myLib.mkTypstDerivation {
+      src = myLib.cleanTypstSource ./clean;
+      EXPECTED_SRC = ./clean-expected;
+      nativeBuildInputs = with pkgs; [
+        tree
+      ];
+      buildPhaseTypstCommand = ''
+        diff -r "$src" "$EXPECTED_SRC"
+        touch $out
+      '';
+    };
+
     devShell = myLib.devShell {
       inherit virtualPaths;
       checks = {

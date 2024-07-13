@@ -1,0 +1,4 @@
+[package]
+name = "clean"
+version = "0.1.0"
+entrypoint = "lib.typ"
