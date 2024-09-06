@@ -9,7 +9,7 @@ A generic derivation constructor for running Typst commands.
 ### `buildPhaseTypstCommand`
 
 Command (or commands) to run during [`buildPhase`][nixpkgs-buildphase]. Any
-output should typically be written to `$out`, e.g. `typsts compile <source>
+output should typically be written to `$out`, e.g. `typst compile <source>
 "$out"`.
 
 See also: [Typst CLI Usage][typst-cli-usage]
