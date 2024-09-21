@@ -39,7 +39,8 @@ however there is a
 
 ## Getting Started
 
-After [installing Nix](https://nixos.org/download#download-nix) and [enabling
+After [installing Nix](https://github.com/DeterminateSystems/nix-installer) and
+[enabling
 flakes](https://nixos.wiki/wiki/Flakes#Enable_flakes_permanently_in_NixOS), you
 can initialize a flake from the default template:
 

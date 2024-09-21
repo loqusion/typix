@@ -1,15 +1,18 @@
 # Getting Started
 
-First, [install Nix](https://nixos.org/download#download-nix):
+First, [install Nix][install-nix]:
+
+[install-nix]: https://github.com/DeterminateSystems/nix-installer
+
+<!-- markdownlint-disable MD013 -->
 
 ```bash
-bash <(curl -L https://nixos.org/nix/install)
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 ```
 
-Then enable flakes and the `nix` command ([see here][enable-flakes] for other
-ways):
+<!-- markdownlint-enable MD013 -->
 
-[enable-flakes]: https://nixos.wiki/wiki/Flakes#Enable_flakes_permanently_in_NixOS
+Make sure `nix-command` and `flakes` are enabled:
 
 `~/.config/nix/nix.conf`
 
