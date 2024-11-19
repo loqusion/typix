@@ -7,6 +7,10 @@
 [github-new-issue]: https://github.com/loqusion/typix/issues/new?assignees=&labels=typst+packages&projects=&template=3-typst_packages.md&title=%5BTypst+packages%5D%3A+
 [github-open-issues]: https://github.com/loqusion/typix/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3A%22typst+packages%22
 
+> You can find a full working example using Typst packages [here][github-example].
+
+[github-example]: https://github.com/loqusion/typix/blob/main/examples/typst-packages/flake.nix
+
 [Typst packages][typst-packages] are still experimental, so Typix doesn't
 provide direct support for them yet. However, there are ways you can get them to
 work.
