@@ -9,7 +9,10 @@
 
 <p align="center">
   <a href="https://flakehub.com/flake/loqusion/typix">
-    <img src="https://img.shields.io/endpoint?style=for-the-badge&color=95b6f9&labelColor=302D41&url=https://flakehub.com/f/loqusion/typix/badge"></a>
+    <img
+      src="https://img.shields.io/endpoint?style=for-the-badge&color=95b6f9&labelColor=302D41&url=https://flakehub.com/f/loqusion/typix/badge"
+      alt="FlakeHub version"
+    ></a>
 </p>
 
 Typix aims to make it easier to use [Nix](https://nixos.org/) in
@@ -18,6 +21,7 @@ Typix aims to make it easier to use [Nix](https://nixos.org/) in
 - **Dependency management**: supports arbitrary dependencies including fonts,
   images, and data
 - **Reproducible**: via a hermetically sealed build environment
+- **Extensible**: works with [Typst packages](https://typst.app/docs/packages/)
 
 ## Features
 
@@ -28,12 +32,10 @@ Typix aims to make it easier to use [Nix](https://nixos.org/) in
   environment variables and symlinks
 - Extensible via
   [`mkTypstDerivation`](https://loqusion.github.io/typix/api/derivations/mk-typst-derivation.html)
-- Support for dependencies such as:
-  - [fonts](https://typst.app/docs/reference/text/text/#parameters-font)
-  - [images](https://typst.app/docs/reference/visualize/image/)
-  - [data](https://typst.app/docs/reference/data-loading/)
+- Support for dependencies such as [fonts](https://typst.app/docs/reference/text/text/#parameters-font),
+  [images](https://typst.app/docs/reference/visualize/image/), and [data](https://typst.app/docs/reference/data-loading/)
 
-[Typst packages](https://typst.app/docs/packages/) are currently unsupported,
+[Typst packages](https://typst.app/docs/packages/) are not _officially_ supported,
 however there is a
 [workaround](https://loqusion.github.io/typix/recipes/using-typst-packages.html).
 
