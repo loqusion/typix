@@ -21,7 +21,7 @@ Typix aims to make it easier to use [Nix](https://nixos.org/) in
 - **Dependency management**: supports arbitrary dependencies including fonts,
   images, and data
 - **Reproducible**: via a hermetically sealed build environment
-- **Extensible**: works with [Typst packages](https://typst.app/docs/packages/)
+- **Extensible**: fully compatible with [Typst packages](https://typst.app/docs/packages/)
 
 ## Features
 
