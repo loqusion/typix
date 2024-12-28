@@ -1,7 +1,7 @@
 {
   lib,
   linkVirtualPaths,
-  mkShell,
+  mkShellNoCC,
   typst,
 }: args @ {
   checks ? {},
@@ -26,7 +26,7 @@
     "virtualPaths"
   ];
 in
-  mkShell (cleanedArgs
+  mkShellNoCC (cleanedArgs
     // optionalAttrs (fontPaths != []) {
       TYPST_FONT_PATHS = concatStringsSep ":" fontPaths;
     }

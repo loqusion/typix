@@ -1,7 +1,7 @@
 {
   copyVirtualPathsHook,
   lib,
-  stdenv,
+  stdenvNoCC,
   typst,
 }: args @ {
   buildPhaseTypstCommand,
@@ -37,7 +37,7 @@
     }
     else {inherit name;};
 in
-  stdenv.mkDerivation (cleanedArgs
+  stdenvNoCC.mkDerivation (cleanedArgs
     // nameArgs
     // optionalAttrs (fontPaths != []) {
       TYPST_FONT_PATHS = concatStringsSep ":" fontPaths;
