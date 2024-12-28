@@ -62,7 +62,7 @@ let
   # You can use this if you only need to use official packages
   # typstPackagesSrc = "${inputs.typst-packages}/packages";
 
-  typstPackagesCache = pkgs.stdenv.mkDerivation {
+  typstPackagesCache = pkgs.stdenvNoCC.mkDerivation {
     name = "typst-packages-cache";
     src = typstPackagesSrc;
     dontBuild = true;
