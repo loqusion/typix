@@ -4,7 +4,7 @@ A generic derivation constructor for running Typst commands.
 
 ## Parameters
 
-**Note:** All parameters for `stdenvNoCC.mkDerivation`[^stdenvNoCC] are also available.
+**Note:** All parameters for `stdenv.mkDerivation`[^stdenv] are also available.
 
 ### `buildPhaseTypstCommand`
 
@@ -46,7 +46,7 @@ See also: [Typst CLI Usage][typst-cli-usage]
 
 ## Footnotes
 
-[^stdenvNoCC]: [`stdenvNoCC`][nixpkgs-stdenv] (not for the faint of heart)
+[^stdenv]: [`stdenv`][nixpkgs-stdenv] (not for the faint of heart)
 
 [nixpkgs-buildphase]: https://nixos.org/manual/nixpkgs/stable/#build-phase
 [nixpkgs-stdenv]: https://nixos.org/manual/nixpkgs/stable/#chap-stdenv
