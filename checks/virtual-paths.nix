@@ -22,7 +22,7 @@
     assertionCommand,
     ...
   }:
-    pkgs.stdenv.mkDerivation ((cleanArgs args)
+    pkgs.stdenvNoCC.mkDerivation ((cleanArgs args)
       // {
         src = cleanTypstSource ./simple;
         nativeBuildInputs = [
@@ -55,7 +55,7 @@
     linkAssertionCommand ? "true",
     ...
   }:
-    pkgs.stdenv.mkDerivation ((cleanArgs args)
+    pkgs.stdenvNoCC.mkDerivation ((cleanArgs args)
       // {
         src = cleanTypstSource ./simple;
         buildPhase = ''
