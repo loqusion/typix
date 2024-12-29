@@ -59,7 +59,7 @@
           # More Typst packages can be added here
         ];
       };
-      typstPackagesCache = pkgs.stdenv.mkDerivation {
+      typstPackagesCache = pkgs.stdenvNoCC.mkDerivation {
         name = "typst-packages-cache";
         src = typstPackagesSrc;
         dontBuild = true;
