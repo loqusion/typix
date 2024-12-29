@@ -70,7 +70,7 @@
     devShells = forAllSystems (system: let
       pkgs = pkgsFor.${system};
     in {
-      default = pkgs.mkShell {
+      default = pkgs.mkShellNoCC {
         nativeBuildInputs = with pkgs; [
           alejandra
           markdownlint-cli
