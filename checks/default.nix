@@ -41,6 +41,11 @@ in
       '';
     };
 
+    date = myLib.buildTypstProject {
+      inherit typstSource;
+      src = myLib.cleanTypstSource ./date;
+    };
+
     devShell = myLib.devShell {
       inherit virtualPaths;
       checks = {
