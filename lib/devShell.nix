@@ -17,7 +17,7 @@
   inherit (lib) optionalAttrs optionalString;
   inherit (lib.strings) concatStringsSep;
 
-  unsetSourceDateEpochScript = builtins.readFile ./setupHooks/unsetSourceDateEpoch.sh;
+  unsetSourceDateEpochScript = builtins.readFile ./setupHooks/unsetSourceDateEpochScript.sh;
 
   cleanedArgs = removeAttrs args [
     "checks"

@@ -24,7 +24,7 @@
       {inherit typstSource;} // args
     ));
 
-  unsetSourceDateEpochScript = builtins.readFile ./setupHooks/unsetSourceDateEpoch.sh;
+  unsetSourceDateEpochScript = builtins.readFile ./setupHooks/unsetSourceDateEpochScript.sh;
 
   cleanedArgs = removeAttrs args [
     "fontPaths"

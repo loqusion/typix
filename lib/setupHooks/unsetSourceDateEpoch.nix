@@ -1,10 +1,10 @@
 {makeSetupHook}: let
-  unsetSourceDateEpoch = builtins.readFile ./unsetSourceDateEpoch.sh;
+  unsetSourceDateEpochScript = builtins.readFile ./unsetSourceDateEpochScript.sh;
 in
   makeSetupHook {
     name = "unsetSourceDateEpoch";
     substitutions = {
-      inherit unsetSourceDateEpoch;
+      inherit unsetSourceDateEpochScript;
     };
   }
   ./unsetSourceDateEpochHook.sh

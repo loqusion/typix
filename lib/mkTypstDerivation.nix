@@ -3,7 +3,7 @@
   lib,
   stdenvNoCC,
   typst,
-  unsetSourceDateEpoch,
+  unsetSourceDateEpochHook,
 }: args @ {
   buildPhaseTypstCommand,
   fontPaths ? [],
@@ -49,7 +49,7 @@ in
         ++ [
           typst
           (copyVirtualPathsHook virtualPaths)
-          unsetSourceDateEpoch
+          unsetSourceDateEpochHook
         ];
 
       buildPhase =
