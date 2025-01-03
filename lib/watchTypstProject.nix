@@ -5,6 +5,7 @@
   pkgs,
   typst,
   typstOptsFromArgs,
+  unsetSourceDateEpoch,
 }: args @ {
   fontPaths ? [],
   forceVirtualPaths ? false,
@@ -23,6 +24,8 @@
     or (inferTypstProjectOutput (
       {inherit typstSource;} // args
     ));
+
+  unsetSourceDateEpochHook = builtins.readFile "${unsetSourceDateEpoch}/nix-support/setup-hook";
 
   cleanedArgs = removeAttrs args [
     "fontPaths"
@@ -55,11 +58,15 @@ in
         + optionalString (virtualPaths != []) (linkVirtualPaths {
           inherit virtualPaths forceVirtualPaths;
         })
+        + unsetSourceDateEpochHook
         + ''
 
           ${toShellVars {inherit typstOutput typstSource;}}
           out=''${1:-''${typstOutput:?not defined}}
           mkdir -p "$(dirname "$out")"
+
+          unsetSourceDateEpoch
+
           ${typstWatchCommand} ${typstOptsString} "$typstSource" "$out"
         '';
     })
