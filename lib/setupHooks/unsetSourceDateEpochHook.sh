@@ -1,5 +1,5 @@
 unsetSourceDateEpoch() {
-    unset SOURCE_DATE_EPOCH
+    @unsetSourceDateEpoch@
 }
 
 preBuildHooks+=(unsetSourceDateEpoch)

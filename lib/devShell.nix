@@ -3,7 +3,6 @@
   linkVirtualPaths,
   mkShellNoCC,
   typst,
-  unsetSourceDateEpoch,
 }: args @ {
   checks ? {},
   extraShellHook ? "",
@@ -18,7 +17,7 @@
   inherit (lib) optionalAttrs optionalString;
   inherit (lib.strings) concatStringsSep;
 
-  unsetSourceDateEpochHook = builtins.readFile "${unsetSourceDateEpoch}/nix-support/setup-hook";
+  unsetSourceDateEpochScript = builtins.readFile ./setupHooks/unsetSourceDateEpoch.sh;
 
   cleanedArgs = removeAttrs args [
     "checks"
@@ -48,7 +47,7 @@ in
           inherit virtualPaths forceVirtualPaths;
         }))
         + ''
-          unset SOURCE_DATE_EPOCH
+          ${unsetSourceDateEpochScript}
         ''
         + optionalString (extraShellHook != "") ''
 
