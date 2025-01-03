@@ -15,5 +15,6 @@ in {
   linkVirtualPaths = callPackage ./linkVirtualPaths.nix {};
   mkTypstDerivation = callPackage ./mkTypstDerivation.nix {};
   typstOptsFromArgs = callPackage ./typstOptsFromArgs.nix {};
+  unsetSourceDateEpoch = callPackage ./setupHooks/unsetSourceDateEpoch.nix {};
   watchTypstProject = callPackage ./watchTypstProject.nix {};
 })

@@ -24,6 +24,8 @@
       {inherit typstSource;} // args
     ));
 
+  unsetSourceDateEpochScript = builtins.readFile ./setupHooks/unsetSourceDateEpoch.sh;
+
   cleanedArgs = removeAttrs args [
     "fontPaths"
     "forceVirtualPaths"
@@ -60,6 +62,9 @@ in
           ${toShellVars {inherit typstOutput typstSource;}}
           out=''${1:-''${typstOutput:?not defined}}
           mkdir -p "$(dirname "$out")"
+
+          ${unsetSourceDateEpochScript}
+
           ${typstWatchCommand} ${typstOptsString} "$typstSource" "$out"
         '';
     })

@@ -17,6 +17,8 @@
   inherit (lib) optionalAttrs optionalString;
   inherit (lib.strings) concatStringsSep;
 
+  unsetSourceDateEpochScript = builtins.readFile ./setupHooks/unsetSourceDateEpoch.sh;
+
   cleanedArgs = removeAttrs args [
     "checks"
     "extraShellHook"
@@ -44,6 +46,9 @@ in
         or (optionalString (virtualPaths != []) (linkVirtualPaths {
           inherit virtualPaths forceVirtualPaths;
         }))
+        + ''
+          ${unsetSourceDateEpochScript}
+        ''
         + optionalString (extraShellHook != "") ''
 
           ${extraShellHook}
