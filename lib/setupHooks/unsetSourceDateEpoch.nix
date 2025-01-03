@@ -2,4 +2,4 @@
 makeSetupHook {
   name = "unsetSourceDateEpoch";
 }
-./unsetSourceDateEpoch.sh
+./unsetSourceDateEpochHook.sh
