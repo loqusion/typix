@@ -45,6 +45,10 @@ in
       inherit typstSource;
       src = myLib.cleanTypstSource ./date;
     };
+    dateWatch = watch {} {
+      inherit typstSource;
+      src = myLib.cleanTypstSource ./date;
+    };
 
     devShell = myLib.devShell {
       inherit virtualPaths;
