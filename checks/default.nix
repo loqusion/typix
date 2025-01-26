@@ -3,6 +3,7 @@
   myLib,
 }: let
   inherit (pkgs) lib;
+  inherit (lib.strings) escapeShellArg concatMapStringsSep;
   onlyDrvs = lib.filterAttrs (_: lib.isDerivation);
 in
   onlyDrvs (lib.makeScope myLib.newScope (self: let
@@ -58,6 +59,112 @@ in
           src = myLib.cleanTypstSource ./simple;
         };
       };
+    };
+
+    checkEmojiScript = {
+      inputs =
+        (with pkgs; [
+          python312
+          python312Packages.emoji
+        ])
+        ++ (
+          with pkgs.python312Packages; [
+            # Referencing `emoji` doesn't work here because an attribute of that
+            # name already exists in a recursive attribute set (`rec {...}`)
+            pdfplumber
+          ]
+        );
+      script = patterns: ''
+        python3.12 ${./check-emojis.py} "$out" ${concatMapStringsSep " " escapeShellArg patterns}
+      '';
+    };
+
+    emoji = {
+      emojiFont,
+      fontPaths ? [],
+      patterns,
+    }: (myLib.buildTypstProject ({
+        inherit typstSource fontPaths;
+        src = myLib.cleanTypstSource ./emoji;
+        doCheck = true;
+        nativeCheckInputs = checkEmojiScript.inputs;
+        checkPhase = checkEmojiScript.script patterns;
+      }
+      // lib.optionalAttrs (emojiFont != "__OMIT__") {
+        inherit emojiFont;
+      }));
+    emojiOmit = emoji {
+      emojiFont = "__OMIT__";
+      patterns = ["emoji"];
+    };
+    emojiTwemoji = emoji {
+      emojiFont = "twemoji";
+      patterns = ["emoji"];
+    };
+    emojiTwemojiCbdt = emoji {
+      emojiFont = "twemoji-cbdt";
+      patterns = ["emoji"];
+    };
+    emojiNoto = emoji {
+      emojiFont = "noto";
+      patterns = ["emoji"];
+    };
+    emojiNotoMonochrome = emoji {
+      emojiFont = "noto-monochrome";
+      patterns = ["emoji"];
+    };
+    emojiEmojiOne = emoji {
+      emojiFont = "emojione";
+      patterns = ["emoji"];
+    };
+    emojiFontOverride = emoji {
+      emojiFont = null;
+      fontPaths = ["${pkgs.noto-fonts-color-emoji}/share/fonts/noto"];
+      patterns = ["emoji"];
+    };
+
+    emojiWatch = {
+      emojiFont,
+      fontPaths ? [],
+      patterns,
+    }: (watch {
+        nativeBuildInputs = checkEmojiScript.inputs;
+        postBuild = checkEmojiScript.script patterns;
+      } ({
+          inherit typstSource fontPaths;
+          src = myLib.cleanTypstSource ./emoji;
+        }
+        // lib.optionalAttrs (emojiFont != "__OMIT__") {
+          inherit emojiFont;
+        }));
+    emojiWatchOmit = emojiWatch {
+      emojiFont = "__OMIT__";
+      patterns = ["emoji"];
+    };
+    emojiWatchTwemoji = emojiWatch {
+      emojiFont = "twemoji";
+      patterns = ["emoji"];
+    };
+    emojiWatchTwemojiCbdt = emojiWatch {
+      emojiFont = "twemoji-cbdt";
+      patterns = ["emoji"];
+    };
+    emojiWatchNoto = emojiWatch {
+      emojiFont = "noto";
+      patterns = ["emoji"];
+    };
+    emojiWatchNotoMonochrome = emojiWatch {
+      emojiFont = "noto-monochrome";
+      patterns = ["emoji"];
+    };
+    emojiWatchEmojiOne = emojiWatch {
+      emojiFont = "emojione";
+      patterns = ["emoji"];
+    };
+    emojiWatchFontOverride = emojiWatch {
+      emojiFont = null;
+      fontPaths = ["${pkgs.noto-fonts-color-emoji}/share/fonts/noto"];
+      patterns = ["emoji"];
     };
 
     overlappingVirtualPaths = isInvariant: util: file:
