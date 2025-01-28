@@ -1,4 +1,5 @@
 {
+  emojiFontPathFromString,
   inferTypstProjectOutput,
   lib,
   linkVirtualPaths,
@@ -6,6 +7,7 @@
   typst,
   typstOptsFromArgs,
 }: args @ {
+  emojiFont ? "default",
   fontPaths ? [],
   forceVirtualPaths ? false,
   typstSource ? "main.typ",
@@ -13,10 +15,12 @@
   virtualPaths ? [],
   ...
 }: let
-  inherit (builtins) removeAttrs;
-  inherit (lib) optionalString;
+  inherit (builtins) isNull removeAttrs;
+  inherit (lib) lists optionalString;
   inherit (lib.strings) concatStringsSep toShellVars;
 
+  emojiFontPath = emojiFontPathFromString emojiFont;
+  allFontPaths = fontPaths ++ lists.optional (!isNull emojiFontPath) emojiFontPath;
   typstOptsString = args.typstOptsString or (typstOptsFromArgs args);
   typstOutput =
     args.typstOutput
@@ -27,6 +31,7 @@
   unsetSourceDateEpochScript = builtins.readFile ./setupHooks/unsetSourceDateEpochScript.sh;
 
   cleanedArgs = removeAttrs args [
+    "emojiFont"
     "fontPaths"
     "forceVirtualPaths"
     "scriptName"
@@ -51,8 +56,8 @@ in
         ];
 
       text =
-        optionalString (fontPaths != []) ''
-          export TYPST_FONT_PATHS=${concatStringsSep ":" fontPaths}
+        optionalString (allFontPaths != []) ''
+          export TYPST_FONT_PATHS=${concatStringsSep ":" allFontPaths}
         ''
         + optionalString (virtualPaths != []) (linkVirtualPaths {
           inherit virtualPaths forceVirtualPaths;

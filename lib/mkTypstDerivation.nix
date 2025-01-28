@@ -1,22 +1,28 @@
 {
   copyVirtualPathsHook,
+  emojiFontPathFromString,
   lib,
   stdenvNoCC,
   typst,
   unsetSourceDateEpochHook,
 }: args @ {
   buildPhaseTypstCommand,
+  emojiFont ? "default",
   fontPaths ? [],
   installPhaseCommand ? "",
   virtualPaths ? [],
   ...
 }: let
-  inherit (builtins) baseNameOf getEnv removeAttrs;
-  inherit (lib) optionalAttrs;
+  inherit (builtins) baseNameOf getEnv isNull removeAttrs;
+  inherit (lib) lists optionalAttrs;
   inherit (lib.strings) concatStringsSep;
+
+  emojiFontPath = emojiFontPathFromString emojiFont;
+  allFontPaths = fontPaths ++ lists.optional (!isNull emojiFontPath) emojiFontPath;
 
   cleanedArgs = removeAttrs args [
     "buildPhaseTypstCommand"
+    "emojiFont"
     "fontPaths"
     "installPhaseCommand"
     "virtualPaths"
@@ -40,8 +46,8 @@
 in
   stdenvNoCC.mkDerivation (cleanedArgs
     // nameArgs
-    // optionalAttrs (fontPaths != []) {
-      TYPST_FONT_PATHS = concatStringsSep ":" fontPaths;
+    // optionalAttrs (allFontPaths != []) {
+      TYPST_FONT_PATHS = concatStringsSep ":" allFontPaths;
     }
     // {
       nativeBuildInputs =
