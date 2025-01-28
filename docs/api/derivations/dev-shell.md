@@ -8,6 +8,10 @@ or [`direnv`][direnv].
 **Note:** All parameters for [`mkShell`][nixpkgs-mkshell] are also
 supported.
 
+### `emojiFont` (optional) { #emojifont }
+
+{{#include common/emoji-font.md}}
+
 ### extraShellHook (optional) { #extrashellhook }
 
 Bash statements added to the [`shellHook`][nixpkgs-mkshell-attributes]

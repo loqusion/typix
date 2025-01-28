@@ -36,6 +36,10 @@ All parameters accepted by
 
 {{#include common/src.md}}
 
+### `emojiFont` (optional) { #emojifont }
+
+{{#include common/emoji-font.md}}
+
 ### `fontPaths` (optional) { #fontpaths }
 
 {{#include common/font-paths.md}}

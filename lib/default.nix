@@ -11,6 +11,7 @@ in {
   coerceVirtualPathAttr = callPackage ./coerceVirtualPathAttr.nix {};
   copyVirtualPathsHook = callPackage ./setupHooks/copyVirtualPaths.nix {};
   devShell = callPackage ./devShell.nix {};
+  emojiFontPathFromString = callPackage ./emojiFontPathFromString.nix {};
   inferTypstProjectOutput = callPackage ./inferTypstProjectOutput.nix {};
   linkVirtualPaths = callPackage ./linkVirtualPaths.nix {};
   mkTypstDerivation = callPackage ./mkTypstDerivation.nix {};
