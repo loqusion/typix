@@ -13,9 +13,9 @@ May be any of the following:
 <details>
 <summary>Note about difference between <code>"twemoji"</code> and <code>"twemoji-cbdt"</code></summary>
 
-The default Twemoji font uses the SVG [font format], which may not be supported
-by some systems. If emojis aren't displaying properly, using `"twemoji-cbdt"`
-may fix it.
+The default Twemoji font displays color emojis using the SVG [font format],
+which may not be supported by some systems. If emojis aren't displaying
+properly, using `"twemoji-cbdt"` may fix it.
 
 [font format]: https://www.colorfonts.wtf/
 
