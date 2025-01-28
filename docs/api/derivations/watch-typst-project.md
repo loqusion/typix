@@ -9,6 +9,10 @@ changes.
 [`writeShellApplication`][nixpkgs-writeshellapplication] are also supported
 (besides `text`).
 
+### `emojiFont` (optional) { #emojifont }
+
+{{#include common/emoji-font.md}}
+
 ### `fontPaths` (optional) { #fontpaths }
 
 {{#include common/font-paths.md}}
