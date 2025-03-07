@@ -1,3 +1,3 @@
-#set text (font: "Roboto")
+#set text(font: "Roboto")
 
 #lorem(100)
