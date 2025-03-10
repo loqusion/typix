@@ -86,7 +86,10 @@
         });
 
       # Watch a project and recompile on changes
-      watch-script = typixLib.watchTypstProject commonArgs;
+      watch-script = typixLib.watchTypstProject (commonArgs
+        // {
+          typstWatchCommand = "XDG_CACHE_HOME=${lib.strings.escapeShellArg typstPackagesCache} typst watch";
+        });
     in {
       checks = {
         inherit build-drv build-script watch-script;
