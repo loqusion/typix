@@ -8,6 +8,11 @@
 [github-open-issues]: https://github.com/loqusion/typix/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3A%22typst+packages%22
 
 > You can find a full working example using Typst packages [here][github-example].
+> To use this example as a template, execute the following:
+>
+> ```bash
+> nix flake init -t 'github:loqusion/typix#with-typst-packages'
+> ```
 
 [github-example]: https://github.com/loqusion/typix/blob/main/examples/typst-packages/flake.nix
 
