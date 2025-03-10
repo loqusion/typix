@@ -22,12 +22,12 @@ work.
 
 [typst-packages]: https://github.com/typst/packages
 
-Typst packages _should_ work out of the box for:
+Official Typst packages _should_ work out of the box for:
 
 - [`watchTypstProject`](../api/derivations/watch-typst-project.md)
 - [`devShell`](../api/derivations/dev-shell.md)
 
-For the other derivation constructors, see below.
+For the other derivation constructors, or for unofficial packages, see below.
 
 ## Providing the package cache
 
@@ -54,6 +54,8 @@ With flake inputs defined like:
 ```
 
 ...we can provide them where Typst expects them:
+
+<!-- markdownlint-disable MD013 -->
 
 ```nix
 let
@@ -86,8 +88,16 @@ in {
     XDG_CACHE_HOME = typstPackagesCache;
     # ...
   };
+
+  watch-script = typixLib.watchTypstProject {
+    # This is necessary for unofficial packages
+    typstWatchCommand = "XDG_CACHE_HOME=${typstPackagesCache} typst watch";
+    # ...
+  };
 }
 ```
+
+<!-- markdownlint-enable MD013 -->
 
 Then, we can use them in a Typst file like so:
 
