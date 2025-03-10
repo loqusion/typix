@@ -11,7 +11,7 @@
 > To use this example as a template, execute the following:
 >
 > ```bash
-> nix flake init -t 'github:loqusion/typix#with-typst-packages'
+> nix flake init --refresh -t 'github:loqusion/typix#with-typst-packages'
 > ```
 
 [github-example]: https://github.com/loqusion/typix/blob/main/examples/typst-packages/flake.nix
