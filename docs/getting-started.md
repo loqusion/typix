@@ -23,7 +23,7 @@ experimental-features = nix-command flakes
 Finally, you can initialize a flake from the default template:
 
 ```bash
-nix flake init -t github:loqusion/typix
+nix flake init --refresh -t github:loqusion/typix
 ```
 
 ---
