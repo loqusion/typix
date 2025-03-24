@@ -221,11 +221,17 @@ in
       inherit fontPaths typstSource;
       src = myLib.cleanTypstSource ./simple-with-fonts;
     };
-    # TODO: add support for typst packages
-    # simpleWithTypstPackages = myLib.buildTypstProject {
-    #   inherit typstSource;
-    #   src = myLib.cleanTypstSource ./simple-with-typst-packages;
-    # };
+    simpleWithTypstPackages = myLib.buildTypstProject {
+      inherit typstSource;
+      src = myLib.cleanTypstSource ./simple-with-typst-packages;
+      typstPackages = [
+        {
+          name = "example";
+          version = "0.1.0";
+          sha256 = "sha256-R18Xv3AoZsTtMycRasczTsje5yIfiURIxtDICQ4mvho=";
+        }
+      ];
+    };
     simpleWithVirtualPaths = myLib.buildTypstProject {
       inherit virtualPaths typstSource;
       src = myLib.cleanTypstSource ./simple-with-virtual-paths;
