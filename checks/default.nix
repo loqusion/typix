@@ -18,6 +18,29 @@ in
         dest = "icons";
       }
     ];
+    typstPackages = [
+      {
+        name = "example";
+        version = "0.1.0";
+        sha256 = "sha256-R18Xv3AoZsTtMycRasczTsje5yIfiURIxtDICQ4mvho=";
+      }
+      {
+        name = "cetz";
+        version = "0.3.4";
+        sha256 = "sha256-5w3UYRUSdi4hCvAjrp9HslzrUw7BhgDdeCiDRHGvqd4=";
+      }
+      {
+        name = "polylux";
+        version = "0.4.0";
+        sha256 = "sha256-4owP2KiyaaASS1YZ0Hs58k6UEVAqsRR3YdGF26ikosk=";
+      }
+      # Required by cetz
+      {
+        name = "oxifmt";
+        version = "0.2.1";
+        sha256 = "sha256-8PNPa9TGFybMZ1uuJwb5ET0WGIInmIgg8h24BmdfxlU=";
+      }
+    ];
   in rec {
     buildLocal = callPackage ./build-local.nix {};
     buildLocalSimple = buildLocal {} {
@@ -31,6 +54,11 @@ in
     buildLocalSimpleWithVirtualPaths = buildLocal {} {
       inherit virtualPaths typstSource;
       src = myLib.cleanTypstSource ./simple-with-virtual-paths;
+    };
+    buildLocalWithTypstPackages = buildLocal {} {
+      inherit typstSource;
+      src = myLib.cleanTypstSource ./typst-packages;
+      inherit typstPackages;
     };
 
     clean = myLib.mkTypstDerivation {
@@ -221,20 +249,15 @@ in
       inherit fontPaths typstSource;
       src = myLib.cleanTypstSource ./simple-with-fonts;
     };
-    simpleWithTypstPackages = myLib.buildTypstProject {
-      inherit typstSource;
-      src = myLib.cleanTypstSource ./simple-with-typst-packages;
-      typstPackages = [
-        {
-          name = "example";
-          version = "0.1.0";
-          sha256 = "sha256-R18Xv3AoZsTtMycRasczTsje5yIfiURIxtDICQ4mvho=";
-        }
-      ];
-    };
     simpleWithVirtualPaths = myLib.buildTypstProject {
       inherit virtualPaths typstSource;
       src = myLib.cleanTypstSource ./simple-with-virtual-paths;
+    };
+
+    withTypstPackages = myLib.buildTypstProject {
+      inherit typstSource;
+      src = myLib.cleanTypstSource ./typst-packages;
+      inherit typstPackages;
     };
 
     virtualPathsChecks = callPackage ./virtual-paths.nix {};
