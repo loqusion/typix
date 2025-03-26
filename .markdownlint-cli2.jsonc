@@ -1,0 +1,4 @@
+{
+  "ignores": ["CHANGELOG.md"],
+  "no-inline-html": false,
+}
