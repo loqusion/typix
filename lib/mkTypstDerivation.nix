@@ -12,7 +12,7 @@
   fontPaths ? [],
   installPhaseCommand ? "",
   virtualPaths ? [],
-  typstPackages ? [],
+  unstableTypstPackages ? [],
   ...
 }: let
   inherit (builtins) baseNameOf getEnv isNull removeAttrs;
@@ -28,7 +28,7 @@
     "fontPaths"
     "installPhaseCommand"
     "virtualPaths"
-    "typstPackages"
+    "unstableTypstPackages"
   ];
 
   name =
@@ -52,8 +52,8 @@ in
     // optionalAttrs (allFontPaths != []) {
       TYPST_FONT_PATHS = concatStringsSep ":" allFontPaths;
     }
-    // optionalAttrs (typstPackages != []) {
-      TYPST_PACKAGE_CACHE_PATH = fetchTypstPackages typstPackages;
+    // optionalAttrs (unstableTypstPackages != []) {
+      TYPST_PACKAGE_CACHE_PATH = fetchTypstPackages unstableTypstPackages;
     }
     // {
       nativeBuildInputs =
