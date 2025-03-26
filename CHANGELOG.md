@@ -32,7 +32,7 @@
 
 [#29]: https://github.com/loqusion/typix/pull/29
 
-# [0.1.5] (June 13, 2024)
+# [0.1.5] (July 13, 2024)
 
 ### Fixed
 
