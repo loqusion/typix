@@ -1,3 +1,11 @@
+# Unreleased
+
+### Added
+
+- Typst packages support (unstable) ([#51])
+
+[#51]: https://github.com/loqusion/typix/pull/51
+
 # [0.3.0] (January 27, 2025)
 
 ### Added
