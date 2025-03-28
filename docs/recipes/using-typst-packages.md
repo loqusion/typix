@@ -1,42 +1,116 @@
 # Using Typst packages
 
-> If none of the advice on this page works for you, and there are no [open
-> issues][github-open-issues] related to your problem, feel free to [open an
-> issue][github-new-issue].
-
-[github-new-issue]: https://github.com/loqusion/typix/issues/new?assignees=&labels=typst+packages&projects=&template=3-typst_packages.md&title=%5BTypst+packages%5D%3A+
-[github-open-issues]: https://github.com/loqusion/typix/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3A%22typst+packages%22
-
-> You can find a full working example using Typst packages [here][github-example].
-> To use this example as a template, execute the following:
+> TL;DR: Use [this example][typst-packages-example] as a template:
 >
 > ```bash
 > nix flake init --refresh -t 'github:loqusion/typix#with-typst-packages'
 > ```
+>
+> [typst-packages-example]: https://github.com/loqusion/typix/blob/main/examples/typst-packages/flake.nix
 
-[github-example]: https://github.com/loqusion/typix/blob/main/examples/typst-packages/flake.nix
+<div class="warning">
 
-[Typst packages][typst-packages] are still experimental, so Typix doesn't
-provide direct support for them yet. However, there are ways you can get them to
-work.
+Typst packages are considered experimental at the time of writing, and the
+methods documented here may become outdated at any point if breaking changes are
+made upstream.
 
-[typst-packages]: https://github.com/typst/packages
+If you experience any unexpected errors or bugs, and there are no [open issues]
+related to your problem, feel free to [open an issue].
 
-Official Typst packages _should_ work out of the box for:
+[open issues]: https://github.com/loqusion/typix/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3A%22typst+packages%22
+[open an issue]: https://github.com/loqusion/typix/issues/new?assignees=&labels=typst+packages&projects=&template=3-typst_packages.md&title=%5BTypst+packages%5D%3A+
 
-- [`watchTypstProject`](../api/derivations/watch-typst-project.md)
-- [`devShell`](../api/derivations/dev-shell.md)
+</div>
 
-For the other derivation constructors, or for unofficial packages, see below.
+There are two types of Typst packages: _official_ and _unofficial_:
 
-## Providing the package cache
+- [_Official_ packages](#official-typst-packages) are those submitted to the
+  [Typst Packages repository] and can be browsed on [Typst Universe].
+- [_Unofficial_ packages](#unofficial-typst-packages) are packages that aren't
+  published.
+  They can be stored locally on your system, on a GitHub repository, or elsewhere.
 
-Typst [caches downloaded packages][typst-packages-cache] for a given `namespace`
-in `{cache-dir}/typst/packages/{namespace}`.
+[Typst Packages repository]: https://github.com/typst/packages
+[Typst Universe]: https://typst.app/universe/
 
-[typst-packages-cache]: https://github.com/typst/packages?tab=readme-ov-file#downloads
+The method to get Typst packages working differs depending on whether they are
+official or unofficial.
 
-With flake inputs defined like:
+## Official Typst packages
+
+Official Typst packages work out of the box for for [`watchTypstProject`] and
+commands executed while [`devShell`] is active.
+
+For [`buildTypstProject`], [`buildTypstProjectLocal`], and [`mkTypstDerivation`],
+there are two methods:
+
+<!-- markdownlint-disable link-fragments -->
+
+- [`unstableTypstPackages`](#the-typstpackages-attribute) (recommended)
+- [`TYPST_PACKAGE_CACHE_PATH`](#the-typst_package_cache_path-environment-variable)
+
+<!-- markdownlint-enable link-fragments -->
+
+It is recommended to use `unstableTypstPackages`, as it is faster and consumes
+less disk space.
+
+### The `unstableTypstPackages` attribute { #the-typstpackages-attribute }
+
+The `unstableTypstPackages` attribute is used to fetch packages from the official
+Typst packages CDN at `https://packages.typst.org`.
+
+For more information, see the respective documentation for the attribute on
+[`buildTypstProject`], [`buildTypstProjectLocal`], and [`mkTypstDerivation`].
+
+```nix
+{
+  outputs = {
+    nixpkgs,
+    typix,
+  }: let
+    inherit (nixpkgs.lib) getExe;
+    system = "x86_64-linux";
+
+    unstableTypstPackages = [
+      {
+        name = "cetz";
+        version = "0.3.4";
+        hash = "sha256-5w3UYRUSdi4hCvAjrp9HslzrUw7BhgDdeCiDRHGvqd4=";
+      }
+      # Transitive dependencies must be manually specified
+      # `oxifmt` is required by `cetz`
+      {
+        name = "oxifmt";
+        version = "0.2.1";
+        hash = "sha256-8PNPa9TGFybMZ1uuJwb5ET0WGIInmIgg8h24BmdfxlU=";
+      }
+    ];
+
+    build-drv = typix.lib.${system}.buildTypstProject {
+      inherit unstableTypstPackages;
+      # ...
+    };
+
+    build-script = typix.lib.${system}.buildTypstProjectLocal {
+      inherit unstableTypstPackages;
+      # ...
+    };
+  in {
+    packages.${system}.default = build-drv;
+    apps.${system}.default = {
+      type = "app";
+      program = getExe build-script;
+    };
+  };
+}
+```
+
+### The `TYPST_PACKAGE_CACHE_PATH` environment variable
+
+This method downloads the _entire_ contents of the [Typst Packages repository],
+making all packages available in your Typst project.
+
+First, add the repository to flake inputs:
 
 ```nix
 {
@@ -44,64 +118,57 @@ With flake inputs defined like:
     url = "github:typst/packages";
     flake = false;
   };
-
-  # Contrived example of an additional package repository
-  inputs.my-typst-packages = {
-    url = "github:loqusion/my-typst-packages";
-    flake = false;
-  };
 }
 ```
 
-...we can provide them where Typst expects them:
-
-<!-- markdownlint-disable MD013 -->
+Then, use it in flake outputs:
 
 ```nix
-let
-  typstPackagesSrc = pkgs.symlinkJoin {
-    name = "typst-packages-src";
-    paths = [
-      "${inputs.typst-packages}/packages"
-      "${inputs.my-typst-packages}/..."
-    ];
-  };
-  # You can use this if you only need to use official packages
-  # typstPackagesSrc = "${inputs.typst-packages}/packages";
+{
+  outputs = {
+    nixpkgs,
+    typix,
+    typst-packages,
+  }: let
+    inherit (nixpkgs.lib) getExe;
+    system = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages.${system};
 
-  typstPackagesCache = pkgs.stdenvNoCC.mkDerivation {
-    name = "typst-packages-cache";
-    src = typstPackagesSrc;
-    dontBuild = true;
-    installPhase = ''
-      mkdir -p "$out/typst/packages"
-      cp -LR --reflink=auto --no-preserve=mode -t "$out/typst/packages" "$src"/*
-    '';
-  };
-in {
-  build-drv = typixLib.buildTypstProject {
-    XDG_CACHE_HOME = typstPackagesCache;
-    # ...
-  };
+    typstPackagesCache = pkgs.stdenvNoCC.mkDerivation {
+      name = "typst-packages-cache";
+      src = "${typst-packages}/packages";
+      dontBuild = true;
+      installPhase = ''
+        mkdir -p "$out/typst/packages"
+        cp -LR --reflink=auto --no-preserve=mode -t "$out/typst/packages" "$src"/*
+      '';
+    };
 
-  build-script = typixLib.buildTypstProjectLocal {
-    XDG_CACHE_HOME = typstPackagesCache;
-    # ...
-  };
+    build-drv = typix.lib.${system}.buildTypstProject {
+      TYPST_PACKAGE_CACHE_PATH = typstPackagesCache;
+      # ...
+    };
 
-  watch-script = typixLib.watchTypstProject {
-    # This is necessary for unofficial packages
-    typstWatchCommand = "XDG_CACHE_HOME=${typstPackagesCache} typst watch";
-    # ...
+    build-script = typix.lib.${system}.buildTypstProjectLocal {
+      TYPST_PACKAGE_CACHE_PATH = typstPackagesCache;
+      # ...
+    };
+  in {
+    packages.${system}.default = build-drv;
+    apps.${system}.default = {
+      type = "app";
+      program = getExe build-script;
+    };
   };
 }
 ```
 
-<!-- markdownlint-enable MD013 -->
+## Unofficial Typst packages
 
-Then, we can use them in a Typst file like so:
+TODO
 
-```typst
-#import "@preview/example:0.1.0"
-#import "@loqusion/my-package:0.2.1"
-```
+[`buildTypstProjectLocal`]: ../api/derivations/build-typst-project-local.md#typstpackages
+[`buildTypstProject`]: ../api/derivations/build-typst-project.md#typstpackages
+[`devShell`]: ../api/derivations/dev-shell.md
+[`mkTypstDerivation`]: ../api/derivations/mk-typst-derivation.md#typstpackages
+[`watchTypstProject`]: ../api/derivations/watch-typst-project.md
