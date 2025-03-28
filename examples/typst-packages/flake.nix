@@ -11,11 +11,6 @@
 
     flake-utils.url = "github:numtide/flake-utils";
 
-    typst-packages = {
-      url = "github:typst/packages";
-      flake = false;
-    };
-
     # Example of downloading icons from a non-flake source
     # font-awesome = {
     #   url = "github:FortAwesome/Font-Awesome";
@@ -52,43 +47,39 @@
           # }
         ];
       };
-      typstPackagesSrc = pkgs.symlinkJoin {
-        name = "typst-packages-src";
-        paths = [
-          "${inputs.typst-packages}/packages"
-          # More Typst packages can be added here
-        ];
-      };
-      typstPackagesCache = pkgs.stdenvNoCC.mkDerivation {
-        name = "typst-packages-cache";
-        src = typstPackagesSrc;
-        dontBuild = true;
-        installPhase = ''
-          mkdir -p "$out/typst/packages"
-          cp -LR --reflink=auto --no-preserve=mode -t "$out/typst/packages" "$src"/*
-        '';
-      };
+
+      unstableTypstPackages = [
+        {
+          name = "cetz";
+          version = "0.3.4";
+          hash = "sha256-5w3UYRUSdi4hCvAjrp9HslzrUw7BhgDdeCiDRHGvqd4=";
+        }
+        # Required by cetz
+        {
+          name = "oxifmt";
+          version = "0.2.1";
+          hash = "sha256-8PNPa9TGFybMZ1uuJwb5ET0WGIInmIgg8h24BmdfxlU=";
+        }
+      ];
 
       # Compile a Typst project, *without* copying the result
       # to the current directory
       build-drv = typixLib.buildTypstProject (commonArgs
         // {
-          inherit src;
-          XDG_CACHE_HOME = typstPackagesCache;
+          inherit src unstableTypstPackages;
         });
 
       # Compile a Typst project, and then copy the result
       # to the current directory
       build-script = typixLib.buildTypstProjectLocal (commonArgs
         // {
-          inherit src;
-          XDG_CACHE_HOME = typstPackagesCache;
+          inherit src unstableTypstPackages;
         });
 
       # Watch a project and recompile on changes
       watch-script = typixLib.watchTypstProject (commonArgs
         // {
-          typstWatchCommand = "XDG_CACHE_HOME=${lib.strings.escapeShellArg typstPackagesCache} typst watch";
+          typstWatchCommand = "typst watch";
         });
     in {
       checks = {
