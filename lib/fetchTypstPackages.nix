@@ -14,11 +14,11 @@
     namespace ? "preview",
     name,
     version,
-    sha256,
+    hash,
   } @ args:
     fetchurl {
       url = "${typstPackageRegistry}/${namespace}/${name}-${version}.tar.gz";
-      inherit sha256;
+      inherit hash;
       downloadToTemp = true;
 
       # The Typst package registry does not produce reproducible tarballs

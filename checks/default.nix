@@ -22,23 +22,23 @@ in
       {
         name = "example";
         version = "0.1.0";
-        sha256 = "sha256-R18Xv3AoZsTtMycRasczTsje5yIfiURIxtDICQ4mvho=";
+        hash = "sha256-R18Xv3AoZsTtMycRasczTsje5yIfiURIxtDICQ4mvho=";
       }
       {
         name = "cetz";
         version = "0.3.4";
-        sha256 = "sha256-5w3UYRUSdi4hCvAjrp9HslzrUw7BhgDdeCiDRHGvqd4=";
+        hash = "sha256-5w3UYRUSdi4hCvAjrp9HslzrUw7BhgDdeCiDRHGvqd4=";
       }
       {
         name = "polylux";
         version = "0.4.0";
-        sha256 = "sha256-4owP2KiyaaASS1YZ0Hs58k6UEVAqsRR3YdGF26ikosk=";
+        hash = "sha256-4owP2KiyaaASS1YZ0Hs58k6UEVAqsRR3YdGF26ikosk=";
       }
       # Required by cetz
       {
         name = "oxifmt";
         version = "0.2.1";
-        sha256 = "sha256-8PNPa9TGFybMZ1uuJwb5ET0WGIInmIgg8h24BmdfxlU=";
+        hash = "sha256-8PNPa9TGFybMZ1uuJwb5ET0WGIInmIgg8h24BmdfxlU=";
       }
     ];
   in rec {
