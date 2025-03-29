@@ -12,7 +12,8 @@ When this feature reaches stability, it will be renamed to `typstPackages`.
 
 </div>
 
-List of [Typst packages] to use in your Typst project.
+List of [Typst packages] to use in your Typst project, fetched from the
+official Typst packages CDN at `https://packages.typst.org`.
 
 Each element of the list is an attribute set with the following keys:
 
