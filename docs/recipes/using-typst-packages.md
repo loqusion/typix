@@ -22,23 +22,25 @@ related to your problem, feel free to [open an issue].
 
 </div>
 
-There are two types of Typst packages: _official_ and _unofficial_:
+There are two types of Typst packages: _published_ and _unpublished_:
 
-- [_Official_ packages](#official-typst-packages) are those submitted to the
+- [_Published_ packages](#published-typst-packages) are those submitted to the
   [Typst Packages repository] and can be browsed on [Typst Universe].
-- [_Unofficial_ packages](#unofficial-typst-packages) are packages that aren't
-  published.
+- [_Unpublished_ packages](#unpublished-typst-packages) are packages that are
+  only available from unofficial sources.
   They can be stored locally on your system, on a GitHub repository, or elsewhere.
+  ("Unpublished" can also refer to unpublished versions of a package which has
+  published versions.)
 
 [Typst Packages repository]: https://github.com/typst/packages
 [Typst Universe]: https://typst.app/universe/
 
 The method to get Typst packages working differs depending on whether they are
-official or unofficial.
+published or unpublished.
 
-## Official Typst packages
+## Published Typst packages
 
-Official Typst packages work out of the box for for [`watchTypstProject`] and
+Published Typst packages work out of the box for for [`watchTypstProject`] and
 commands executed while [`devShell`] is active.
 
 For [`buildTypstProject`], [`buildTypstProjectLocal`], and [`mkTypstDerivation`],
@@ -163,7 +165,7 @@ Then, use it in flake outputs:
 }
 ```
 
-## Unofficial Typst packages
+## Unpublished Typst packages
 
 TODO
 
