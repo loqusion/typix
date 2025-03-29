@@ -47,9 +47,9 @@
         description = "A Typst project (with packages)";
         path = ./examples/typst-packages;
       };
-      with-typst-packages-unofficial = {
-        description = "A Typst project (with unofficial packages)";
-        path = ./examples/typst-packages-unofficial;
+      with-typst-packages-unpublished = {
+        description = "A Typst project (with unpublished packages)";
+        path = ./examples/typst-packages-unpublished;
       };
     };
 

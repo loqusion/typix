@@ -1,5 +1,5 @@
 {
-  description = "A Typst project that uses unofficial Typst packages";
+  description = "A Typst project that uses unpublished Typst packages";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -11,7 +11,7 @@
 
     flake-utils.url = "github:numtide/flake-utils";
 
-    # TODO: Change this and the list in `unofficialTypstPackages`
+    # TODO: Change this and the list in `unpublishedTypstPackages`
     my-typst-package = {
       url = "github:loqusion/my-typst-package";
       flake = false;
@@ -85,8 +85,8 @@
           '';
         };
 
-      unofficialTypstPackages = pkgs.symlinkJoin {
-        name = "unofficial-typst-packages";
+      unpublishedTypstPackages = pkgs.symlinkJoin {
+        name = "unpublished-typst-packages";
         paths = map mkTypstPackageDrv [
           # TODO: Change this
           {
@@ -114,7 +114,7 @@
         // {
           inherit src;
           inherit unstableTypstPackages;
-          TYPST_PACKAGE_PATH = unofficialTypstPackages;
+          TYPST_PACKAGE_PATH = unpublishedTypstPackages;
         });
 
       # Compile a Typst project, and then copy the result
@@ -123,13 +123,13 @@
         // {
           inherit src;
           inherit unstableTypstPackages;
-          TYPST_PACKAGE_PATH = unofficialTypstPackages;
+          TYPST_PACKAGE_PATH = unpublishedTypstPackages;
         });
 
       # Watch a project and recompile on changes
       watch-script = typixLib.watchTypstProject (commonArgs
         // {
-          typstWatchCommand = "TYPST_PACKAGE_PATH=${escapeShellArg unofficialTypstPackages} typst watch";
+          typstWatchCommand = "TYPST_PACKAGE_PATH=${escapeShellArg unpublishedTypstPackages} typst watch";
         });
     in {
       checks = {
