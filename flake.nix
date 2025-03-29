@@ -47,6 +47,10 @@
         description = "A Typst project (with packages)";
         path = ./examples/typst-packages;
       };
+      with-typst-packages-unofficial = {
+        description = "A Typst project (with unofficial packages)";
+        path = ./examples/typst-packages-unofficial;
+      };
     };
 
     checks = forAllSystems (system: let
