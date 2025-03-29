@@ -18,4 +18,5 @@ in {
   typstOptsFromArgs = callPackage ./typstOptsFromArgs.nix {};
   unsetSourceDateEpochHook = callPackage ./setupHooks/unsetSourceDateEpoch.nix {};
   watchTypstProject = callPackage ./watchTypstProject.nix {};
+  fetchTypstPackages = callPackage ./fetchTypstPackages.nix {};
 })

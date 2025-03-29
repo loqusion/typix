@@ -61,6 +61,15 @@ These are in addition to any options you manually pass in
 
 Default is `main.typ`.
 
+### `unstableTypstPackages` (optional) { #typstpackages }
+
+{{#include common/typst-packages.md:body}}
+
+#### Example { #typstpackages-example }
+
+{{#include common/typst-packages.md:example_buildtypstproject}}
+{{#include common/typst-packages.md:example_typst}}
+
 ### `virtualPaths` (optional) { #virtualpaths }
 
 {{#include common/virtual-paths.md}}

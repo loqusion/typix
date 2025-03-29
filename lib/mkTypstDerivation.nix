@@ -5,12 +5,14 @@
   stdenvNoCC,
   typst,
   unsetSourceDateEpochHook,
+  fetchTypstPackages,
 }: args @ {
   buildPhaseTypstCommand,
   emojiFont ? "default",
   fontPaths ? [],
   installPhaseCommand ? "",
   virtualPaths ? [],
+  unstableTypstPackages ? [],
   ...
 }: let
   inherit (builtins) baseNameOf getEnv isNull removeAttrs;
@@ -26,6 +28,7 @@
     "fontPaths"
     "installPhaseCommand"
     "virtualPaths"
+    "unstableTypstPackages"
   ];
 
   name =
@@ -48,6 +51,9 @@ in
     // nameArgs
     // optionalAttrs (allFontPaths != []) {
       TYPST_FONT_PATHS = concatStringsSep ":" allFontPaths;
+    }
+    // optionalAttrs (unstableTypstPackages != []) {
+      TYPST_PACKAGE_CACHE_PATH = fetchTypstPackages unstableTypstPackages;
     }
     // {
       nativeBuildInputs =
