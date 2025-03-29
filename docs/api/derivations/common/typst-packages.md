@@ -9,6 +9,8 @@ derivations relying on this feature may break at any time, even if you don't
 update Typst or Typix.
 
 When this feature reaches stability, it will be renamed to `typstPackages`.
+(The old name will be kept as an undocumented alias, to avoid unnecessary
+breakage.)
 
 </div>
 
