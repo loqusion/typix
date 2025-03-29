@@ -28,8 +28,67 @@ Each element of the list is an attribute set with the following keys:
 from the registry, using the "fake hash method". See [Updating source hashes][fetchers-hash]
 for how to do this.
 
-Note that if a package depends on other packages, you must also specify the exact
-version of each of those packages.
+Sometimes, you might encounter an error that looks like this:
+
+```text
+> help: error occurred while importing this module
+>   ┌─ @preview/cetz:0.3.4/src/canvas.typ:3:8
+>   │
+> 3 │ #import "util.typ"
+>   │         ^^^^^^^^^^
+> help: error occurred while importing this module
+>   ┌─ @preview/cetz:0.3.4/src/lib.typ:3:8
+>   │
+> 3 │ #import "canvas.typ": canvas
+>   │         ^^^^^^^^^^^^
+> help: error occurred while importing this module
+>   ┌─ main.typ:1:8
+>   │
+> 1 │ #import "@preview/cetz:0.3.4"
+>   │         ^^^^^^^^^^^^^^^^^^^^^
+>
+For full logs, run 'nix log /nix/store/6jhjxbl7glmy4adpr5wzfgn9jvsyyipf-typst.drv'.
+```
+
+In this example, Nix is hiding too much output for us to diagnose the issue.
+Run the command again with the [`-L` flag] (in our case, `nix run .#build -L`):
+
+[`-L` flag]: https://nix.dev/manual/nix/2.18/command-ref/new-cli/nix3-run#opt-print-build-logs
+
+```text
+> downloading @preview/oxifmt:0.2.1
+> error: failed to download package (Network Error: OpenSSL error)
+>   ┌─ @preview/cetz:0.3.4/src/deps.typ:1:8
+>   │
+> 1 │ #import "@preview/oxifmt:0.2.1"
+>   │         ^^^^^^^^^^^^^^^^^^^^^^^
+> help: error occurred while importing this module
+>   ┌─ @preview/cetz:0.3.4/src/util.typ:1:8
+>   │
+> 1 │ #import "deps.typ"
+>   │         ^^^^^^^^^^
+> help: error occurred while importing this module
+>   ┌─ @preview/cetz:0.3.4/src/canvas.typ:3:8
+>   │
+> 3 │ #import "util.typ"
+>   │         ^^^^^^^^^^
+> help: error occurred while importing this module
+>   ┌─ @preview/cetz:0.3.4/src/lib.typ:3:8
+>   │
+> 3 │ #import "canvas.typ": canvas
+>   │         ^^^^^^^^^^^^
+> help: error occurred while importing this module
+>   ┌─ main.typ:1:8
+>   │
+> 1 │ #import "@preview/cetz:0.3.4"
+>   │         ^^^^^^^^^^^^^^^^^^^^^
+```
+
+We can see that `cetz` is trying to import `oxifmt` 0.2.1, but Typst can't
+download it because Nix derivations are (by design) not run in an environment
+which supports networking. To fix this, add `oxifmt` 0.2.1 to
+`unstableTypstPackages` alongside your direct dependencies.
+(Make sure to match the exact version!!)
 
 There is currently no official support for [Local Typst packages].
 
