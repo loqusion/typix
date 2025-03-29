@@ -167,7 +167,162 @@ Then, use it in flake outputs:
 
 ## Unpublished Typst packages
 
-TODO
+If the Typst package you want to use is stored locally, in the same repository
+as your flake, all you have to do is directly [import] the entrypoint module:
+
+[import]: https://typst.app/docs/reference/foundations/module/
+
+```typst
+#import "my-typst-package/src/lib.typ": my-item
+
+#my-item
+```
+
+You may want to [expand the source tree] or [filter certain files].
+
+[expand the source tree]: ../recipes/specifying-sources.md#expanding-a-source-tree
+[filter certain files]: ../recipes/specifying-sources.md#source-filtering
+
+If you need to fetch an unpublished Typst package from a GitHub repository instead,
+see below.
+
+### Fetching from a GitHub repository
+
+> You can use [this example][unpublished-example] as a template:
+>
+> ```bash
+> nix flake init --refresh -t 'github:loqusion/typix#with-typst-packages-unpublished'
+> ```
+>
+> [unpublished-example]: https://github.com/loqusion/typix/blob/main/examples/typst-packages-unpublished/flake.nix
+
+Add the GitHub repository containing the unpublished Typst package to flake inputs:
+
+```nix
+{
+  inputs = {
+    my-typst-package = {
+      url = "github:loqusion/my-typst-package";
+      flake = false;
+    };
+  };
+}
+```
+
+Then, create a derivation containing the inputs and pass it to Typst with
+the `TYPST_PACKAGE_PATH` environment variable:
+
+<!-- markdownlint-disable line-length -->
+
+```nix
+{
+  outputs = {
+    nixpkgs,
+    typix,
+    my-typst-package,
+  }: let
+    system = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages.${system};
+    inherit (pkgs) lib;
+    inherit (lib) getExe;
+    inherit (lib.strings) escapeShellArg toShellVars;
+
+    mkTypstPackageDrv = {
+      name,
+      version,
+      namespace,
+      input,
+      subdir ? "",
+    }: let
+      outSubdir = "${namespace}/${name}/${version}";
+    in
+      pkgs.stdenvNoCC.mkDerivation {
+        inherit name;
+        src = input;
+        dontBuild = true;
+        installPhase = ''
+          ${toShellVars {inherit subdir outSubdir;}}
+          mkdir -p $out/$outSubdir
+          if [ -n "$subdir" ]; then
+            if [ ! -e "$src/$subdir" ]; then
+              echo "error: subdir '$subdir' does not exist in $src" >&2
+              echo "contents of $src:" >&2
+              ls "$src" >&2
+              exit 1
+            fi
+            cp -r "$src/$subdir"/* -t $out/$outSubdir
+          else
+            cp -r $src/* -t $out/$outSubdir
+          fi
+        '';
+      };
+
+    unpublishedTypstPackages = pkgs.symlinkJoin {
+      name = "unpublished-typst-packages";
+      paths = map mkTypstPackageDrv [
+        # Unpublished packages can be added here
+        {
+          name = "my-typst-package";
+          version = "0.1.0";
+          namespace = "local";
+          input = my-typst-package;
+          # If `typst.toml` is not in the repository's root directory,
+          # `subdir` must point to its parent directory
+          # subdir = "path/to/dir";
+        }
+      ];
+    };
+
+    # Any transitive dependencies must be added here
+    unstableTypstPackages = [
+      {
+        name = "oxifmt";
+        version = "0.2.1";
+        hash = "sha256-8PNPa9TGFybMZ1uuJwb5ET0WGIInmIgg8h24BmdfxlU=";
+      }
+    ];
+
+    build-drv = typix.lib.${system}.buildTypstProject {
+      inherit unstableTypstPackages;
+      TYPST_PACKAGE_PATH = unpublishedTypstPackages;
+      # ...
+    };
+
+    build-script = typix.lib.${system}.buildTypstProjectLocal {
+      inherit unstableTypstPackages;
+      TYPST_PACKAGE_PATH = unpublishedTypstPackages;
+      # ...
+    };
+
+    watch-script = typix.lib.${system}.watchTypstProject {
+      # `watchTypstProject` can already access published packages, so
+      # `unstableTypstPackages` is not needed here
+      typstWatchCommand = "TYPST_PACKAGE_PATH=${escapeShellArg unpublishedTypstPackages} typst watch";
+      # ...
+    };
+  in {
+    packages.${system}.default = build-drv;
+    apps.${system}.default = {
+      type = "app";
+      program = getExe build-script;
+    };
+    apps.${system}.watch = {
+      type = "app";
+      program = getExe watch-script;
+    };
+  };
+}
+```
+
+Finally, you can use the package in a Typst file:
+
+```typst
+#import "@local/my-typst-package:0.1.0": *
+
+#nothing
+```
+
+<!-- markdownlint-enable line-length -->
 
 [`buildTypstProjectLocal`]: ../api/derivations/build-typst-project-local.md#typstpackages
 [`buildTypstProject`]: ../api/derivations/build-typst-project.md#typstpackages
