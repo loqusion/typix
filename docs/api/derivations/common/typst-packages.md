@@ -90,11 +90,13 @@ which supports networking. To fix this, add `oxifmt` 0.2.1 to
 `unstableTypstPackages` alongside your direct dependencies.
 (Make sure to match the exact version!!)
 
-There is currently no official support for [Local Typst packages].
+There is currently no official support for [unpublished Typst packages].
+However, there is a [workaround].
 
 [Typst packages]: https://github.com/typst/packages
 [fetchers-hash]: https://nixos.org/manual/nixpkgs/stable/#sec-pkgs-fetchers-updating-source-hashes
-[Local Typst packages]: https://github.com/typst/packages#local-packages
+[unpublished Typst packages]: https://github.com/typst/packages#local-packages
+[workaround]: ../../recipes/using-typst-packages.md#unpublished-typst-packages
 
 <!-- ANCHOR_END: body -->
 
