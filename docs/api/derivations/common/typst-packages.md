@@ -22,7 +22,8 @@ Each element of the list is an attribute set with the following keys:
 - `hash`: hash of the downloaded package tarball
 
 `hash` must be manually updated to match the hash of the package tarball downloaded
-from the registry. See [Updating source hashes][fetchers-hash] for how to do this.
+from the registry, using the "fake hash method". See [Updating source hashes][fetchers-hash]
+for how to do this.
 
 Note that if a package depends on other packages, you must also specify the exact
 version of each of those packages.
