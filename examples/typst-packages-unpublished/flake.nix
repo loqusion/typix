@@ -33,7 +33,7 @@
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
       inherit (pkgs) lib;
-      inherit (lib.strings) escapeShellArg toShellVars;
+      inherit (lib.strings) escapeShellArg;
 
       typixLib = typix.lib.${system};
 
@@ -55,48 +55,31 @@
         ];
       };
 
-      mkTypstPackageDrv = {
-        name,
-        version,
-        namespace,
-        input,
-        subdir ? "",
-      }: let
-        outSubdir = "${namespace}/${name}/${version}";
+      mkTypstPackagesDrv = name: entries: let
+        linkFarmEntries =
+          lib.foldl (set: {
+            name,
+            version,
+            namespace,
+            input,
+          }:
+            set
+            // {
+              "${namespace}/${name}/${version}" = input;
+            })
+          {}
+          entries;
       in
-        pkgs.stdenvNoCC.mkDerivation {
-          inherit name;
-          src = input;
-          dontBuild = true;
-          installPhase = ''
-            ${toShellVars {inherit subdir outSubdir;}}
-            mkdir -p $out/$outSubdir
-            if [ -n "$subdir" ]; then
-              if [ ! -e "$src/$subdir" ]; then
-                echo "error: subdir '$subdir' does not exist in $src" >&2
-                echo "contents of $src:" >&2
-                ls "$src" >&2
-                exit 1
-              fi
-              cp -r "$src/$subdir"/* -t $out/$outSubdir
-            else
-              cp -r $src/* -t $out/$outSubdir
-            fi
-          '';
-        };
+        pkgs.linkFarm name linkFarmEntries;
 
-      unpublishedTypstPackages = pkgs.symlinkJoin {
-        name = "unpublished-typst-packages";
-        paths = map mkTypstPackageDrv [
-          # TODO: Change this
-          {
-            name = "my-typst-package";
-            version = "0.1.0";
-            namespace = "local";
-            input = inputs.my-typst-package;
-          }
-        ];
-      };
+      unpublishedTypstPackages = mkTypstPackagesDrv "unpublished-typst-packages" [
+        {
+          name = "my-typst-package";
+          version = "0.1.0";
+          namespace = "local";
+          input = inputs.my-typst-package;
+        }
+      ];
 
       # Any transitive dependencies must be added here
       # See https://loqusion.github.io/typix/recipes/using-typst-packages.html#the-typstpackages-attribute
