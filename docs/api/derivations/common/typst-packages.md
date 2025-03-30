@@ -134,7 +134,7 @@ However, there is a [workaround].
 ```nix
 {
   outputs = { nixpkgs, typix }: let
-    inherit (nixpkgs.lib) getExe;
+    inherit (nixpkgs) lib;
     system = "x86_64-linux";
     build-script = typix.lib.${system}.buildTypstProjectLocal {
       unstableTypstPackages = [
@@ -155,7 +155,7 @@ However, there is a [workaround].
   in {
     apps.${system}.default = {
       type = "app";
-      program = getExe build-script;
+      program = lib.getExe build-script;
     };
   };
 }

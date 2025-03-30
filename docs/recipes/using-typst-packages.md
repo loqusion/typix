@@ -69,7 +69,7 @@ For more information, see the respective documentation for the attribute on
     nixpkgs,
     typix,
   }: let
-    inherit (nixpkgs.lib) getExe;
+    inherit (nixpkgs) lib;
     system = "x86_64-linux";
 
     unstableTypstPackages = [
@@ -100,7 +100,7 @@ For more information, see the respective documentation for the attribute on
     packages.${system}.default = build-drv;
     apps.${system}.default = {
       type = "app";
-      program = getExe build-script;
+      program = lib.getExe build-script;
     };
   };
 }
@@ -131,7 +131,7 @@ Then, use it in flake outputs:
     typix,
     typst-packages,
   }: let
-    inherit (nixpkgs.lib) getExe;
+    inherit (nixpkgs) lib;
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
 
@@ -158,7 +158,7 @@ Then, use it in flake outputs:
     packages.${system}.default = build-drv;
     apps.${system}.default = {
       type = "app";
-      program = getExe build-script;
+      program = lib.getExe build-script;
     };
   };
 }
@@ -223,7 +223,6 @@ the `TYPST_PACKAGE_PATH` environment variable:
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
     inherit (pkgs) lib;
-    inherit (lib) getExe;
     inherit (lib.strings) escapeShellArg;
 
     mkTypstPackagesDrv = name: entries: let
@@ -284,11 +283,11 @@ the `TYPST_PACKAGE_PATH` environment variable:
     packages.${system}.default = build-drv;
     apps.${system}.default = {
       type = "app";
-      program = getExe build-script;
+      program = lib.getExe build-script;
     };
     apps.${system}.watch = {
       type = "app";
-      program = getExe watch-script;
+      program = lib.getExe watch-script;
     };
   };
 }
