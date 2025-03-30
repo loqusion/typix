@@ -224,53 +224,34 @@ the `TYPST_PACKAGE_PATH` environment variable:
     pkgs = nixpkgs.legacyPackages.${system};
     inherit (pkgs) lib;
     inherit (lib) getExe;
-    inherit (lib.strings) escapeShellArg toShellVars;
+    inherit (lib.strings) escapeShellArg;
 
-    mkTypstPackageDrv = {
-      name,
-      version,
-      namespace,
-      input,
-      subdir ? "",
-    }: let
-      outSubdir = "${namespace}/${name}/${version}";
+    mkTypstPackagesDrv = name: entries: let
+      linkFarmEntries =
+        lib.foldl (set: {
+          name,
+          version,
+          namespace,
+          input,
+        }:
+          set
+          // {
+            "${namespace}/${name}/${version}" = input;
+          })
+        {}
+        entries;
     in
-      pkgs.stdenvNoCC.mkDerivation {
-        inherit name;
-        src = input;
-        dontBuild = true;
-        installPhase = ''
-          ${toShellVars {inherit subdir outSubdir;}}
-          mkdir -p $out/$outSubdir
-          if [ -n "$subdir" ]; then
-            if [ ! -e "$src/$subdir" ]; then
-              echo "error: subdir '$subdir' does not exist in $src" >&2
-              echo "contents of $src:" >&2
-              ls "$src" >&2
-              exit 1
-            fi
-            cp -r "$src/$subdir"/* -t $out/$outSubdir
-          else
-            cp -r $src/* -t $out/$outSubdir
-          fi
-        '';
-      };
+      pkgs.linkFarm name linkFarmEntries;
 
-    unpublishedTypstPackages = pkgs.symlinkJoin {
-      name = "unpublished-typst-packages";
-      paths = map mkTypstPackageDrv [
-        # Unpublished packages can be added here
-        {
-          name = "my-typst-package";
-          version = "0.1.0";
-          namespace = "local";
-          input = my-typst-package;
-          # If `typst.toml` is not in the repository's root directory,
-          # `subdir` must point to its parent directory
-          # subdir = "path/to/dir";
-        }
-      ];
-    };
+    unpublishedTypstPackages = mkTypstPackagesDrv "unpublished-typst-packages" [
+      # Unpublished packages can be added here
+      {
+        name = "my-typst-package";
+        version = "0.1.0";
+        namespace = "local";
+        input = my-typst-package;
+      }
+    ];
 
     # Any transitive dependencies must be added here
     unstableTypstPackages = [
