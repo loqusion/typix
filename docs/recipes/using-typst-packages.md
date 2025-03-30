@@ -22,17 +22,16 @@ related to your problem, feel free to [open an issue].
 
 </div>
 
-There are two types of Typst packages: _published_ and _unpublished_:
+There are two types of [Typst packages][typst-packages]: _published_ and _unpublished_:
 
 - [_Published_ packages](#published-typst-packages) are those submitted to the
-  [Typst Packages repository] and can be browsed on [Typst Universe].
+  [Typst Packages repository][typst-packages] and can be browsed on [Typst Universe].
 - [_Unpublished_ packages](#unpublished-typst-packages) are packages that are
   only available from unofficial sources.
   They can be stored locally on your system, on a GitHub repository, or elsewhere.
   ("Unpublished" can also refer to unpublished versions of a package which has
   published versions.)
 
-[Typst Packages repository]: https://github.com/typst/packages
 [Typst Universe]: https://typst.app/universe/
 
 The method to get Typst packages working differs depending on whether they are
@@ -109,7 +108,7 @@ For more information, see the respective documentation for the attribute on
 
 ### The `TYPST_PACKAGE_CACHE_PATH` environment variable
 
-This method downloads the _entire_ contents of the [Typst Packages repository],
+This method downloads the _entire_ contents of the [Typst Packages repository][typst-packages],
 making all packages available in your Typst project.
 
 First, add the repository to flake inputs:
@@ -324,6 +323,7 @@ Finally, you can use the package in a Typst file:
 
 <!-- markdownlint-enable line-length -->
 
+[typst-packages]: https://github.com/typst/packages
 [`buildTypstProjectLocal`]: ../api/derivations/build-typst-project-local.md#typstpackages
 [`buildTypstProject`]: ../api/derivations/build-typst-project.md#typstpackages
 [`devShell`]: ../api/derivations/dev-shell.md
