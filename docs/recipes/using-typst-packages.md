@@ -1,12 +1,12 @@
 # Using Typst packages
 
-> TL;DR: Use [this example][typst-packages-example] as a template:
+> TL;DR: Use [this example][published-example] as a template:
 >
 > ```bash
 > nix flake init --refresh -t 'github:loqusion/typix#with-typst-packages'
 > ```
 >
-> [typst-packages-example]: https://github.com/loqusion/typix/blob/main/examples/typst-packages/flake.nix
+> [published-example]: https://github.com/loqusion/typix/blob/main/examples/typst-packages/flake.nix
 
 <div class="warning">
 
