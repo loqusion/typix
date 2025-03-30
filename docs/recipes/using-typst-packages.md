@@ -195,7 +195,9 @@ see below.
 >
 > [unpublished-example]: https://github.com/loqusion/typix/blob/main/examples/typst-packages-unpublished/flake.nix
 
-Add the GitHub repository containing the unpublished Typst package to flake inputs:
+Add the GitHub repository containing the unpublished Typst package to [flake inputs]:
+
+[flake inputs]: https://nix.dev/manual/nix/2.24/command-ref/new-cli/nix3-flake#flake-references
 
 ```nix
 {
