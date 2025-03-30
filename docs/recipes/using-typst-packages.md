@@ -167,8 +167,8 @@ Then, use it in flake outputs:
 
 ## Unpublished Typst packages
 
-If the Typst package you want to use is stored locally, in the same repository
-as your flake, all you have to do is directly [import] the entrypoint module:
+If the Typst package you want to use is stored locally — in the same repository
+as your flake — all you have to do is directly [import] the entrypoint module:
 
 [import]: https://typst.app/docs/reference/foundations/module/
 
