@@ -3,6 +3,11 @@
 ### Added
 
 - Typst packages support (unstable) ([#51])
+- `with-typst-packages-unpublished` template ([#51])
+
+### Changed
+
+- Use `unstableTypstPackages` in `with-typst-packages` template ([#51])
 
 [#51]: https://github.com/loqusion/typix/pull/51
 
