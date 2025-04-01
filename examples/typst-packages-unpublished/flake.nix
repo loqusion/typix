@@ -1,5 +1,5 @@
 {
-  description = "A Typst project that uses Typst packages";
+  description = "A Typst project that uses unpublished Typst packages";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -10,6 +10,12 @@
     };
 
     flake-utils.url = "github:numtide/flake-utils";
+
+    # TODO: Change this and the list in `unpublishedTypstPackages`
+    my-typst-package = {
+      url = "github:loqusion/my-typst-package";
+      flake = false;
+    };
 
     # Example of downloading icons from a non-flake source
     # font-awesome = {
@@ -27,6 +33,7 @@
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
       inherit (pkgs) lib;
+      inherit (lib.strings) escapeShellArg;
 
       typixLib = typix.lib.${system};
 
@@ -48,13 +55,35 @@
         ];
       };
 
-      unstableTypstPackages = [
+      mkTypstPackagesDrv = name: entries: let
+        linkFarmEntries =
+          lib.foldl (set: {
+            name,
+            version,
+            namespace,
+            input,
+          }:
+            set
+            // {
+              "${namespace}/${name}/${version}" = input;
+            })
+          {}
+          entries;
+      in
+        pkgs.linkFarm name linkFarmEntries;
+
+      unpublishedTypstPackages = mkTypstPackagesDrv "unpublished-typst-packages" [
         {
-          name = "cetz";
-          version = "0.3.4";
-          hash = "sha256-5w3UYRUSdi4hCvAjrp9HslzrUw7BhgDdeCiDRHGvqd4=";
+          name = "my-typst-package";
+          version = "0.1.0";
+          namespace = "local";
+          input = inputs.my-typst-package;
         }
-        # Required by cetz
+      ];
+
+      # Any transitive dependencies must be added here
+      # See https://loqusion.github.io/typix/recipes/using-typst-packages.html#the-typstpackages-attribute
+      unstableTypstPackages = [
         {
           name = "oxifmt";
           version = "0.2.1";
@@ -66,18 +95,25 @@
       # to the current directory
       build-drv = typixLib.buildTypstProject (commonArgs
         // {
-          inherit src unstableTypstPackages;
+          inherit src;
+          inherit unstableTypstPackages;
+          TYPST_PACKAGE_PATH = unpublishedTypstPackages;
         });
 
       # Compile a Typst project, and then copy the result
       # to the current directory
       build-script = typixLib.buildTypstProjectLocal (commonArgs
         // {
-          inherit src unstableTypstPackages;
+          inherit src;
+          inherit unstableTypstPackages;
+          TYPST_PACKAGE_PATH = unpublishedTypstPackages;
         });
 
       # Watch a project and recompile on changes
-      watch-script = typixLib.watchTypstProject commonArgs;
+      watch-script = typixLib.watchTypstProject (commonArgs
+        // {
+          typstWatchCommand = "TYPST_PACKAGE_PATH=${escapeShellArg unpublishedTypstPackages} typst watch";
+        });
     in {
       checks = {
         inherit build-drv build-script watch-script;

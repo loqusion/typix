@@ -26,9 +26,17 @@ Finally, you can initialize a flake from the default template:
 nix flake init --refresh -t github:loqusion/typix
 ```
 
+> Alternatively, you can use a template demonstrating [Typst packages] usage:
+>
+> ```bash
+> nix flake init --refresh -t 'github:loqusion/typix#with-typst-packages'
+> ```
+>
+> [Typst packages]: ./recipes/using-typst-packages.md
+
 ---
 
-Here are some commands you can run from the default template:
+Here are some commands you can run from any template:
 
 - `nix run .#watch` — watch the input files and recompile on changes
 - `nix run .#build` — compile and copy the output to the current directory

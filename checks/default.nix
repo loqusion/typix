@@ -18,6 +18,29 @@ in
         dest = "icons";
       }
     ];
+    unstableTypstPackages = [
+      {
+        name = "example";
+        version = "0.1.0";
+        hash = "sha256-R18Xv3AoZsTtMycRasczTsje5yIfiURIxtDICQ4mvho=";
+      }
+      {
+        name = "cetz";
+        version = "0.3.4";
+        hash = "sha256-5w3UYRUSdi4hCvAjrp9HslzrUw7BhgDdeCiDRHGvqd4=";
+      }
+      {
+        name = "polylux";
+        version = "0.4.0";
+        hash = "sha256-4owP2KiyaaASS1YZ0Hs58k6UEVAqsRR3YdGF26ikosk=";
+      }
+      # Required by cetz
+      {
+        name = "oxifmt";
+        version = "0.2.1";
+        hash = "sha256-8PNPa9TGFybMZ1uuJwb5ET0WGIInmIgg8h24BmdfxlU=";
+      }
+    ];
   in rec {
     buildLocal = callPackage ./build-local.nix {};
     buildLocalSimple = buildLocal {} {
@@ -31,6 +54,11 @@ in
     buildLocalSimpleWithVirtualPaths = buildLocal {} {
       inherit virtualPaths typstSource;
       src = myLib.cleanTypstSource ./simple-with-virtual-paths;
+    };
+    buildLocalWithTypstPackages = buildLocal {} {
+      inherit typstSource;
+      src = myLib.cleanTypstSource ./typst-packages;
+      inherit unstableTypstPackages;
     };
 
     clean = myLib.mkTypstDerivation {
@@ -221,14 +249,15 @@ in
       inherit fontPaths typstSource;
       src = myLib.cleanTypstSource ./simple-with-fonts;
     };
-    # TODO: add support for typst packages
-    # simpleWithTypstPackages = myLib.buildTypstProject {
-    #   inherit typstSource;
-    #   src = myLib.cleanTypstSource ./simple-with-typst-packages;
-    # };
     simpleWithVirtualPaths = myLib.buildTypstProject {
       inherit virtualPaths typstSource;
       src = myLib.cleanTypstSource ./simple-with-virtual-paths;
+    };
+
+    withTypstPackages = myLib.buildTypstProject {
+      inherit typstSource;
+      src = myLib.cleanTypstSource ./typst-packages;
+      inherit unstableTypstPackages;
     };
 
     virtualPathsChecks = callPackage ./virtual-paths.nix {};

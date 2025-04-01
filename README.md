@@ -21,7 +21,7 @@ Typix aims to make it easier to use [Nix](https://nixos.org/) in
 - **Dependency management**: supports arbitrary dependencies including fonts,
   images, and data
 - **Reproducible**: via a hermetically sealed build environment
-- **Extensible**: fully compatible with [Typst packages](https://typst.app/docs/packages/)
+- **Extensible**: full support for [Typst packages](https://loqusion.github.io/typix/recipes/using-typst-packages.html)
 
 ## Features
 
@@ -34,10 +34,8 @@ Typix aims to make it easier to use [Nix](https://nixos.org/) in
   [`mkTypstDerivation`](https://loqusion.github.io/typix/api/derivations/mk-typst-derivation.html)
 - Support for dependencies such as [fonts](https://typst.app/docs/reference/text/text/#parameters-font),
   [images](https://typst.app/docs/reference/visualize/image/), and [data](https://typst.app/docs/reference/data-loading/)
-
-[Typst packages](https://typst.app/docs/packages/) are not _officially_ supported,
-however there is a
-[workaround](https://loqusion.github.io/typix/recipes/using-typst-packages.html).
+- [Typst packages](https://loqusion.github.io/typix/recipes/using-typst-packages.html)
+  fetched from the official Typst packages CDN
 
 ## Getting Started
 
@@ -50,7 +48,14 @@ can initialize a flake from the default template:
 nix flake init -t github:loqusion/typix
 ```
 
-Here are some commands you can run from the default template:
+> Alternatively, you can use a template demonstrating [Typst packages](https://loqusion.github.io/typix/recipes/using-typst-packages.html)
+> usage:
+>
+> ```bash
+> nix flake init -t 'github:loqusion/typix#with-typst-packages'
+> ```
+
+Here are some commands you can run from any template:
 
 - `nix run .#watch` — watch the input files and recompile on changes
 - `nix run .#build` — compile and copy the output to the current directory

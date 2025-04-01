@@ -34,6 +34,15 @@ See also: [Typst CLI Usage][typst-cli-usage]
 
 {{#include common/install-phase-command.md}}
 
+### `unstableTypstPackages` (optional) { #typstpackages }
+
+{{#include common/typst-packages.md:body}}
+
+#### Example { #typstpackages-example }
+
+{{#include common/typst-packages.md:example_mktypstderivation}}
+{{#include common/typst-packages.md:example_typst}}
+
 ### `virtualPaths` (optional) { #virtualpaths }
 
 {{#include common/virtual-paths.md}}
