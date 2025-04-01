@@ -47,7 +47,7 @@ there are two methods:
 
 <!-- markdownlint-disable link-fragments -->
 
-- [`unstable_typstPackages`](#the-typstpackages-attribute) (recommended)
+- [`unstable_typstPackages`](#the-typstpackages-attribute) _(recommended)_
 - [`TYPST_PACKAGE_CACHE_PATH`](#the-typst_package_cache_path-environment-variable)
 
 <!-- markdownlint-enable link-fragments -->
