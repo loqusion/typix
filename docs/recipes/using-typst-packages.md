@@ -243,7 +243,7 @@ the `TYPST_PACKAGE_PATH` environment variable:
       }
     ];
 
-    # Any transitive dependencies must be added here
+    # Any transitive dependencies on published packages must be added here
     unstableTypstPackages = [
       {
         name = "oxifmt";
