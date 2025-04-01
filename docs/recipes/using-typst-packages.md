@@ -133,25 +133,14 @@ Then, use it in flake outputs:
   }: let
     inherit (nixpkgs) lib;
     system = "x86_64-linux";
-    pkgs = nixpkgs.legacyPackages.${system};
-
-    typstPackagesCache = pkgs.stdenvNoCC.mkDerivation {
-      name = "typst-packages-cache";
-      src = "${typst-packages}/packages";
-      dontBuild = true;
-      installPhase = ''
-        mkdir -p "$out/typst/packages"
-        cp -LR --reflink=auto --no-preserve=mode -t "$out/typst/packages" "$src"/*
-      '';
-    };
 
     build-drv = typix.lib.${system}.buildTypstProject {
-      TYPST_PACKAGE_CACHE_PATH = typstPackagesCache;
+      TYPST_PACKAGE_CACHE_PATH = "${typst-packages}/packages";
       # ...
     };
 
     build-script = typix.lib.${system}.buildTypstProjectLocal {
-      TYPST_PACKAGE_CACHE_PATH = typstPackagesCache;
+      TYPST_PACKAGE_CACHE_PATH = "${typst-packages}/packages";
       # ...
     };
   in {
