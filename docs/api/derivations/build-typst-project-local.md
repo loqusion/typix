@@ -93,7 +93,7 @@ These are in addition to any options you manually pass in
 
 Default is `main.typ`.
 
-### `unstableTypstPackages` <sup><em>optional</em></sup> { #typstpackages }
+### `unstable_typstPackages` <sup><em>optional</em></sup> { #typstpackages }
 
 {{#include common/typst-packages.md:body}}
 

@@ -83,7 +83,7 @@
 
       # Any transitive dependencies must be added here
       # See https://loqusion.github.io/typix/recipes/using-typst-packages.html#the-typstpackages-attribute
-      unstableTypstPackages = [
+      unstable_typstPackages = [
         {
           name = "oxifmt";
           version = "0.2.1";
@@ -96,7 +96,7 @@
       build-drv = typixLib.buildTypstProject (commonArgs
         // {
           inherit src;
-          inherit unstableTypstPackages;
+          inherit unstable_typstPackages;
           TYPST_PACKAGE_PATH = unpublishedTypstPackages;
         });
 
@@ -105,7 +105,7 @@
       build-script = typixLib.buildTypstProjectLocal (commonArgs
         // {
           inherit src;
-          inherit unstableTypstPackages;
+          inherit unstable_typstPackages;
           TYPST_PACKAGE_PATH = unpublishedTypstPackages;
         });
 

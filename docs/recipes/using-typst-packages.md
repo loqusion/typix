@@ -47,17 +47,17 @@ there are two methods:
 
 <!-- markdownlint-disable link-fragments -->
 
-- [`unstableTypstPackages`](#the-typstpackages-attribute) (recommended)
+- [`unstable_typstPackages`](#the-typstpackages-attribute) (recommended)
 - [`TYPST_PACKAGE_CACHE_PATH`](#the-typst_package_cache_path-environment-variable)
 
 <!-- markdownlint-enable link-fragments -->
 
-It is recommended to use `unstableTypstPackages`, as it is faster and consumes
+It is recommended to use `unstable_typstPackages`, as it is faster and consumes
 less disk space.
 
-### The `unstableTypstPackages` attribute { #the-typstpackages-attribute }
+### The `unstable_typstPackages` attribute { #the-typstpackages-attribute }
 
-The `unstableTypstPackages` attribute is used to fetch packages from the official
+The `unstable_typstPackages` attribute is used to fetch packages from the official
 Typst packages CDN at `https://packages.typst.org`.
 
 For more information, see the respective documentation for the attribute on
@@ -72,7 +72,7 @@ For more information, see the respective documentation for the attribute on
     inherit (nixpkgs) lib;
     system = "x86_64-linux";
 
-    unstableTypstPackages = [
+    unstable_typstPackages = [
       {
         name = "cetz";
         version = "0.3.4";
@@ -88,12 +88,12 @@ For more information, see the respective documentation for the attribute on
     ];
 
     build-drv = typix.lib.${system}.buildTypstProject {
-      inherit unstableTypstPackages;
+      inherit unstable_typstPackages;
       # ...
     };
 
     build-script = typix.lib.${system}.buildTypstProjectLocal {
-      inherit unstableTypstPackages;
+      inherit unstable_typstPackages;
       # ...
     };
   in {
@@ -244,7 +244,7 @@ the `TYPST_PACKAGE_PATH` environment variable:
     ];
 
     # Any transitive dependencies on published packages must be added here
-    unstableTypstPackages = [
+    unstable_typstPackages = [
       {
         name = "oxifmt";
         version = "0.2.1";
@@ -253,20 +253,20 @@ the `TYPST_PACKAGE_PATH` environment variable:
     ];
 
     build-drv = typix.lib.${system}.buildTypstProject {
-      inherit unstableTypstPackages;
+      inherit unstable_typstPackages;
       TYPST_PACKAGE_PATH = unpublishedTypstPackages;
       # ...
     };
 
     build-script = typix.lib.${system}.buildTypstProjectLocal {
-      inherit unstableTypstPackages;
+      inherit unstable_typstPackages;
       TYPST_PACKAGE_PATH = unpublishedTypstPackages;
       # ...
     };
 
     watch-script = typix.lib.${system}.watchTypstProject {
       # `watchTypstProject` can already access published packages, so
-      # `unstableTypstPackages` is not needed here
+      # `unstable_typstPackages` is not needed here
       typstWatchCommand = "TYPST_PACKAGE_PATH=${escapeShellArg unpublishedTypstPackages} typst watch";
       # ...
     };

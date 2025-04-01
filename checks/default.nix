@@ -18,7 +18,7 @@ in
         dest = "icons";
       }
     ];
-    unstableTypstPackages = [
+    unstable_typstPackages = [
       {
         name = "example";
         version = "0.1.0";
@@ -58,7 +58,7 @@ in
     buildLocalWithTypstPackages = buildLocal {} {
       inherit typstSource;
       src = myLib.cleanTypstSource ./typst-packages;
-      inherit unstableTypstPackages;
+      inherit unstable_typstPackages;
     };
 
     clean = myLib.mkTypstDerivation {
@@ -257,7 +257,7 @@ in
     withTypstPackages = myLib.buildTypstProject {
       inherit typstSource;
       src = myLib.cleanTypstSource ./typst-packages;
-      inherit unstableTypstPackages;
+      inherit unstable_typstPackages;
     };
 
     virtualPathsChecks = callPackage ./virtual-paths.nix {};

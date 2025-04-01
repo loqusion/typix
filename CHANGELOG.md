@@ -7,7 +7,7 @@
 
 ### Changed
 
-- Use `unstableTypstPackages` in `with-typst-packages` template ([#51])
+- Use `unstable_typstPackages` in `with-typst-packages` template ([#51])
 
 [#51]: https://github.com/loqusion/typix/pull/51
 

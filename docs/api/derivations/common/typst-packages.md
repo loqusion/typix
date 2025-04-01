@@ -87,7 +87,7 @@ Run the command again with the [`-L` flag] (in our case, `nix run .#build -L`):
 We can see that `cetz` is trying to import `oxifmt` 0.2.1, but Typst can't
 download it because Nix derivations are (by design) not run in an environment
 which supports networking. To fix this, add `oxifmt` 0.2.1 to
-`unstableTypstPackages` alongside your direct dependencies.
+`unstable_typstPackages` alongside your direct dependencies.
 (Make sure to match the exact version!!)
 
 There is currently no official support for [unpublished Typst packages].
@@ -108,7 +108,7 @@ However, there is a [workaround].
     system = "x86_64-linux";
   in {
     packages.${system}.default = typix.lib.${system}.buildTypstProject {
-      unstableTypstPackages = [
+      unstable_typstPackages = [
         {
           name = "cetz";
           version = "0.3.4";
@@ -138,7 +138,7 @@ However, there is a [workaround].
     system = "x86_64-linux";
 
     build-script = typix.lib.${system}.buildTypstProjectLocal {
-      unstableTypstPackages = [
+      unstable_typstPackages = [
         {
           name = "cetz";
           version = "0.3.4";
@@ -172,7 +172,7 @@ However, there is a [workaround].
     system = "x86_64-linux";
   in {
     packages.${system}.default = typix.lib.${system}.mkTypstDerivation {
-      unstableTypstPackages = [
+      unstable_typstPackages = [
         {
           name = "cetz";
           version = "0.3.4";

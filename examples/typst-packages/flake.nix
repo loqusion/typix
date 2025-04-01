@@ -48,7 +48,7 @@
         ];
       };
 
-      unstableTypstPackages = [
+      unstable_typstPackages = [
         {
           name = "cetz";
           version = "0.3.4";
@@ -66,14 +66,14 @@
       # to the current directory
       build-drv = typixLib.buildTypstProject (commonArgs
         // {
-          inherit src unstableTypstPackages;
+          inherit src unstable_typstPackages;
         });
 
       # Compile a Typst project, and then copy the result
       # to the current directory
       build-script = typixLib.buildTypstProjectLocal (commonArgs
         // {
-          inherit src unstableTypstPackages;
+          inherit src unstable_typstPackages;
         });
 
       # Watch a project and recompile on changes

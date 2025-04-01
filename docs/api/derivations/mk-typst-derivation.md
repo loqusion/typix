@@ -34,7 +34,7 @@ See also: [Typst CLI Usage][typst-cli-usage]
 
 {{#include common/install-phase-command.md}}
 
-### `unstableTypstPackages` <sup><em>optional</em></sup> { #typstpackages }
+### `unstable_typstPackages` <sup><em>optional</em></sup> { #typstpackages }
 
 {{#include common/typst-packages.md:body}}
 
