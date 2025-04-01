@@ -21,7 +21,7 @@ Each element of the list is an attribute set with the following keys:
 
 - `name`: the package's identifier in its namespace
 - `version`: the package's version as a full major-minor-patch triple
-- `namespace` (optional): the package's namespace (defaults to `preview`)
+- `namespace` _(optional)_: the package's namespace (defaults to `preview`)
 - `hash`: hash of the downloaded package tarball
 
 `hash` must be manually updated to match the hash of the package tarball downloaded
