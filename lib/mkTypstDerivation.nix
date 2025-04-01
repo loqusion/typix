@@ -14,7 +14,10 @@
   virtualPaths ? [],
   unstable_typstPackages ? [],
   ...
-}: let
+}:
+assert lib.assertMsg (!(builtins.hasAttr "unstableTypstPackages" args)) ''
+  `unstableTypstPackages` has been renamed to `unstable_typstPackages`.
+''; let
   inherit (builtins) baseNameOf getEnv isNull removeAttrs;
   inherit (lib) lists optionalAttrs;
   inherit (lib.strings) concatStringsSep;
