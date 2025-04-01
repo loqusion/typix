@@ -45,14 +45,14 @@ flakes](https://nixos.wiki/wiki/Flakes#Enable_flakes_permanently_in_NixOS), you
 can initialize a flake from the default template:
 
 ```bash
-nix flake init -t github:loqusion/typix
+nix flake init --refresh -t github:loqusion/typix
 ```
 
 > Alternatively, you can use a template demonstrating [Typst packages](https://loqusion.github.io/typix/recipes/using-typst-packages.html)
 > usage:
 >
 > ```bash
-> nix flake init -t 'github:loqusion/typix#with-typst-packages'
+> nix flake init --refresh -t 'github:loqusion/typix#with-typst-packages'
 > ```
 
 Here are some commands you can run from any template:
