@@ -18,11 +18,11 @@ See also: [Typst CLI Usage][typst-cli-usage]
 
 {{#include common/src.md}}
 
-### `emojiFont` (optional) { #emojifont }
+### `emojiFont` <sup><em>optional</em></sup> { #emojifont }
 
 {{#include common/emoji-font.md}}
 
-### `fontPaths` (optional) { #fontpaths }
+### `fontPaths` <sup><em>optional</em></sup> { #fontpaths }
 
 {{#include common/font-paths.md}}
 
@@ -30,11 +30,11 @@ See also: [Typst CLI Usage][typst-cli-usage]
 
 {{#include common/font-paths-example.md:mktypstderivation_example}}
 
-### `installPhaseCommand` (optional) { #installphasecommand }
+### `installPhaseCommand` <sup><em>optional</em></sup> { #installphasecommand }
 
 {{#include common/install-phase-command.md}}
 
-### `unstableTypstPackages` (optional) { #typstpackages }
+### `unstableTypstPackages` <sup><em>optional</em></sup> { #typstpackages }
 
 {{#include common/typst-packages.md:body}}
 
@@ -43,7 +43,7 @@ See also: [Typst CLI Usage][typst-cli-usage]
 {{#include common/typst-packages.md:example_mktypstderivation}}
 {{#include common/typst-packages.md:example_typst}}
 
-### `virtualPaths` (optional) { #virtualpaths }
+### `virtualPaths` <sup><em>optional</em></sup> { #virtualpaths }
 
 {{#include common/virtual-paths.md}}
 

@@ -15,11 +15,11 @@ All parameters accepted by
 
 {{#include common/src.md}}
 
-### `emojiFont` (optional) { #emojifont }
+### `emojiFont` <sup><em>optional</em></sup> { #emojifont }
 
 {{#include common/emoji-font.md}}
 
-### `fontPaths` (optional) { #fontpaths }
+### `fontPaths` <sup><em>optional</em></sup> { #fontpaths }
 
 {{#include common/font-paths.md}}
 
@@ -27,17 +27,17 @@ All parameters accepted by
 
 {{#include common/font-paths-example.md:buildtypstproject_example}}
 
-### `installPhaseCommand` (optional) { #installphasecommand }
+### `installPhaseCommand` <sup><em>optional</em></sup> { #installphasecommand }
 
 {{#include common/install-phase-command.md}}
 
-### `typstCompileCommand` (optional) { #typstcompilecommand }
+### `typstCompileCommand` <sup><em>optional</em></sup> { #typstcompilecommand }
 
 {{#include common/typst-compile-command.md}}
 
 Default is `typst compile`.
 
-### `typstOpts` (optional) { #typstopts }
+### `typstOpts` <sup><em>optional</em></sup> { #typstopts }
 
 {{#include common/typst-opts.md:head}}
 
@@ -55,13 +55,13 @@ These are in addition to any options you manually pass in
 {{#include common/typst-opts-example.md:head}}
 {{#include common/typst-opts-example.md:typstcompile}}
 
-### `typstSource` (optional) { #typstsource }
+### `typstSource` <sup><em>optional</em></sup> { #typstsource }
 
 {{#include common/typst-project-source.md}}
 
 Default is `main.typ`.
 
-### `unstableTypstPackages` (optional) { #typstpackages }
+### `unstableTypstPackages` <sup><em>optional</em></sup> { #typstpackages }
 
 {{#include common/typst-packages.md:body}}
 
@@ -70,7 +70,7 @@ Default is `main.typ`.
 {{#include common/typst-packages.md:example_buildtypstproject}}
 {{#include common/typst-packages.md:example_typst}}
 
-### `virtualPaths` (optional) { #virtualpaths }
+### `virtualPaths` <sup><em>optional</em></sup> { #virtualpaths }
 
 {{#include common/virtual-paths.md}}
 

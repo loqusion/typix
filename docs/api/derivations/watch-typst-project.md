@@ -9,11 +9,11 @@ changes.
 [`writeShellApplication`][nixpkgs-writeshellapplication] are also supported
 (besides `text`).
 
-### `emojiFont` (optional) { #emojifont }
+### `emojiFont` <sup><em>optional</em></sup> { #emojifont }
 
 {{#include common/emoji-font.md}}
 
-### `fontPaths` (optional) { #fontpaths }
+### `fontPaths` <sup><em>optional</em></sup> { #fontpaths }
 
 {{#include common/font-paths.md}}
 
@@ -21,7 +21,7 @@ changes.
 
 {{#include common/font-paths-example.md:watchtypstproject_example}}
 
-### `forceVirtualPaths` (optional) { #forcevirtualpaths }
+### `forceVirtualPaths` <sup><em>optional</em></sup> { #forcevirtualpaths }
 
 <!-- markdownlint-disable link-fragments -->
 
@@ -33,13 +33,13 @@ Default is `false`.
 
 <!-- markdownlint-restore -->
 
-### `scriptName` (optional) { #scriptname }
+### `scriptName` <sup><em>optional</em></sup> { #scriptname }
 
 {{#include common/script-name.md}}
 
 Default is `typst-watch`.
 
-### `typstOpts` (optional) { #typstopts }
+### `typstOpts` <sup><em>optional</em></sup> { #typstopts }
 
 {{#include common/typst-opts.md:head}}
 
@@ -57,25 +57,25 @@ These are in addition to any options you manually pass in
 {{#include common/typst-opts-example.md:head}}
 {{#include common/typst-opts-example.md:typstwatch}}
 
-### `typstOutput` (optional) { #typstoutput }
+### `typstOutput` <sup><em>optional</em></sup> { #typstoutput }
 
 {{#include common/typst-project-output.md:head}}
 {{#include common/typst-project-output.md:watchtypstproject}}
 
-### `typstSource` (optional) { #typstsource }
+### `typstSource` <sup><em>optional</em></sup> { #typstsource }
 
 {{#include common/typst-project-source.md}}
 
 Default is `main.typ`.
 
-### `typstWatchCommand` (optional) { #typstwatchcommand }
+### `typstWatchCommand` <sup><em>optional</em></sup> { #typstwatchcommand }
 
 Base Typst command to run to watch the project. Other arguments will be appended
 based on the other parameters you supply.
 
 Default is `typst watch`.
 
-### `virtualPaths` (optional) { #virtualpaths }
+### `virtualPaths` <sup><em>optional</em></sup> { #virtualpaths }
 
 {{#include common/virtual-paths.md}}
 

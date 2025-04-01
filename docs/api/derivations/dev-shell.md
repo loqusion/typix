@@ -8,16 +8,16 @@ or [`direnv`][direnv].
 **Note:** All parameters for [`mkShell`][nixpkgs-mkshell] are also
 supported.
 
-### `emojiFont` (optional) { #emojifont }
+### `emojiFont` <sup><em>optional</em></sup> { #emojifont }
 
 {{#include common/emoji-font.md}}
 
-### extraShellHook (optional) { #extrashellhook }
+### extraShellHook <sup><em>optional</em></sup> { #extrashellhook }
 
 Bash statements added to the [`shellHook`][nixpkgs-mkshell-attributes]
 attribute.
 
-### `fontPaths` (optional) { #fontpaths }
+### `fontPaths` <sup><em>optional</em></sup> { #fontpaths }
 
 {{#include common/font-paths.md}}
 
@@ -25,7 +25,7 @@ attribute.
 
 {{#include common/font-paths-example.md:devshell_example}}
 
-### `forceVirtualPaths` (optional) { #forcevirtualpaths }
+### `forceVirtualPaths` <sup><em>optional</em></sup> { #forcevirtualpaths }
 
 <!-- markdownlint-disable link-fragments -->
 
@@ -37,7 +37,7 @@ Default is `false`.
 
 <!-- markdownlint-restore -->
 
-### `virtualPaths` (optional) { #virtualpaths }
+### `virtualPaths` <sup><em>optional</em></sup> { #virtualpaths }
 
 {{#include common/virtual-paths.md}}
 
