@@ -136,6 +136,7 @@ However, there is a [workaround].
   outputs = { nixpkgs, typix }: let
     inherit (nixpkgs) lib;
     system = "x86_64-linux";
+
     build-script = typix.lib.${system}.buildTypstProjectLocal {
       unstableTypstPackages = [
         {
