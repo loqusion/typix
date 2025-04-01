@@ -7,11 +7,17 @@
   outputs = { nixpkgs, typix }: let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
-  in {
-    apps.${system}.default = typix.lib.${system}.buildTypstProjectLocal {
+    inherit (pkgs) lib;
+
+    build-script = typix.lib.${system}.buildTypstProjectLocal {
       fontPaths = [
         "${pkgs.roboto}/share/fonts/truetype"
       ];
+    };
+  in {
+    apps.${system}.default = {
+      type = "app";
+      program = lib.getExe build-script;
     };
   };
 }
@@ -83,11 +89,17 @@
   outputs = { nixpkgs, typix }: let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
-  in {
-    apps.${system}.default = typix.lib.${system}.watchTypstProject {
+    inherit (pkgs) lib;
+
+    watch-script = typix.lib.${system}.watchTypstProject {
       fontPaths = [
         "${pkgs.roboto}/share/fonts/truetype"
       ];
+    };
+  in {
+    apps.${system}.default = {
+      type = "app";
+      program = lib.getExe watch-script;
     };
   };
 }

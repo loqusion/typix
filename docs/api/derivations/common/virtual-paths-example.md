@@ -18,16 +18,22 @@ project with something like:
     };
   };
 
-  outputs = { typix, font-awesome }: let
+  outputs = { nixpkgs, typix, font-awesome }: let
     system = "x86_64-linux";
-  in {
-    apps.${system}.default = typix.lib.${system}.buildTypstProjectLocal {
+    inherit (nixpkgs) lib;
+
+    build-script = typix.lib.${system}.buildTypstProjectLocal {
       virtualPaths = [
         {
           dest = "icons";
           src = "${font-awesome}/svgs/regular";
         }
       ];
+    };
+  in {
+    apps.${system}.default = {
+      type = "app";
+      program = lib.getExe build-script;
     };
   };
 }
@@ -130,16 +136,22 @@ project with something like:
     };
   };
 
-  outputs = { typix, font-awesome }: let
+  outputs = { nixpkgs, typix, font-awesome }: let
     system = "x86_64-linux";
-  in {
-    apps.${system}.default = typix.lib.${system}.watchTypstProject {
+    inherit (nixpkgs) lib;
+
+    watch-script = typix.lib.${system}.watchTypstProject {
       virtualPaths = [
         {
           dest = "icons";
           src = "${font-awesome}/svgs/regular";
         }
       ];
+    };
+  in {
+    apps.${system}.default = {
+      type = "app";
+      program = lib.getExe watch-script;
     };
   };
 }
