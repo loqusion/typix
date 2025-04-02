@@ -17,7 +17,7 @@
     then null
     else let
       inherit (origArgs) typstOutput;
-      supportedExtensions = ["pdf" "svg" "png"];
+      supportedExtensions = ["pdf" "svg" "png" "html"];
       extension = pathExtension typstOutput;
     in
       if (elem extension supportedExtensions)
