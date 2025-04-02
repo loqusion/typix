@@ -28,7 +28,7 @@ Each element of the list is an attribute set with the following keys:
 from the registry, using the "fake hash method". See [Updating source hashes][fetchers-hash]
 for how to do this.
 
-Sometimes, you might encounter an error that looks like this:
+Sometimes, you might encounter a Typst compilation error that looks like this:
 
 ```text
 > help: error occurred while importing this module
