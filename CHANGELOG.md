@@ -1,4 +1,4 @@
-# Unreleased
+# [0.3.1] (April 02, 2025)
 
 ### Added
 
@@ -80,6 +80,7 @@
 
 - First release
 
+[0.3.1]: https://github.com/loqusion/typix/compare/0.3.0...0.3.1
 [0.3.0]: https://github.com/loqusion/typix/compare/0.2.0...0.3.0
 [0.2.0]: https://github.com/loqusion/typix/compare/0.1.7...0.2.0
 [0.1.7]: https://github.com/loqusion/typix/compare/0.1.6...0.1.7
