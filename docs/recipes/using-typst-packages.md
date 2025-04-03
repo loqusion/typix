@@ -34,7 +34,7 @@ There are two types of [Typst packages][typst-packages]: _published_ and _unpubl
 
 [Typst Universe]: https://typst.app/universe/
 
-[Transitive dependencies] — that is, a _dependency's_ dependency — must be
+[Transitive dependencies] — that is, a _dependency's_ dependencies — must be
 added explicitly, in addition to any direct dependencies you have. For
 instance, `cetz` 0.3.4 depends on `oxifmt` 0.2.1, so if you use `cetz` 0.3.4 you
 must also ensure `oxifmt` 0.2.1 is provided. This applies recursively: if you
