@@ -85,8 +85,8 @@ Run the command again with the [`-L` flag] (in our case, `nix run .#build -L`):
 ```
 
 We can see that `cetz` is trying to import `oxifmt` 0.2.1, but Typst can't
-download it because Nix derivations are (by design) not run in an environment
-which supports networking. To fix this, add `oxifmt` 0.2.1 to
+download it because Nix derivations are (by design) run in an environment
+which does not support networking. To fix this, add `oxifmt` 0.2.1 to
 `unstable_typstPackages` alongside your direct dependencies.
 (Make sure to match the exact version shown in your error message!!)
 
