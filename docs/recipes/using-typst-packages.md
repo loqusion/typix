@@ -34,8 +34,19 @@ There are two types of [Typst packages][typst-packages]: _published_ and _unpubl
 
 [Typst Universe]: https://typst.app/universe/
 
-The method to get Typst packages working differs depending on whether they are
-published or unpublished.
+[Transitive dependencies] — that is, a _dependency's_ dependency — must be
+added explicitly, in addition to any direct dependencies you have. For
+instance, `cetz` 0.3.4 depends on `oxifmt` 0.2.1, so if you use `cetz` 0.3.4 you
+must also ensure `oxifmt` 0.2.1 is provided. This applies recursively: if you
+depend on `A` which depends on `B` and `B` depends on `C`, you must explicitly
+specify both `B` _and_ `C`, in addition to `A`. Also, the precise version is
+important: if different versions of the same package are imported, _both
+versions_ must be specified.
+
+[Transitive dependencies]: https://en.wikipedia.org/wiki/Transitive_dependency
+
+The method to add Typst packages differs depending on whether they are published
+or unpublished.
 
 ## Published Typst packages
 
@@ -170,6 +181,9 @@ You may want to [expand the source tree] or [filter certain files].
 
 [expand the source tree]: ../recipes/specifying-sources.md#expanding-a-source-tree
 [filter certain files]: ../recipes/specifying-sources.md#source-filtering
+
+If the imported module imports any packages, those packages must be specified
+using one of the methods documented in this chapter.
 
 If you need to fetch an unpublished Typst package from a GitHub repository instead,
 see below.
