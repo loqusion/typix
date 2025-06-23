@@ -249,6 +249,13 @@ in
       inherit fontPaths typstSource;
       src = myLib.cleanTypstSource ./simple-with-fonts;
     };
+    simpleWithMultipleParameters = myLib.buildTypstProject {
+      inherit typstSource;
+      src = myLib.cleanTypstSource ./simple-with-multiple-parameters;
+      typstOpts = {
+        input = ["key1=value1" "key2=value2"];
+      };
+    };
     simpleWithVirtualPaths = myLib.buildTypstProject {
       inherit virtualPaths typstSource;
       src = myLib.cleanTypstSource ./simple-with-virtual-paths;
