@@ -1,3 +1,11 @@
+# Unreleased
+
+### Added
+
+- `typstOpts` repeatable flags ([#59])
+
+[#59]: https://github.com/loqusion/typix/pull/59
+
 # [0.3.1] (April 02, 2025)
 
 ### Added
