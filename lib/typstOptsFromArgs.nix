@@ -3,7 +3,7 @@
   inherit (lib) optionalAttrs optionalString;
   inherit (lib.attrsets) filterAttrs mapAttrsToList recursiveUpdate;
   inherit (lib.lists) last;
-  inherit (lib.strings) concatStringsSep concatMapStringsSep escapeShellArg splitString;
+  inherit (lib.strings) concatMapStringsSep concatStringsSep escapeShellArg splitString;
 
   pathExtension = path: let
     splitPathTail = tail (splitString "." path);
@@ -43,10 +43,11 @@
 in
   concatStringsSep " " (
     mapAttrsToList
-    (opt: value:
-      if builtins.isList value
-      then (concatMapStringsSep " " (parametersFrom opt) value)
-      else (parametersFrom opt value)
+    (
+      opt: value:
+        if builtins.isList value
+        then (concatMapStringsSep " " (parametersFrom opt) value)
+        else (parametersFrom opt value)
     )
     (filterAttrs (_: v: v != false && !isNull v) args.typstOpts)
   )
