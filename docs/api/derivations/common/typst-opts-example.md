@@ -6,6 +6,7 @@
 {
   format = "png";
   ppi = 300;
+  input = ["key1=value1" "key2=value2"];
 }
 ```
 
@@ -16,7 +17,7 @@
 <!-- ANCHOR: typstcompile -->
 
 ```sh
-typst compile --format png --ppi 300 <source> <output>
+typst compile --format png --ppi 300 --input key1=value1 --input key2=value2 <source> <output>
 ```
 
 <!-- ANCHOR_END: typstcompile -->
@@ -24,7 +25,7 @@ typst compile --format png --ppi 300 <source> <output>
 <!-- ANCHOR: typstwatch -->
 
 ```sh
-typst watch --format png --ppi 300 <source> <output>
+typst watch --format png --ppi 300 --input key1=value1 --input key2=value2 <source> <output>
 ```
 
 <!-- ANCHOR_END: typstwatch -->
