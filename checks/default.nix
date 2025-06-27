@@ -55,6 +55,13 @@ in
       inherit virtualPaths typstSource;
       src = myLib.cleanTypstSource ./simple-with-virtual-paths;
     };
+    buildLocalWithMultipleParameters = buildLocal {} {
+      inherit typstSource;
+      src = myLib.cleanTypstSource ./simple-with-multiple-parameters;
+      typstOpts = {
+        input = ["key1=value1" "key2=value2" "key3= --spaces-are-properly-escaped" "key4='quotes-are-properly-escaped\""];
+      };
+    };
     buildLocalWithTypstPackages = buildLocal {} {
       inherit typstSource;
       src = myLib.cleanTypstSource ./typst-packages;
@@ -253,7 +260,7 @@ in
       inherit typstSource;
       src = myLib.cleanTypstSource ./simple-with-multiple-parameters;
       typstOpts = {
-        input = ["key1=value1" "key2=value2"];
+        input = ["key1=value1" "key2=value2" "key3= --spaces-are-properly-escaped" "key4='quotes-are-properly-escaped\""];
       };
     };
     simpleWithVirtualPaths = myLib.buildTypstProject {
@@ -277,6 +284,13 @@ in
     watchSimpleWithFonts = watch {} {
       inherit fontPaths typstSource;
       src = myLib.cleanTypstSource ./simple-with-fonts;
+    };
+    watchWithMultipleParameters = watch {} {
+      inherit typstSource;
+      src = myLib.cleanTypstSource ./simple-with-multiple-parameters;
+      typstOpts = {
+        input = ["key1=value1" "key2=value2" "key3= --spaces-are-properly-escaped" "key4='quotes-are-properly-escaped\""];
+      };
     };
     # TODO: see above
     # watchSimpleWithTypstPackages = watch {} {
