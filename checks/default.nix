@@ -41,6 +41,7 @@ in
         hash = "sha256-8PNPa9TGFybMZ1uuJwb5ET0WGIInmIgg8h24BmdfxlU=";
       }
     ];
+    nixpkgs_typstPackages = with pkgs.typstPackages; [example cetz polylux];
   in rec {
     buildLocal = callPackage ./build-local.nix {};
     buildLocalSimple = buildLocal {} {
@@ -66,6 +67,11 @@ in
       inherit typstSource;
       src = myLib.cleanTypstSource ./typst-packages;
       inherit unstable_typstPackages;
+    };
+    buildLocalWithReproducibleTypstPackages = buildLocal {} {
+      inherit typstSource;
+      src = myLib.cleanTypstSource ./typst-packages;
+      inherit nixpkgs_typstPackages;
     };
 
     clean = myLib.mkTypstDerivation {
@@ -274,6 +280,12 @@ in
       inherit typstSource;
       src = myLib.cleanTypstSource ./typst-packages;
       inherit unstable_typstPackages;
+    };
+
+    withReproducibleTypstPackages = myLib.buildTypstProject {
+      inherit typstSource;
+      src = myLib.cleanTypstSource ./typst-packages;
+      inherit nixpkgs_typstPackages;
     };
 
     virtualPathsChecks = callPackage ./virtual-paths.nix {};
