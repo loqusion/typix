@@ -6,7 +6,7 @@ lib.cleanSourceWith {
     isSpecialFile = builtins.elem (builtins.baseNameOf path) [
       "typst.toml"
       "metadata.toml"
-    ];
+    ] || lib.hasSuffix ".bib" path;
   in
     type == "directory" || isTypstSource || isSpecialFile;
 }
