@@ -1,7 +1,7 @@
 # cleanTypstSource
 
-Filters a source tree to only contain `*.typ` files and special files such as
-[`typst.toml`][typst-blog-package-manager].
+Filters a source tree to only contain files that are usually pertinent to a
+Typst project.
 
 <!-- markdownlint-disable heading-increment -->
 
@@ -11,7 +11,10 @@ Filters a source tree to only contain `*.typ` files and special files such as
 
 ```nix
 {
-  outputs = { nixpkgs, typix }: let
+  outputs = {
+    nixpkgs,
+    typix,
+  }: let
     system = "x86_64-linux";
     typixLib = typix.lib.${system};
   in {
@@ -21,5 +24,3 @@ Filters a source tree to only contain `*.typ` files and special files such as
   };
 }
 ```
-
-[typst-blog-package-manager]: https://typst.app/blog/2023/package-manager/#package-format
