@@ -2,11 +2,18 @@
 lib.cleanSourceWith {
   src = lib.cleanSource src;
   filter = path: type: let
-    isTypstSource = lib.hasSuffix ".typ" path;
+    hasAcceptedSuffix = builtins.any (lib.flip lib.hasSuffix path) [
+      ".typ" # Typst files
+      ".bib" # BibLaTeX files
+    ];
     isSpecialFile = builtins.elem (builtins.baseNameOf path) [
       "typst.toml"
       "metadata.toml"
     ];
   in
-    type == "directory" || isTypstSource || isSpecialFile;
+    builtins.any lib.id [
+      (type == "directory")
+      hasAcceptedSuffix
+      isSpecialFile
+    ];
 }
