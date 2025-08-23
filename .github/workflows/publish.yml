@@ -30,8 +30,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: ${{ format('refs/tags/{0}', steps.git-tag.outputs.tag) }}
-      - uses: cachix/install-nix-action@v24
-      - uses: DeterminateSystems/flakehub-push@v3
+      - uses: cachix/install-nix-action@v31
+      - uses: DeterminateSystems/flakehub-push@v6
         with:
           visibility: public
           name: loqusion/typix
