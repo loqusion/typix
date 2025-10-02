@@ -52,7 +52,7 @@ These are in addition to any options you manually pass in
 
 #### Example { #typstopts-example }
 
-{{#include common/typst-opts-example.md:head}}
+{{#include common/typst-opts-example.md:buildtypstproject}}
 {{#include common/typst-opts-example.md:typstcompile}}
 
 ### `typstSource` <sup><em>optional</em></sup> { #typstsource }
