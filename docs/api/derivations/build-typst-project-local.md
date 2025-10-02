@@ -79,7 +79,7 @@ These are in addition to any options you manually pass in
 
 #### Example { #typstopts-example }
 
-{{#include common/typst-opts-example.md:head}}
+{{#include common/typst-opts-example.md:buildtypstprojectlocal}}
 {{#include common/typst-opts-example.md:typstcompile}}
 
 ### `typstOutput` <sup><em>optional</em></sup> { #typstoutput }

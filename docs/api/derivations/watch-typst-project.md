@@ -54,7 +54,7 @@ These are in addition to any options you manually pass in
 
 #### Example { #typstopts-example }
 
-{{#include common/typst-opts-example.md:head}}
+{{#include common/typst-opts-example.md:watchtypstproject}}
 {{#include common/typst-opts-example.md:typstwatch}}
 
 ### `typstOutput` <sup><em>optional</em></sup> { #typstoutput }
