@@ -148,10 +148,11 @@ in
       emojiFont = "noto-monochrome";
       patterns = ["emoji"];
     };
-    emojiEmojiOne = emoji {
-      emojiFont = "emojione";
-      patterns = ["emoji"];
-    };
+    # FIXME: https://github.com/loqusion/typix/issues/79
+    # emojiEmojiOne = emoji {
+    #   emojiFont = "emojione";
+    #   patterns = ["emoji"];
+    # };
     emojiFontOverride = emoji {
       emojiFont = null;
       fontPaths = ["${pkgs.noto-fonts-color-emoji}/share/fonts/noto"];
@@ -192,10 +193,11 @@ in
       emojiFont = "noto-monochrome";
       patterns = ["emoji"];
     };
-    emojiWatchEmojiOne = emojiWatch {
-      emojiFont = "emojione";
-      patterns = ["emoji"];
-    };
+    # FIXME: https://github.com/loqusion/typix/issues/79
+    # emojiWatchEmojiOne = emojiWatch {
+    #   emojiFont = "emojione";
+    #   patterns = ["emoji"];
+    # };
     emojiWatchFontOverride = emojiWatch {
       emojiFont = null;
       fontPaths = ["${pkgs.noto-fonts-color-emoji}/share/fonts/noto"];
