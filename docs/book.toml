@@ -1,7 +1,6 @@
 [book]
 authors = ["loqusion"]
 language = "en"
-multilingual = false
 src = "."
 title = "Typix"
 
