@@ -1,5 +1,43 @@
 # Using Typst packages
 
+## From `nixpkgs`
+
+[`buildTypstProject`], [`buildTypstProjectLocal`], and [`mkTypstDerivation`],
+expose a `nixpgks_typstPackages` parameter that takes the list of packages to
+load:
+
+```nix
+{
+  outputs = {
+    nixpkgs,
+    typix,
+  }: let
+    inherit (nixpkgs) lib;
+    system = "x86_64-linux";
+
+    unstable_typstPackages = with pkgs.typstPackages; [ cetz ];
+
+    build-drv = typix.lib.${system}.buildTypstProject {
+      inherit nixpkgs_typstPackages;
+      # ...
+    };
+
+    build-script = typix.lib.${system}.buildTypstProjectLocal {
+      inherit nixpkgs_typstPackages;
+      # ...
+    };
+  in {
+    packages.${system}.default = build-drv;
+    apps.${system}.default = {
+      type = "app";
+      program = lib.getExe build-script;
+    };
+  };
+}
+```
+
+## Not from `nixpkgs`
+
 > TL;DR: Use [this example][published-example] as a template:
 >
 > ```bash
@@ -48,7 +86,7 @@ versions_ must be specified.
 The method to add Typst packages differs depending on whether they are published
 or unpublished.
 
-## Published Typst packages
+### Published Typst packages
 
 Published Typst packages work out of the box for for [`watchTypstProject`] and
 commands executed while [`devShell`] is active.
@@ -66,7 +104,7 @@ there are two methods:
 It is recommended to use `unstable_typstPackages`, as it is faster and consumes
 less disk space.
 
-### The `unstable_typstPackages` attribute { #the-typstpackages-attribute }
+#### The `unstable_typstPackages` attribute { #the-typstpackages-attribute }
 
 The `unstable_typstPackages` attribute is used to fetch packages from the official
 Typst packages CDN at `https://packages.typst.org`.
@@ -117,7 +155,7 @@ For more information, see the respective documentation for the attribute on
 }
 ```
 
-### The `TYPST_PACKAGE_CACHE_PATH` environment variable
+#### The `TYPST_PACKAGE_CACHE_PATH` environment variable
 
 This method downloads the _entire_ contents of the [Typst Packages repository][typst-packages],
 making all packages available in your Typst project.
@@ -164,7 +202,7 @@ Then, use it in flake outputs:
 }
 ```
 
-## Unpublished Typst packages
+### Unpublished Typst packages
 
 If the Typst package you want to use is stored locally — in the same repository
 as your flake — all you have to do is directly [import] the entrypoint module:
@@ -188,7 +226,7 @@ using one of the methods documented in this chapter.
 If you need to fetch an unpublished Typst package from a GitHub repository instead,
 see below.
 
-### Fetching from a GitHub repository
+#### Fetching from a GitHub repository
 
 > You can use [this example][unpublished-example] as a template:
 >

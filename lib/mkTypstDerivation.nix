@@ -13,6 +13,7 @@
   installPhaseCommand ? "",
   virtualPaths ? [],
   unstable_typstPackages ? [],
+  nixpkgs_typstPackages ? [],
   ...
 }:
 assert lib.assertMsg (!(builtins.hasAttr "unstableTypstPackages" args)) ''
@@ -32,6 +33,7 @@ assert lib.assertMsg (!(builtins.hasAttr "unstableTypstPackages" args)) ''
     "installPhaseCommand"
     "virtualPaths"
     "unstable_typstPackages"
+    "nixpkgs_typstPackages"
   ];
 
   name =
@@ -49,6 +51,11 @@ assert lib.assertMsg (!(builtins.hasAttr "unstableTypstPackages" args)) ''
       inherit (args) version;
     }
     else {inherit name;};
+
+  typst' =
+    if nixpkgs_typstPackages != []
+    then (typst.withPackages (_: nixpkgs_typstPackages))
+    else typst;
 in
   stdenvNoCC.mkDerivation (cleanedArgs
     // nameArgs
@@ -62,7 +69,7 @@ in
       nativeBuildInputs =
         (args.nativeBuildInputs or [])
         ++ [
-          typst
+          typst'
           (copyVirtualPathsHook virtualPaths)
           unsetSourceDateEpochHook
         ];
