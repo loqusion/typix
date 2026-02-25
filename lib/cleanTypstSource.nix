@@ -5,6 +5,8 @@ lib.cleanSourceWith {
     hasAcceptedSuffix = builtins.any (lib.flip lib.hasSuffix path) [
       ".typ" # Typst files
       ".bib" # BibLaTeX files
+      ".yaml" # Hayagriva files
+      ".yml" # Hayagriva files
     ];
     isSpecialFile = builtins.elem (builtins.baseNameOf path) [
       "typst.toml"
