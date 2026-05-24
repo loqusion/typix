@@ -13,6 +13,7 @@
   installPhaseCommand ? "",
   virtualPaths ? [],
   unstable_typstPackages ? [],
+  nixpkgs_typstPackages ? [],
   ...
 }:
 assert lib.assertMsg (!(builtins.hasAttr "unstableTypstPackages" args)) ''
@@ -32,6 +33,7 @@ assert lib.assertMsg (!(builtins.hasAttr "unstableTypstPackages" args)) ''
     "installPhaseCommand"
     "virtualPaths"
     "unstable_typstPackages"
+    "nixpkgs_typstPackages"
   ];
 
   name =
@@ -55,8 +57,24 @@ in
     // optionalAttrs (allFontPaths != []) {
       TYPST_FONT_PATHS = concatStringsSep ":" allFontPaths;
     }
-    // optionalAttrs (unstable_typstPackages != []) {
-      TYPST_PACKAGE_CACHE_PATH = fetchTypstPackages unstable_typstPackages;
+    // optionalAttrs (unstable_typstPackages != [] || nixpkgs_typstPackages != []) {
+      TYPST_PACKAGE_CACHE_PATH =
+        (fetchTypstPackages unstable_typstPackages)
+          .overrideAttrs (_: super: {
+            paths = super.paths
+                    ++ (lib.map
+                      (p: p.overrideAttrs (oldAttrs: {
+                        postInstall = ''
+                          mv $out/lib/typst-packages $out/preview; rmdir $out/lib
+                        '';
+                      }))
+                      (lib.foldl'
+                        (acc: p: acc ++ lib.singleton p ++ p.propagatedBuildInputs)
+                        [ ]
+                        nixpkgs_typstPackages)
+                    );
+          })
+      ;
     }
     // {
       nativeBuildInputs =
